@@ -7,6 +7,7 @@
 //
 
 #import "DocWinC.h"
+#import "Document.h"
 
 @interface DocWinC ()
 
@@ -14,20 +15,15 @@
 
 @implementation DocWinC
 
+@synthesize _pdfView;
+
 #pragma mark - Window Controller Method
 
 - (void)windowDidLoad {
     [super windowDidLoad];
-    NSLog(@"%s",__func__);
-    //テキストファイルの読み込みと表示
-    NSString *txt = [[NSString alloc]initWithContentsOfURL:[[self document]fileURL] encoding:NSUTF8StringEncoding error:nil];
-    [_textView replaceCharactersInRange:NSMakeRange(0, [[_textView string]length]) withString:txt];
+    Document *doc = [self document];
+    //ファイルから読み込まれたPDFドキュメントをビューに表示
+    [_pdfView setDocument:doc.strPDFDoc];
 }
-
-- (void)setDocument:(id)document{
-    [super setDocument:document];
-    NSLog(@"%s",__func__);
-}
-
 
 @end

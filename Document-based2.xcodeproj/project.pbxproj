@@ -14,6 +14,8 @@
 		B9AD99B81C771044008C29A4 /* Document.xib in Resources */ = {isa = PBXBuildFile; fileRef = B9AD99B61C771044008C29A4 /* Document.xib */; };
 		B9AD99BA1C771044008C29A4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B9AD99B91C771044008C29A4 /* Assets.xcassets */; };
 		B9AD99BD1C771044008C29A4 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = B9AD99BB1C771044008C29A4 /* MainMenu.xib */; };
+		B9D6AEFA1C78CFD900381A32 /* Quartz.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B9D6AEF91C78CFD900381A32 /* Quartz.framework */; };
+		B9D6AF001C78D27E00381A32 /* MyPDFView.m in Sources */ = {isa = PBXBuildFile; fileRef = B9D6AEFF1C78D27E00381A32 /* MyPDFView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -29,6 +31,9 @@
 		B9AD99B91C771044008C29A4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B9AD99BC1C771044008C29A4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		B9AD99BE1C771044008C29A4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B9D6AEF91C78CFD900381A32 /* Quartz.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Quartz.framework; path = System/Library/Frameworks/Quartz.framework; sourceTree = SDKROOT; };
+		B9D6AEFE1C78D27E00381A32 /* MyPDFView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyPDFView.h; sourceTree = "<group>"; };
+		B9D6AEFF1C78D27E00381A32 /* MyPDFView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyPDFView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -36,6 +41,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B9D6AEFA1C78CFD900381A32 /* Quartz.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -46,6 +52,7 @@
 			isa = PBXGroup;
 			children = (
 				B9AD99AC1C771044008C29A4 /* Document-based2 */,
+				B9D6AEF81C78CDE500381A32 /* Frameworks */,
 				B9AD99AB1C771044008C29A4 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -68,6 +75,8 @@
 				B9825A711C77838500F7AD4A /* DocWinC.h */,
 				B9825A721C77838500F7AD4A /* DocWinC.m */,
 				B9AD99B61C771044008C29A4 /* Document.xib */,
+				B9D6AEFE1C78D27E00381A32 /* MyPDFView.h */,
+				B9D6AEFF1C78D27E00381A32 /* MyPDFView.m */,
 				B9AD99B91C771044008C29A4 /* Assets.xcassets */,
 				B9AD99BB1C771044008C29A4 /* MainMenu.xib */,
 				B9AD99BE1C771044008C29A4 /* Info.plist */,
@@ -82,6 +91,15 @@
 				B9AD99B11C771044008C29A4 /* main.m */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		B9D6AEF81C78CDE500381A32 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				B9D6AEF91C78CFD900381A32 /* Quartz.framework */,
+			);
+			name = Frameworks;
+			path = "Document-based2";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -154,6 +172,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B9D6AF001C78D27E00381A32 /* MyPDFView.m in Sources */,
 				B9AD99B51C771044008C29A4 /* Document.m in Sources */,
 				B9AD99B21C771044008C29A4 /* main.m in Sources */,
 				B9AD99AF1C771044008C29A4 /* AppDelegate.m in Sources */,

@@ -15,16 +15,14 @@
 
 @implementation Document
 
+@synthesize strPDFDoc;
+
 - (instancetype)init {
     self = [super init];
     if (self) {
-        // Add your subclass-specific initialization here.
+        strPDFDoc = nil;
     }
     return self;
-}
-
-- (void)windowControllerDidLoadNib:(NSWindowController *)aController {
-    [super windowControllerDidLoadNib:aController];
 }
 
 //オートセーブ機能のON/OFF
@@ -47,6 +45,21 @@
 }
 
 - (BOOL)readFromData:(NSData *)data ofType:(NSString *)typeName error:(NSError **)outError {
+    //ドキュメントデータを読み込みドキュメントウインドウに表示
+    PDFDocument *_pdfDoc = [[PDFDocument alloc]initWithURL:[self fileURL]];
+    if (! _pdfDoc) {
+        //ファイルの読み込みに失敗した場合
+        *outError = [NSError errorWithDomain:NSOSStatusErrorDomain code:unimpErr userInfo:NULL];
+        return NO;
+    } else {
+        if ([self windowControllers].count != 0) {
+            //復帰のための読み込みの場合（既存のPDFビューに直接読み込む）
+            DocWinC *winCtr = [[self windowControllers]objectAtIndex:0];
+            [winCtr._pdfView setDocument:_pdfDoc];
+        } else {
+            strPDFDoc = _pdfDoc;
+        }
+    }
     return YES;
 }
 
