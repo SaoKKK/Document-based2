@@ -8,6 +8,7 @@
 
 #import "DocWinC.h"
 #import "Document.h"
+#import "MyPDFView.h"
 
 @interface DocWinC ()
 
@@ -15,15 +16,13 @@
 
 @implementation DocWinC
 
-@synthesize _pdfView;
-
 #pragma mark - Window Controller Method
 
 - (void)windowDidLoad {
     [super windowDidLoad];
     //ファイルから読み込まれたPDFドキュメントをビューに表示
-    Document *doc = [self document];
-    [_pdfView setDocument:doc.strPDFDoc];
+    PDFDocument *doc = [[PDFDocument alloc]initWithURL:[[self document] fileURL]];
+    [_pdfView setDocument:doc];
     //ドキュメントの保存過程にノーティフィケーションを設定
     [[NSNotificationCenter defaultCenter] addObserver: self selector: @selector(documentBeginWrite:) name: @"PDFDidBeginDocumentWrite" object: [_pdfView document]];
     [[NSNotificationCenter defaultCenter] addObserver: self selector: @selector(documentEndWrite:) name: @"PDFDidEndDocumentWrite" object: [_pdfView document]];

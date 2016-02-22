@@ -8,7 +8,12 @@
 
 #import <Cocoa/Cocoa.h>
 #import <Quartz/Quartz.h>
+#import "Document.h"
 
-@interface MyPDFView : PDFView
+@interface MyPDFView : PDFView{
+}
+
+- (void)saveDocument:(id)sender;
+- (void)saveDocumentAs:(id)sender;
 
 @end
