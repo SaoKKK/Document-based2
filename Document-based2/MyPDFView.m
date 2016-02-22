@@ -10,16 +10,4 @@
 
 @implementation MyPDFView
 
-#pragma mark - save document
-
-//ドキュメントを保存
-- (void)saveDocument:(id)sender{
-    NSLog(@"view-save");
-}
-
-//ドキュメントを別名で保存
-- (void)saveDocumentAs:(id)sender{
-    NSLog(@"view-saveas");
-}
-
 @end

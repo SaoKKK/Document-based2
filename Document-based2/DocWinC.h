@@ -18,6 +18,7 @@
     IBOutlet NSTextField *progCurrentPg;
     IBOutlet NSTextField *progMaxPg;
     IBOutlet MyPDFView *_pdfView;
+    NSURL *docURL;
 }
 
 @end

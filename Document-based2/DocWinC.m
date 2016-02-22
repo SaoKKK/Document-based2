@@ -21,7 +21,8 @@
 - (void)windowDidLoad {
     [super windowDidLoad];
     //ファイルから読み込まれたPDFドキュメントをビューに表示
-    PDFDocument *doc = [[PDFDocument alloc]initWithURL:[[self document] fileURL]];
+    docURL = [[self document] fileURL];
+    PDFDocument *doc = [[PDFDocument alloc]initWithURL:docURL];
     [_pdfView setDocument:doc];
     //ドキュメントの保存過程にノーティフィケーションを設定
     [[NSNotificationCenter defaultCenter] addObserver: self selector: @selector(documentBeginWrite:) name: @"PDFDidBeginDocumentWrite" object: [_pdfView document]];
@@ -57,8 +58,39 @@
 }
 
 - (IBAction)pshtest:(id)sender {
-    NSLog(@"%s",__func__);
+    NSLog(@"%@",[[self document]fileURL]);
     [self.window beginSheet:progressWin completionHandler:^(NSInteger returnCode){}];
+}
+- (IBAction)psh2:(id)sender {
+    [self.window endSheet:progressWin returnCode:0];
+}
+
+#pragma mark - save document
+
+//ドキュメントを保存
+- (void)saveDocument:(id)sender{
+    [_pdfView.document writeToURL:docURL];
+}
+
+//ドキュメントを別名で保存
+- (void)saveDocumentAs:(id)sender{
+    //savePanelの設定と表示
+    NSSavePanel *savePanel = [NSSavePanel savePanel];
+    NSArray *fileTypes = [NSArray arrayWithObjects:@"pdf", nil];
+    [savePanel setAllowedFileTypes:fileTypes]; //保存するファイルの種類
+    [savePanel setNameFieldStringValue:[[docURL path] lastPathComponent]]; //初期ファイル名
+    [savePanel setCanSelectHiddenExtension:YES]; //拡張子を隠すチェックボックスの有無
+    [savePanel setExtensionHidden:NO]; //拡張子を隠すチェックボックスの初期ステータス
+    [savePanel beginSheetModalForWindow:self.window completionHandler:^(NSInteger result){
+        if (result == NSFileHandlingPanelOKButton) {
+            docURL = [savePanel URL];
+            [savePanel orderOut:self];
+            [_pdfView.document writeToURL:docURL];
+            Document *doc = [self document];
+            //ドキュメントのURLを更新
+            [doc setFileURL:docURL];
+       }
+    }];
 }
 
 @end

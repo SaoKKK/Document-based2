@@ -48,6 +48,17 @@
                             <action selector="pshtest:" target="-2" id="Zez-mU-Mgh"/>
                         </connections>
                     </button>
+                    <button verticalHuggingPriority="750" id="hj9-6X-L4d">
+                        <rect key="frame" x="15" y="382" width="79" height="28"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <buttonCell key="cell" type="push" title="Button" bezelStyle="rounded" alignment="center" controlSize="small" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="UVz-tw-fyE">
+                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                            <font key="font" metaFont="smallSystem"/>
+                        </buttonCell>
+                        <connections>
+                            <action selector="psh2:" target="-2" id="9WC-vL-4K0"/>
+                        </connections>
+                    </button>
                 </subviews>
             </view>
             <connections>

@@ -13,7 +13,4 @@
 @interface MyPDFView : PDFView{
 }
 
-- (void)saveDocument:(id)sender;
-- (void)saveDocumentAs:(id)sender;
-
 @end
