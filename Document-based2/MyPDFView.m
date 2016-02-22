@@ -7,13 +7,16 @@
 //
 
 #import "MyPDFView.h"
+#import "Document.h"
 
 @implementation MyPDFView
 
 - (void)drawRect:(NSRect)dirtyRect {
     [super drawRect:dirtyRect];
-    
-    // Drawing code here.
+}
+
+-(void)saveDocumentAs:(id)sender{
+    NSLog(@"saveas");
 }
 
 @end

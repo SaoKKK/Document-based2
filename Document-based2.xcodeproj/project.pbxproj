@@ -70,15 +70,9 @@
 			children = (
 				B9AD99AD1C771044008C29A4 /* AppDelegate.h */,
 				B9AD99AE1C771044008C29A4 /* AppDelegate.m */,
-				B9AD99B31C771044008C29A4 /* Document.h */,
-				B9AD99B41C771044008C29A4 /* Document.m */,
-				B9825A711C77838500F7AD4A /* DocWinC.h */,
-				B9825A721C77838500F7AD4A /* DocWinC.m */,
-				B9AD99B61C771044008C29A4 /* Document.xib */,
-				B9D6AEFE1C78D27E00381A32 /* MyPDFView.h */,
-				B9D6AEFF1C78D27E00381A32 /* MyPDFView.m */,
-				B9AD99B91C771044008C29A4 /* Assets.xcassets */,
 				B9AD99BB1C771044008C29A4 /* MainMenu.xib */,
+				B9E21BE41C7A759F004DDB0F /* Document */,
+				B9AD99B91C771044008C29A4 /* Assets.xcassets */,
 				B9AD99BE1C771044008C29A4 /* Info.plist */,
 				B9AD99B01C771044008C29A4 /* Supporting Files */,
 			);
@@ -100,6 +94,20 @@
 			);
 			name = Frameworks;
 			path = "Document-based2";
+			sourceTree = "<group>";
+		};
+		B9E21BE41C7A759F004DDB0F /* Document */ = {
+			isa = PBXGroup;
+			children = (
+				B9AD99B61C771044008C29A4 /* Document.xib */,
+				B9AD99B31C771044008C29A4 /* Document.h */,
+				B9AD99B41C771044008C29A4 /* Document.m */,
+				B9825A711C77838500F7AD4A /* DocWinC.h */,
+				B9825A721C77838500F7AD4A /* DocWinC.m */,
+				B9D6AEFE1C78D27E00381A32 /* MyPDFView.h */,
+				B9D6AEFF1C78D27E00381A32 /* MyPDFView.m */,
+			);
+			name = Document;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

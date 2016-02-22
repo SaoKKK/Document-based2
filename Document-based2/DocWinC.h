@@ -8,9 +8,16 @@
 
 #import <Cocoa/Cocoa.h>
 #import <Quartz/Quartz.h>
+#import "MyPDFView.h"
 
-@interface DocWinC : NSWindowController
+@interface DocWinC : NSWindowController{
+    IBOutlet NSWindow *window;
+    IBOutlet NSWindow *progressWin;
+    IBOutlet NSProgressIndicator *savingProgBar;
+    IBOutlet NSTextField *progCurrentPg;
+    IBOutlet NSTextField *progMaxPg;
+}
 
-@property (strong) IBOutlet PDFView *_pdfView;
+@property (strong) IBOutlet MyPDFView *_pdfView;
 
 @end
