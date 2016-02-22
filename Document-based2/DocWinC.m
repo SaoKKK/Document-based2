@@ -53,13 +53,6 @@
     [savingProgBar displayIfNeeded];
 }
 
-- (IBAction)pshtest:(id)sender {
-    [self.window beginSheet:progressWin completionHandler:^(NSInteger returnCode){}];
-}
-- (IBAction)psh2:(id)sender {
-    [self.window endSheet:progressWin returnCode:0];
-}
-
 #pragma mark - save document
 
 //ドキュメントを保存

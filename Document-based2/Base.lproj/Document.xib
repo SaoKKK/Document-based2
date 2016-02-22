@@ -26,10 +26,6 @@
                 <rect key="frame" x="0.0" y="0.0" width="427" height="436"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <pdfView autoresizesSubviews="NO" autoScales="YES" id="5KT-rY-Wiy" customClass="MyPDFView">
-                        <rect key="frame" x="120" y="0.0" width="307" height="380"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                    </pdfView>
                     <pdfThumbnailView id="l18-Ye-seO">
                         <rect key="frame" x="0.0" y="0.0" width="120" height="380"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
@@ -42,9 +38,6 @@
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                             <font key="font" metaFont="smallSystem"/>
                         </buttonCell>
-                        <connections>
-                            <action selector="pshtest:" target="-2" id="Zez-mU-Mgh"/>
-                        </connections>
                     </button>
                     <button verticalHuggingPriority="750" id="hj9-6X-L4d">
                         <rect key="frame" x="15" y="382" width="79" height="28"/>
@@ -53,16 +46,17 @@
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                             <font key="font" metaFont="smallSystem"/>
                         </buttonCell>
-                        <connections>
-                            <action selector="psh2:" target="-2" id="9WC-vL-4K0"/>
-                        </connections>
                     </button>
+                    <pdfView autoresizesSubviews="NO" autoScales="YES" id="5KT-rY-Wiy" customClass="MyPDFView">
+                        <rect key="frame" x="120" y="0.0" width="307" height="380"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                    </pdfView>
                 </subviews>
             </view>
             <connections>
                 <outlet property="delegate" destination="-2" id="0bl-1N-x8E"/>
             </connections>
-            <point key="canvasLocation" x="264.5" y="327"/>
+            <point key="canvasLocation" x="52.5" y="270"/>
         </window>
         <window title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" frameAutosaveName="" animationBehavior="default" id="hPb-14-zhA">
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
