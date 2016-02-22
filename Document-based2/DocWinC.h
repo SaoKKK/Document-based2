@@ -15,8 +15,6 @@
     IBOutlet NSWindow *window;
     IBOutlet NSWindow *progressWin;
     IBOutlet NSProgressIndicator *savingProgBar;
-    IBOutlet NSTextField *progCurrentPg;
-    IBOutlet NSTextField *progMaxPg;
     IBOutlet MyPDFView *_pdfView;
     NSURL *docURL;
 }

@@ -9,8 +9,6 @@
         <customObject id="-2" userLabel="File's Owner" customClass="DocWinC">
             <connections>
                 <outlet property="_pdfView" destination="5KT-rY-Wiy" id="iQ9-j2-wQi"/>
-                <outlet property="progCurrentPg" destination="abO-kk-70f" id="DbC-tI-CEA"/>
-                <outlet property="progMaxPg" destination="Gt3-9F-dip" id="XYS-Kg-2sk"/>
                 <outlet property="progressWin" destination="hPb-14-zhA" id="UjU-D2-2P7"/>
                 <outlet property="savingProgBar" destination="iTd-5B-A8m" id="qIm-vH-Z9B"/>
                 <outlet property="window" destination="xOd-HO-29H" id="t0q-Kb-qFt"/>
@@ -88,26 +86,6 @@
                         <rect key="frame" x="20" y="19" width="260" height="20"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                     </progressIndicator>
-                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" id="Gt3-9F-dip">
-                        <rect key="frame" x="234" y="55" width="48" height="14"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                        <textFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" id="gYc-wb-5uz">
-                            <numberFormatter key="formatter" formatterBehavior="default10_4" usesGroupingSeparator="NO" groupingSize="0" minimumIntegerDigits="0" maximumIntegerDigits="42" id="NM7-vp-pSn"/>
-                            <font key="font" metaFont="smallSystem"/>
-                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                        </textFieldCell>
-                    </textField>
-                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" id="abO-kk-70f">
-                        <rect key="frame" x="184" y="55" width="52" height="14"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                        <textFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="/" id="CxZ-5Z-v5p">
-                            <numberFormatter key="formatter" formatterBehavior="default10_4" usesGroupingSeparator="NO" groupingSize="0" minimumIntegerDigits="0" maximumIntegerDigits="42" id="phV-MW-Z6t"/>
-                            <font key="font" metaFont="smallSystem"/>
-                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                        </textFieldCell>
-                    </textField>
                 </subviews>
             </view>
             <point key="canvasLocation" x="139" y="786.5"/>

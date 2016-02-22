@@ -38,10 +38,8 @@
     double pgCnt = [[_pdfView document] pageCount];
     [savingProgBar setMaxValue:pgCnt];
     [savingProgBar setDoubleValue: 0.0];
-    [progCurrentPg setStringValue:[NSString stringWithFormat: @"%f",pgCnt]];
     //プログレス・パネルをシート表示
     [self.window beginSheet:progressWin completionHandler:^(NSInteger returnCode){}];
-    NSLog(@"max-%f",pgCnt);
 }
 
 - (void) documentEndWrite: (NSNotification *) notification{
@@ -53,12 +51,9 @@
     double currentPg = [[[notification userInfo] objectForKey: @"PDFDocumentPageIndex"] floatValue];
     [savingProgBar setDoubleValue:currentPg];
     [savingProgBar displayIfNeeded];
-    [progCurrentPg setStringValue:[NSString stringWithFormat:@"%f/",currentPg]];
-    NSLog(@"%f",currentPg);
 }
 
 - (IBAction)pshtest:(id)sender {
-    NSLog(@"%@",[[self document]fileURL]);
     [self.window beginSheet:progressWin completionHandler:^(NSInteger returnCode){}];
 }
 - (IBAction)psh2:(id)sender {
