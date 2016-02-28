@@ -16,7 +16,16 @@
     IBOutlet NSWindow *progressWin;
     IBOutlet NSProgressIndicator *savingProgBar;
     IBOutlet MyPDFView *_pdfView;
-    NSURL *docURL;
+    IBOutlet NSButton *btnGoToFirstPg;
+    IBOutlet NSButton *btnGoToPrevPg;
+    IBOutlet NSButton *btnGoToNextPg;
+    IBOutlet NSButton *btnGoToLastPg;
+    IBOutlet NSButton *btnGoBack;
+    IBOutlet NSButton *btnGoFoward;
+    IBOutlet NSTextField *txtPg;
+    IBOutlet NSTextField *txtTotalPg;
+    IBOutlet NSNumberFormatter *txtPageFormatter;
+    NSURL *docURL; //ドキュメントのfileURL保持用
 }
 
 @end

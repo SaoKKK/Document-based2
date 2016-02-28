@@ -8,14 +8,18 @@
 
 #import "AppDelegate.h"
 
-@interface AppDelegate ()
+@interface AppDelegate (){
+    IBOutlet NSMenuItem *mmCurrentDocument;
+}
 
 @end
 
 @implementation AppDelegate
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
-    // Insert code here to initialize your application
+    //メニューアイテムのアクションを設定
+    [mmCurrentDocument setRepresentedObject:@"CurrentDocument"];
+    [mmCurrentDocument setAction:@selector(mnCurrentDocument:)];
 }
 
 - (void)applicationWillTerminate:(NSNotification *)aNotification {
@@ -25,6 +29,18 @@
 - (BOOL) applicationShouldOpenUntitledFile: (NSApplication *) application{
     //アプリケーション起動時に空のドキュメントを開くかの可否
     return NO;
+}
+
+#pragma mark - menu action
+- (void)mnCurrentDocument:(id)sender{
+    NSDocumentController *docCtr = [NSDocumentController sharedDocumentController];
+    //アクティブウインドウのドキュメントへの参照
+    NSDocument *currentDoc = [docCtr currentDocument];
+    NSLog(@"%@",currentDoc.fileURL);
+    
+    //開かれているドキュメントへの参照
+    NSArray *docs = [docCtr documents];
+    NSLog(@"%lu",docs.count);
 }
 
 @end

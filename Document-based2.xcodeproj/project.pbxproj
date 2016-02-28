@@ -14,6 +14,13 @@
 		B9AD99B81C771044008C29A4 /* Document.xib in Resources */ = {isa = PBXBuildFile; fileRef = B9AD99B61C771044008C29A4 /* Document.xib */; };
 		B9AD99BA1C771044008C29A4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B9AD99B91C771044008C29A4 /* Assets.xcassets */; };
 		B9AD99BD1C771044008C29A4 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = B9AD99BB1C771044008C29A4 /* MainMenu.xib */; };
+		B9BBD7221C82CEBE006CF6DC /* goBack.png in Resources */ = {isa = PBXBuildFile; fileRef = B9BBD71B1C82CEBE006CF6DC /* goBack.png */; };
+		B9BBD7231C82CEBE006CF6DC /* goFoward.png in Resources */ = {isa = PBXBuildFile; fileRef = B9BBD71C1C82CEBE006CF6DC /* goFoward.png */; };
+		B9BBD7241C82CEBE006CF6DC /* goLast.png in Resources */ = {isa = PBXBuildFile; fileRef = B9BBD71D1C82CEBE006CF6DC /* goLast.png */; };
+		B9BBD7251C82CEBE006CF6DC /* goNext.png in Resources */ = {isa = PBXBuildFile; fileRef = B9BBD71E1C82CEBE006CF6DC /* goNext.png */; };
+		B9BBD7261C82CEBE006CF6DC /* goPrev.png in Resources */ = {isa = PBXBuildFile; fileRef = B9BBD71F1C82CEBE006CF6DC /* goPrev.png */; };
+		B9BBD7271C82CEBE006CF6DC /* goTop.png in Resources */ = {isa = PBXBuildFile; fileRef = B9BBD7201C82CEBE006CF6DC /* goTop.png */; };
+		B9BBD7281C82CEBE006CF6DC /* vline.png in Resources */ = {isa = PBXBuildFile; fileRef = B9BBD7211C82CEBE006CF6DC /* vline.png */; };
 		B9D6AEFA1C78CFD900381A32 /* Quartz.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B9D6AEF91C78CFD900381A32 /* Quartz.framework */; };
 		B9D6AF001C78D27E00381A32 /* MyPDFView.m in Sources */ = {isa = PBXBuildFile; fileRef = B9D6AEFF1C78D27E00381A32 /* MyPDFView.m */; };
 /* End PBXBuildFile section */
@@ -31,6 +38,13 @@
 		B9AD99B91C771044008C29A4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B9AD99BC1C771044008C29A4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		B9AD99BE1C771044008C29A4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B9BBD71B1C82CEBE006CF6DC /* goBack.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = goBack.png; path = Graphics/goBack.png; sourceTree = "<group>"; };
+		B9BBD71C1C82CEBE006CF6DC /* goFoward.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = goFoward.png; path = Graphics/goFoward.png; sourceTree = "<group>"; };
+		B9BBD71D1C82CEBE006CF6DC /* goLast.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = goLast.png; path = Graphics/goLast.png; sourceTree = "<group>"; };
+		B9BBD71E1C82CEBE006CF6DC /* goNext.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = goNext.png; path = Graphics/goNext.png; sourceTree = "<group>"; };
+		B9BBD71F1C82CEBE006CF6DC /* goPrev.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = goPrev.png; path = Graphics/goPrev.png; sourceTree = "<group>"; };
+		B9BBD7201C82CEBE006CF6DC /* goTop.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = goTop.png; path = Graphics/goTop.png; sourceTree = "<group>"; };
+		B9BBD7211C82CEBE006CF6DC /* vline.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = vline.png; path = Graphics/vline.png; sourceTree = "<group>"; };
 		B9D6AEF91C78CFD900381A32 /* Quartz.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Quartz.framework; path = System/Library/Frameworks/Quartz.framework; sourceTree = SDKROOT; };
 		B9D6AEFE1C78D27E00381A32 /* MyPDFView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyPDFView.h; sourceTree = "<group>"; };
 		B9D6AEFF1C78D27E00381A32 /* MyPDFView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyPDFView.m; sourceTree = "<group>"; };
@@ -73,9 +87,9 @@
 				B9AD99AD1C771044008C29A4 /* AppDelegate.h */,
 				B9AD99AE1C771044008C29A4 /* AppDelegate.m */,
 				B9AD99BB1C771044008C29A4 /* MainMenu.xib */,
-				B9E21BE41C7A759F004DDB0F /* Document */,
 				B9AD99B91C771044008C29A4 /* Assets.xcassets */,
-				B9AD99BE1C771044008C29A4 /* Info.plist */,
+				B9E21BE41C7A759F004DDB0F /* Document */,
+				B9BBD71A1C82CE2D006CF6DC /* Graphics */,
 				B9AD99B01C771044008C29A4 /* Supporting Files */,
 			);
 			path = "Document-based2";
@@ -84,9 +98,24 @@
 		B9AD99B01C771044008C29A4 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				B9AD99BE1C771044008C29A4 /* Info.plist */,
 				B9AD99B11C771044008C29A4 /* main.m */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		B9BBD71A1C82CE2D006CF6DC /* Graphics */ = {
+			isa = PBXGroup;
+			children = (
+				B9BBD71B1C82CEBE006CF6DC /* goBack.png */,
+				B9BBD71C1C82CEBE006CF6DC /* goFoward.png */,
+				B9BBD71D1C82CEBE006CF6DC /* goLast.png */,
+				B9BBD71E1C82CEBE006CF6DC /* goNext.png */,
+				B9BBD71F1C82CEBE006CF6DC /* goPrev.png */,
+				B9BBD7201C82CEBE006CF6DC /* goTop.png */,
+				B9BBD7211C82CEBE006CF6DC /* vline.png */,
+			);
+			name = Graphics;
 			sourceTree = "<group>";
 		};
 		B9D6AEF81C78CDE500381A32 /* Frameworks */ = {
@@ -169,8 +198,15 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B9BBD7261C82CEBE006CF6DC /* goPrev.png in Resources */,
+				B9BBD7221C82CEBE006CF6DC /* goBack.png in Resources */,
+				B9BBD7251C82CEBE006CF6DC /* goNext.png in Resources */,
+				B9BBD7271C82CEBE006CF6DC /* goTop.png in Resources */,
+				B9BBD7241C82CEBE006CF6DC /* goLast.png in Resources */,
 				B9AD99BA1C771044008C29A4 /* Assets.xcassets in Resources */,
+				B9BBD7231C82CEBE006CF6DC /* goFoward.png in Resources */,
 				B9AD99B81C771044008C29A4 /* Document.xib in Resources */,
+				B9BBD7281C82CEBE006CF6DC /* vline.png in Resources */,
 				B9AD99BD1C771044008C29A4 /* MainMenu.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
