@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		B9825A731C77838500F7AD4A /* DocWinC.m in Sources */ = {isa = PBXBuildFile; fileRef = B9825A721C77838500F7AD4A /* DocWinC.m */; };
+		B9916AA91C8419D700F82641 /* sidebar.png in Resources */ = {isa = PBXBuildFile; fileRef = B9916AA81C8419D700F82641 /* sidebar.png */; };
 		B9AD99AF1C771044008C29A4 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B9AD99AE1C771044008C29A4 /* AppDelegate.m */; };
 		B9AD99B21C771044008C29A4 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = B9AD99B11C771044008C29A4 /* main.m */; };
 		B9AD99B51C771044008C29A4 /* Document.m in Sources */ = {isa = PBXBuildFile; fileRef = B9AD99B41C771044008C29A4 /* Document.m */; };
@@ -28,6 +29,7 @@
 /* Begin PBXFileReference section */
 		B9825A711C77838500F7AD4A /* DocWinC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DocWinC.h; sourceTree = "<group>"; };
 		B9825A721C77838500F7AD4A /* DocWinC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DocWinC.m; sourceTree = "<group>"; };
+		B9916AA81C8419D700F82641 /* sidebar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = sidebar.png; path = Graphics/sidebar.png; sourceTree = "<group>"; };
 		B9AD99AA1C771044008C29A4 /* Document-based2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Document-based2.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B9AD99AD1C771044008C29A4 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		B9AD99AE1C771044008C29A4 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -107,6 +109,7 @@
 		B9BBD71A1C82CE2D006CF6DC /* Graphics */ = {
 			isa = PBXGroup;
 			children = (
+				B9916AA81C8419D700F82641 /* sidebar.png */,
 				B9BBD71B1C82CEBE006CF6DC /* goBack.png */,
 				B9BBD71C1C82CEBE006CF6DC /* goFoward.png */,
 				B9BBD71D1C82CEBE006CF6DC /* goLast.png */,
@@ -205,6 +208,7 @@
 				B9BBD7241C82CEBE006CF6DC /* goLast.png in Resources */,
 				B9AD99BA1C771044008C29A4 /* Assets.xcassets in Resources */,
 				B9BBD7231C82CEBE006CF6DC /* goFoward.png in Resources */,
+				B9916AA91C8419D700F82641 /* sidebar.png in Resources */,
 				B9AD99B81C771044008C29A4 /* Document.xib in Resources */,
 				B9BBD7281C82CEBE006CF6DC /* vline.png in Resources */,
 				B9AD99BD1C771044008C29A4 /* MainMenu.xib in Resources */,

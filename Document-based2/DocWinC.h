@@ -11,7 +11,7 @@
 
 @class MyPDFView;
 
-@interface DocWinC : NSWindowController{
+@interface DocWinC : NSWindowController<NSSplitViewDelegate>{
     IBOutlet NSWindow *window;
     IBOutlet NSWindow *progressWin;
     IBOutlet NSProgressIndicator *savingProgBar;
@@ -25,7 +25,12 @@
     IBOutlet NSTextField *txtPg;
     IBOutlet NSTextField *txtTotalPg;
     IBOutlet NSNumberFormatter *txtPageFormatter;
+    IBOutlet NSSplitView *_splitView;
+    IBOutlet NSView *tocView;
+    IBOutlet NSTabView *tabToc;
+    IBOutlet NSSearchField *searchField;
     NSURL *docURL; //ドキュメントのfileURL保持用
+    CGFloat oldTocWidth; //目次エリアの変更前の幅保持用
 }
 
 @end

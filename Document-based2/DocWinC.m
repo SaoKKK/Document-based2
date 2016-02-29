@@ -10,6 +10,8 @@
 #import "Document.h"
 #import "MyPDFView.h"
 
+#define kMinTocAreaSplit	165.0f
+
 @interface DocWinC ()
 
 @end
@@ -36,6 +38,8 @@
     [txtPageFormatter setMaximum:[NSNumber numberWithInteger:totalPg]];
     //ページ表示テキストフィールドの値を変更
     [self updateTxtPg];
+    //目次エリア幅保持用変数に初期値を保存
+    oldTocWidth = 165.0F;
 }
 
 #pragma mark - Setup notification
@@ -110,6 +114,56 @@
     PDFDocument *doc = [_pdfView document];
     PDFPage *page = [doc pageAtIndex:[[sender stringValue]integerValue]-1];
     [_pdfView goToPage:page];
+}
+
+//コンテンツ・エリアのビューを切り替え
+- (IBAction)segSelContentsView:(id)sender {
+    [tabToc selectTabViewItemAtIndex:[sender selectedSegment]];
+}
+
+//コンテンツ・エリアの表示／非表示を切り替え
+- (IBAction)showSideBar:(id)sender {
+    CGFloat currentTocWidth = tocView.frame.size.width;
+    if (currentTocWidth == 0) {
+        //目次エリアを表示
+        [tocView setFrame:NSMakeRect(0, 0, oldTocWidth, _splitView.frame.size.height)];
+        [searchField setFrame:NSMakeRect(70, 4, oldTocWidth-77, 19)];
+    } else {
+        //目次エリアを非表示
+        oldTocWidth = tocView.frame.size.width; //非表示前の目次エリア幅を保存
+        [tocView setFrame:NSMakeRect(0, 0, 0, _splitView.frame.size.height)];
+    }
+}
+
+- (IBAction)test:(id)sender {
+    
+}
+
+#pragma mark - split view delegate
+
+- (CGFloat)splitView:(NSSplitView *)splitView constrainMinCoordinate:(CGFloat)proposedMin ofSubviewAt:(NSInteger)dividerIndex{
+    return proposedMin + kMinTocAreaSplit;
+}
+
+- (CGFloat)splitView:(NSSplitView *)splitView constrainMaxCoordinate:(CGFloat)proposedMax ofSubviewAt:(NSInteger)dividerIndex{
+    return proposedMax - kMinTocAreaSplit;
+}
+
+- (void)splitView:(NSSplitView *)splitView resizeSubviewsWithOldSize:(NSSize)oldSize{
+    NSRect newFrame = [splitView frame];    //新しいsplitView全体のサイズを取得
+    NSView *leftView = [[splitView subviews]objectAtIndex:0];
+    NSRect leftFrame = [leftView frame];
+    NSView *rightView = [[splitView subviews]objectAtIndex:1];
+    NSRect rightFrame = [rightView frame];
+    CGFloat dividerThickness = [splitView dividerThickness];
+
+    leftFrame.size.height = newFrame.size.height;
+    rightFrame.size.width = newFrame.size.width - leftFrame.size.width - dividerThickness;
+    rightFrame.size.height = newFrame.size.height;
+    rightFrame.origin.x = leftFrame.size.width + dividerThickness;
+    
+    [leftView setFrame:leftFrame];
+    [rightView setFrame:rightFrame];
 }
 
 #pragma mark - Save document
