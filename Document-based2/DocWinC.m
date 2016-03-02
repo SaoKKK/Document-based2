@@ -18,8 +18,6 @@
 
 @implementation DocWinC
 
-@synthesize _pdfView;
-
 #pragma mark - Window Controller Method
 
 - (void)windowDidLoad {
@@ -48,8 +46,8 @@
 
 #pragma mark - document save/open support
 
-- (PDFDocument*)pdfViewDocument{
-    return [_pdfView document];
+- (NSData *)pdfViewDocumentData{
+    return [[_pdfView document]dataRepresentation];
 }
 
 - (void)revertDocumentToSaved{
@@ -150,8 +148,26 @@
     }
 }
 
+//ディスプレイ・モードを切り替え
+- (IBAction)displayModeMatrix:(id)sender {
+    switch ([sender selectedColumn]) {
+        case 0:
+            [_pdfView setDisplayMode:kPDFDisplaySinglePage];
+            break;
+        case 2:
+            [_pdfView setDisplayMode:kPDFDisplayTwoUp];
+            break;
+        case 3:
+            [_pdfView setDisplayMode:kPDFDisplayTwoUpContinuous];
+            break;
+        default:
+            [_pdfView setDisplayMode:kPDFDisplaySinglePageContinuous];
+            break;
+    }
+}
+
 - (IBAction)test:(id)sender {
-    
+    NSLog(@"%ld",(long)[_pdfView displayMode]);
 }
 
 #pragma mark - split view delegate
