@@ -40,6 +40,12 @@
     [self updateTxtPg];
     //目次エリア幅保持用変数に初期値を保存
     oldTocWidth = 165.0F;
+    //サムネイルビューの選択規則を設定
+    [thumbView setAllowsMultipleSelection:YES];
+}
+
+- (void)windowWillClose:(NSNotification *)notification{
+    NSLog(@"close");
 }
 
 #pragma mark - Setup notification
@@ -170,7 +176,11 @@
 
 //ドキュメントを保存
 - (void)saveDocument:(id)sender{
-    [_pdfView.document writeToURL:docURL];
+    if (docURL){
+        [_pdfView.document writeToURL:docURL];
+    } else {
+        [self saveDocumentAs:sender];
+    }
 }
 
 //ドキュメントを別名で保存
@@ -179,7 +189,7 @@
     NSSavePanel *savePanel = [NSSavePanel savePanel];
     NSArray *fileTypes = [NSArray arrayWithObjects:@"pdf", nil];
     [savePanel setAllowedFileTypes:fileTypes]; //保存するファイルの種類
-    [savePanel setNameFieldStringValue:[[docURL path] lastPathComponent]]; //初期ファイル名
+    [savePanel setNameFieldStringValue:self.window.title]; //初期ファイル名
     [savePanel setCanSelectHiddenExtension:YES]; //拡張子を隠すチェックボックスの有無
     [savePanel setExtensionHidden:NO]; //拡張子を隠すチェックボックスの初期ステータス
     [savePanel beginSheetModalForWindow:self.window completionHandler:^(NSInteger result){
@@ -190,6 +200,7 @@
             Document *doc = [self document];
             //ドキュメントのURLを更新
             [doc setFileURL:docURL];
+            NSLog(@"saveas");
        }
     }];
 }

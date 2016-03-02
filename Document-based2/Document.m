@@ -40,6 +40,8 @@
 }
 
 - (NSData *)dataOfType:(NSString *)typeName error:(NSError **)outError{
+    DocWinC *winC = [[self windowControllers]objectAtIndex:0];
+    [winC saveDocument:nil];
     return NULL;
 }
 

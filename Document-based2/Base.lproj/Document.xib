@@ -21,6 +21,7 @@
                 <outlet property="savingProgBar" destination="iTd-5B-A8m" id="qIm-vH-Z9B"/>
                 <outlet property="searchField" destination="iF3-08-ku3" id="UEp-rK-VaH"/>
                 <outlet property="tabToc" destination="d8t-uS-kSi" id="Few-ho-iHI"/>
+                <outlet property="thumbView" destination="5je-Lx-eSc" id="Wah-qh-327"/>
                 <outlet property="tocView" destination="74F-id-FBp" id="oHO-Jk-evz"/>
                 <outlet property="txtPageFormatter" destination="YYU-tr-NfP" id="wmp-FI-AyN"/>
                 <outlet property="txtPg" destination="6ly-SK-3Vt" id="mNf-Ep-Nb6"/>
@@ -243,7 +244,7 @@
                                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                 <subviews>
                                                                     <outlineView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" multipleSelection="NO" autosaveColumns="NO" rowSizeStyle="automatic" headerView="7N2-Cn-9q5" viewBased="YES" indentationPerLevel="16" outlineTableColumn="Off-CF-tak" id="reD-FV-HUc">
-                                                                        <rect key="frame" x="0.0" y="0.0" width="163" height="499"/>
+                                                                        <rect key="frame" x="0.0" y="0.0" width="163" height="0.0"/>
                                                                         <autoresizingMask key="autoresizingMask"/>
                                                                         <size key="intercellSpacing" width="3" height="2"/>
                                                                         <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
