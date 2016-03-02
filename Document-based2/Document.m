@@ -40,12 +40,17 @@
 }
 
 - (NSData *)dataOfType:(NSString *)typeName error:(NSError **)outError{
+    //PDFビューのドキュメントをNSDataにパッケージして返す
     DocWinC *winC = [[self windowControllers]objectAtIndex:0];
-    [winC saveDocument:nil];
-    return NULL;
+    return [[winC pdfViewDocument] dataRepresentation];
 }
 
 - (BOOL)readFromData:(NSData *)data ofType:(NSString *)typeName error:(NSError **)outError {
+    if ([self windowControllers].count != 0) {
+        //復帰のための読み込みの場合
+        DocWinC *winC = [[self windowControllers]objectAtIndex:0];
+        [winC revertDocumentToSaved];
+    }
     return YES;
 }
 

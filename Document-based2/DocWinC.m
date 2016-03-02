@@ -18,6 +18,8 @@
 
 @implementation DocWinC
 
+@synthesize _pdfView;
+
 #pragma mark - Window Controller Method
 
 - (void)windowDidLoad {
@@ -44,8 +46,15 @@
     [thumbView setAllowsMultipleSelection:YES];
 }
 
-- (void)windowWillClose:(NSNotification *)notification{
-    NSLog(@"close");
+#pragma mark - document save/open support
+
+- (PDFDocument*)pdfViewDocument{
+    return [_pdfView document];
+}
+
+- (void)revertDocumentToSaved{
+    PDFDocument *doc = [[PDFDocument alloc]initWithURL:docURL];
+    [_pdfView setDocument:doc];
 }
 
 #pragma mark - Setup notification
@@ -170,39 +179,6 @@
     
     [leftView setFrame:leftFrame];
     [rightView setFrame:rightFrame];
-}
-
-#pragma mark - Save document
-
-//ドキュメントを保存
-- (void)saveDocument:(id)sender{
-    if (docURL){
-        [_pdfView.document writeToURL:docURL];
-    } else {
-        [self saveDocumentAs:sender];
-    }
-}
-
-//ドキュメントを別名で保存
-- (void)saveDocumentAs:(id)sender{
-    //savePanelの設定と表示
-    NSSavePanel *savePanel = [NSSavePanel savePanel];
-    NSArray *fileTypes = [NSArray arrayWithObjects:@"pdf", nil];
-    [savePanel setAllowedFileTypes:fileTypes]; //保存するファイルの種類
-    [savePanel setNameFieldStringValue:self.window.title]; //初期ファイル名
-    [savePanel setCanSelectHiddenExtension:YES]; //拡張子を隠すチェックボックスの有無
-    [savePanel setExtensionHidden:NO]; //拡張子を隠すチェックボックスの初期ステータス
-    [savePanel beginSheetModalForWindow:self.window completionHandler:^(NSInteger result){
-        if (result == NSFileHandlingPanelOKButton) {
-            docURL = [savePanel URL];
-            [savePanel orderOut:self];
-            [_pdfView.document writeToURL:docURL];
-            Document *doc = [self document];
-            //ドキュメントのURLを更新
-            [doc setFileURL:docURL];
-            NSLog(@"saveas");
-       }
-    }];
 }
 
 @end
