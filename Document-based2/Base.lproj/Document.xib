@@ -396,7 +396,7 @@
                             </column>
                         </cells>
                         <connections>
-                            <action selector="displayModeMatrix:" target="-2" id="3RN-JH-fcP"/>
+                            <action selector="matrixDisplayMode:" target="-2" id="9ck-cT-hby"/>
                         </connections>
                     </matrix>
                     <segmentedControl verticalHuggingPriority="750" id="IJb-7H-oEx">

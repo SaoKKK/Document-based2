@@ -181,7 +181,7 @@
 }
 
 //ディスプレイ・モードを切り替え
-- (IBAction)displayModeMatrix:(id)sender {
+- (IBAction)matrixDisplayMode:(id)sender {
     switch ([sender selectedColumn]) {
         case 0:
             [_pdfView setDisplayMode:kPDFDisplaySinglePage];
@@ -235,25 +235,25 @@
 - (IBAction)mnSinglePage:(id)sender{
     [matrixDisplayMode selectCellWithTag:0];
     [APPD setMnPageDisplayState:0];
-    [self displayModeMatrix:matrixDisplayMode];
+    [self matrixDisplayMode:matrixDisplayMode];
 }
 
 - (IBAction)mnSingleCont:(id)sender{
     [matrixDisplayMode selectCellWithTag:1];
     [APPD setMnPageDisplayState:1];
-    [self displayModeMatrix:matrixDisplayMode];
+    [self matrixDisplayMode:matrixDisplayMode];
 }
 
 - (IBAction)mnTwoPages:(id)sender{
     [matrixDisplayMode selectCellWithTag:2];
     [APPD setMnPageDisplayState:2];
-    [self displayModeMatrix:matrixDisplayMode];
+    [self matrixDisplayMode:matrixDisplayMode];
 }
 
 - (IBAction)mnTwoPagesCont:(id)sender{
     [matrixDisplayMode selectCellWithTag:3];
     [APPD setMnPageDisplayState:3];
-    [self displayModeMatrix:matrixDisplayMode];
+    [self matrixDisplayMode:matrixDisplayMode];
 }
 
 //移動メニュー
