@@ -9,7 +9,12 @@
 #import "AppDelegate.h"
 
 @interface AppDelegate (){
-    IBOutlet NSMenuItem *mmCurrentDocument;
+    
+    IBOutlet NSMenuItem *mnSinglePage;
+    IBOutlet NSMenuItem *mnSingleCont;
+    IBOutlet NSMenuItem *mnTwoPages;
+    IBOutlet NSMenuItem *mnTwoPageCont;
+    NSArray *mnPageDisplay; //表示モード変更メニューグループ
 }
 
 @end
@@ -17,9 +22,8 @@
 @implementation AppDelegate
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
-    //メニューアイテムのアクションを設定
-    [mmCurrentDocument setRepresentedObject:@"CurrentDocument"];
-    [mmCurrentDocument setAction:@selector(mnCurrentDocument:)];
+    //メニューグループを作成
+    mnPageDisplay = [NSArray arrayWithObjects:mnSinglePage,mnSingleCont,mnTwoPages,mnTwoPageCont,nil];
 }
 
 - (void)applicationWillTerminate:(NSNotification *)aNotification {
@@ -41,6 +45,19 @@
     //開かれているドキュメントへの参照
     NSArray *docs = [docCtr documents];
     NSLog(@"%lu",docs.count);
+    
+}
+
+#pragma mark - menu control
+
+- (void)setMnPageDisplayState:(NSInteger)tag{
+    for (int i=0; i < mnPageDisplay.count; i++) {
+        if (i == tag) {
+            [[mnPageDisplay objectAtIndex:i]setState:YES];
+        } else {
+            [[mnPageDisplay objectAtIndex:i]setState:NO];
+        }
+    }
 }
 
 @end

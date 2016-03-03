@@ -26,6 +26,8 @@
     IBOutlet NSTextField *txtPg;
     IBOutlet NSTextField *txtTotalPg;
     IBOutlet NSNumberFormatter *txtPageFormatter;
+    IBOutlet NSSegmentedControl *segZoom;
+    IBOutlet NSMatrix *matrixDisplayMode;
     IBOutlet NSSplitView *_splitView;
     IBOutlet NSView *tocView;
     IBOutlet NSTabView *tabToc;

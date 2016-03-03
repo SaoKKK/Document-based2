@@ -14,7 +14,18 @@
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
         <customObject id="Voe-Tx-rLC" customClass="AppDelegate">
             <connections>
-                <outlet property="mmCurrentDocument" destination="Ob5-Z6-l9h" id="sKC-fj-kkA"/>
+                <outlet property="mnGoBack" destination="6fn-SK-nKO" id="AA7-ta-sYU"/>
+                <outlet property="mnGoFoward" destination="OKp-5t-M2w" id="dM2-ld-ICe"/>
+                <outlet property="mnGoToFirstPg" destination="kQh-sc-o3h" id="Haf-DG-9DT"/>
+                <outlet property="mnGoToLastPg" destination="8TC-VT-XrE" id="KD6-u8-CgQ"/>
+                <outlet property="mnGoToNextPg" destination="Mgh-CW-Vyv" id="4Ub-Rb-EgW"/>
+                <outlet property="mnGoToPrevPg" destination="Ob5-Z6-l9h" id="vZQ-nT-Mis"/>
+                <outlet property="mnSingleCont" destination="dv7-5r-YBZ" id="1OH-gG-Xuu"/>
+                <outlet property="mnSinglePage" destination="E8r-pm-WKX" id="7w7-tr-Rnq"/>
+                <outlet property="mnTwoPageCont" destination="2SK-wh-zRc" id="Luh-MJ-h0q"/>
+                <outlet property="mnTwoPages" destination="nUn-NX-nUC" id="j6b-oq-cNl"/>
+                <outlet property="mnZoomIn" destination="p7o-Az-s8w" id="37g-18-wZO"/>
+                <outlet property="mnZoomOut" destination="Srb-vg-b48" id="5ae-Cv-bSE"/>
             </connections>
         </customObject>
         <customObject id="YLy-65-1bz" customClass="NSFontManager"/>
@@ -609,35 +620,103 @@ CA
                 </menuItem>
                 <menuItem title="View" id="H8h-7b-M4v">
                     <modifierMask key="keyEquivalentModifierMask"/>
-                    <menu key="submenu" title="View" id="HyV-fh-RgO">
+                    <menu key="submenu" title="View" autoenablesItems="NO" id="HyV-fh-RgO">
                         <items>
-                            <menuItem title="Show Toolbar" keyEquivalent="t" id="snW-S8-Cw5">
-                                <modifierMask key="keyEquivalentModifierMask" option="YES" command="YES"/>
+                            <menuItem title="Single Page" keyEquivalent="1" id="E8r-pm-WKX">
                                 <connections>
-                                    <action selector="toggleToolbarShown:" target="-1" id="BXY-wc-z0C"/>
+                                    <action selector="mnSinglePage:" target="-1" id="OTn-1H-Bxo"/>
                                 </connections>
                             </menuItem>
-                            <menuItem title="Customize Toolbar…" id="1UK-8n-QPP">
-                                <modifierMask key="keyEquivalentModifierMask"/>
+                            <menuItem title="Single Page Continuous" state="on" keyEquivalent="2" id="dv7-5r-YBZ">
                                 <connections>
-                                    <action selector="runToolbarCustomizationPalette:" target="-1" id="pQI-g3-MTW"/>
+                                    <action selector="mnSingleCont:" target="-1" id="98L-OG-fA8"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Two Pages" keyEquivalent="3" id="nUn-NX-nUC">
+                                <connections>
+                                    <action selector="mnTwoPages:" target="-1" id="U9o-Rx-7ge"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Two Pages Continuous" keyEquivalent="4" id="2SK-wh-zRc">
+                                <connections>
+                                    <action selector="mnTwoPagesCont:" target="-1" id="HoL-7e-UmG"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem isSeparatorItem="YES" id="kiX-Ta-Tzb"/>
+                            <menuItem title="Zoom to Fit" keyEquivalent="9" id="DP4-OT-pV1">
+                                <connections>
+                                    <action selector="zoomImageToFit:" target="-1" id="gY6-Xo-DPZ"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Actual Size" keyEquivalent="0" id="psd-Ef-9Ar">
+                                <connections>
+                                    <action selector="zoomImageToActualSize:" target="-1" id="9v1-mL-IvN"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Zoom In" keyEquivalent="&gt;" id="p7o-Az-s8w">
+                                <modifierMask key="keyEquivalentModifierMask" shift="YES" command="YES"/>
+                                <connections>
+                                    <action selector="zoomIn:" target="-1" id="5D8-o2-P5e"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Zoom Out" keyEquivalent="&lt;" id="Srb-vg-b48">
+                                <modifierMask key="keyEquivalentModifierMask" shift="YES" command="YES"/>
+                                <connections>
+                                    <action selector="zoomOut:" target="-1" id="bXZ-Nz-vVu"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem isSeparatorItem="YES" id="ECg-Hs-GPr"/>
+                            <menuItem title="Enter Full Screen" keyEquivalent="f" id="P9e-mz-M85">
+                                <modifierMask key="keyEquivalentModifierMask" control="YES" command="YES"/>
+                                <connections>
+                                    <action selector="toggleFullScreen:" target="-1" id="KkR-Vn-QyY"/>
                                 </connections>
                             </menuItem>
                         </items>
                     </menu>
                 </menuItem>
-                <menuItem title="Document" id="ai2-GZ-jD6">
+                <menuItem title="Go" id="ai2-GZ-jD6">
                     <modifierMask key="keyEquivalentModifierMask"/>
-                    <menu key="submenu" title="Document" id="zGJ-dX-Oxx">
+                    <menu key="submenu" title="Go" autoenablesItems="NO" id="zGJ-dX-Oxx">
                         <items>
-                            <menuItem title="Current Document" id="Ob5-Z6-l9h">
-                                <modifierMask key="keyEquivalentModifierMask"/>
+                            <menuItem title="Previous Page" enabled="NO" keyEquivalent="" id="Ob5-Z6-l9h">
+                                <connections>
+                                    <action selector="goToPreviousPage:" target="-1" id="Y2J-dL-Gvj"/>
+                                </connections>
                             </menuItem>
-                            <menuItem title="Item 2" id="Mgh-CW-Vyv">
-                                <modifierMask key="keyEquivalentModifierMask"/>
+                            <menuItem title="Next Page" keyEquivalent="" id="Mgh-CW-Vyv">
+                                <connections>
+                                    <action selector="goToNextPage:" target="-1" id="1lQ-59-Fzo"/>
+                                </connections>
                             </menuItem>
-                            <menuItem title="Item 3" id="kQh-sc-o3h">
+                            <menuItem title="First Page" enabled="NO" id="kQh-sc-o3h">
                                 <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="goToFirstPage:" target="-1" id="GPC-uq-K9w"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Last Page" id="8TC-VT-XrE">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="goToLastPage:" target="-1" id="V6c-hq-zdp"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Go To Page..." keyEquivalent="g" id="lcz-oK-gwq" userLabel="Go To Specified Page...">
+                                <modifierMask key="keyEquivalentModifierMask" option="YES" command="YES"/>
+                                <connections>
+                                    <action selector="mnGoToPage:" target="-1" id="n4m-ab-5u6"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem isSeparatorItem="YES" id="ymp-HJ-pmb"/>
+                            <menuItem title="Go Back" enabled="NO" keyEquivalent="[" id="6fn-SK-nKO">
+                                <connections>
+                                    <action selector="goBack:" target="-1" id="ShN-M9-yuC"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Go Foward" enabled="NO" keyEquivalent="]" id="OKp-5t-M2w">
+                                <connections>
+                                    <action selector="goForward:" target="-1" id="pma-E3-VlJ"/>
+                                </connections>
                             </menuItem>
                         </items>
                     </menu>

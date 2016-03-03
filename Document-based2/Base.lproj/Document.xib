@@ -17,9 +17,11 @@
                 <outlet property="btnGoToLastPg" destination="SpU-MM-oJh" id="YaJ-Fe-0bz"/>
                 <outlet property="btnGoToNextPg" destination="Qv9-3u-e1P" id="tdL-XD-JG0"/>
                 <outlet property="btnGoToPrevPg" destination="B9S-XT-Nzp" id="Q3X-Ua-Iw5"/>
+                <outlet property="matrixDisplayMode" destination="ojN-5T-C3x" id="Yyx-La-5Ff"/>
                 <outlet property="progressWin" destination="hPb-14-zhA" id="UjU-D2-2P7"/>
                 <outlet property="savingProgBar" destination="iTd-5B-A8m" id="qIm-vH-Z9B"/>
                 <outlet property="searchField" destination="iF3-08-ku3" id="UEp-rK-VaH"/>
+                <outlet property="segZoom" destination="IJb-7H-oEx" id="KMg-FF-cmg"/>
                 <outlet property="tabToc" destination="d8t-uS-kSi" id="Few-ho-iHI"/>
                 <outlet property="thumbView" destination="5je-Lx-eSc" id="Wah-qh-327"/>
                 <outlet property="tocView" destination="74F-id-FBp" id="oHO-Jk-evz"/>
@@ -36,7 +38,7 @@
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
             <rect key="contentRect" x="61" y="136" width="600" height="600"/>
             <rect key="screenRect" x="0.0" y="0.0" width="1280" height="777"/>
-            <value key="minSize" type="size" width="400" height="100"/>
+            <value key="minSize" type="size" width="400" height="400"/>
             <view key="contentView" id="gIp-Ho-8D9">
                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                 <autoresizingMask key="autoresizingMask"/>
@@ -93,7 +95,7 @@
                     <button toolTip="Go previous page" verticalHuggingPriority="750" id="B9S-XT-Nzp">
                         <rect key="frame" x="27" y="0.0" width="23" height="23"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="goPrev" imagePosition="overlaps" alignment="center" lineBreakMode="truncatingTail" state="on" imageScaling="proportionallyDown" inset="2" id="Weg-wM-jox">
+                        <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="goPrev" imagePosition="overlaps" alignment="center" lineBreakMode="truncatingTail" enabled="NO" state="on" imageScaling="proportionallyDown" inset="2" id="Weg-wM-jox">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                             <font key="font" metaFont="system"/>
                         </buttonCell>
@@ -134,7 +136,7 @@
                     <button toolTip="Go to first page" verticalHuggingPriority="750" id="350-Zi-nk1">
                         <rect key="frame" x="5" y="0.0" width="23" height="23"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="goTop" imagePosition="overlaps" alignment="center" lineBreakMode="truncatingTail" state="on" imageScaling="proportionallyDown" inset="2" id="ckX-wp-sBW">
+                        <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="goTop" imagePosition="overlaps" alignment="center" lineBreakMode="truncatingTail" enabled="NO" state="on" imageScaling="proportionallyDown" inset="2" id="ckX-wp-sBW">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                             <font key="font" metaFont="system"/>
                         </buttonCell>
@@ -154,7 +156,7 @@
                         </connections>
                     </button>
                     <button verticalHuggingPriority="750" id="mbu-wT-Eo9">
-                        <rect key="frame" x="6" y="573" width="35" height="29"/>
+                        <rect key="frame" x="5" y="575" width="33" height="25"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <buttonCell key="cell" type="roundTextured" bezelStyle="texturedRounded" image="sidebar" imagePosition="only" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="mWZ-n8-Tt0">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -375,19 +377,19 @@
                                 </buttonCell>
                             </column>
                             <column>
-                                <buttonCell type="bevel" bezelStyle="regularSquare" image="singleCon_off" imagePosition="only" alignment="left" alternateImage="singleCon_on" controlSize="small" state="on" focusRingType="none" inset="2" id="IAJ-VQ-lFT">
+                                <buttonCell type="bevel" bezelStyle="regularSquare" image="singleCon_off" imagePosition="only" alignment="left" alternateImage="singleCon_on" controlSize="small" state="on" focusRingType="none" tag="1" inset="2" id="IAJ-VQ-lFT">
                                     <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                     <font key="font" metaFont="smallSystem"/>
                                 </buttonCell>
                             </column>
                             <column>
-                                <buttonCell type="bevel" bezelStyle="regularSquare" image="twoUp_off" imagePosition="only" alignment="left" alternateImage="twoUp_on" controlSize="small" focusRingType="none" inset="2" id="7JH-0j-cxf">
+                                <buttonCell type="bevel" bezelStyle="regularSquare" image="twoUp_off" imagePosition="only" alignment="left" alternateImage="twoUp_on" controlSize="small" focusRingType="none" tag="2" inset="2" id="7JH-0j-cxf">
                                     <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                     <font key="font" metaFont="smallSystem"/>
                                 </buttonCell>
                             </column>
                             <column>
-                                <buttonCell type="bevel" bezelStyle="regularSquare" image="twoCont_off" imagePosition="only" alignment="left" alternateImage="twoCont_on" inset="2" id="he4-xq-weK">
+                                <buttonCell type="bevel" bezelStyle="regularSquare" image="twoCont_off" imagePosition="only" alignment="left" alternateImage="twoCont_on" tag="3" inset="2" id="he4-xq-weK">
                                     <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
@@ -397,17 +399,27 @@
                             <action selector="displayModeMatrix:" target="-2" id="3RN-JH-fcP"/>
                         </connections>
                     </matrix>
-                    <button verticalHuggingPriority="750" id="uCJ-mi-dX6">
-                        <rect key="frame" x="167" y="573" width="81" height="32"/>
+                    <segmentedControl verticalHuggingPriority="750" id="IJb-7H-oEx">
+                        <rect key="frame" x="60" y="575" width="104" height="25"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                        <buttonCell key="cell" type="push" title="Button" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="LiP-U3-1aw">
-                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                        <segmentedCell key="cell" borderStyle="border" alignment="left" style="automatic" trackingMode="momentary" id="gLB-KL-hnk">
                             <font key="font" metaFont="system"/>
-                        </buttonCell>
+                            <segments>
+                                <segment image="zoomIn" width="32">
+                                    <nil key="label"/>
+                                </segment>
+                                <segment image="zoomOut" width="32" tag="1">
+                                    <nil key="label"/>
+                                </segment>
+                                <segment image="fitToWindow" width="32">
+                                    <nil key="label"/>
+                                </segment>
+                            </segments>
+                        </segmentedCell>
                         <connections>
-                            <action selector="test:" target="-2" id="zMl-6n-tAu"/>
+                            <action selector="segZoom:" target="-2" id="7e8-0n-HdR"/>
                         </connections>
-                    </button>
+                    </segmentedControl>
                 </subviews>
             </view>
             <connections>
@@ -445,13 +457,14 @@
     <resources>
         <image name="NSIconViewTemplate" width="10" height="10"/>
         <image name="NSListViewTemplate" width="14" height="10"/>
+        <image name="fitToWindow" width="23" height="23"/>
         <image name="goBack" width="23" height="23"/>
         <image name="goFoward" width="23" height="23"/>
         <image name="goLast" width="23" height="23"/>
         <image name="goNext" width="23" height="23"/>
         <image name="goPrev" width="23" height="23"/>
         <image name="goTop" width="23" height="23"/>
-        <image name="sidebar" width="23" height="23"/>
+        <image name="sidebar" width="22" height="18"/>
         <image name="singleCon_off" width="25" height="23"/>
         <image name="singleCon_on" width="25" height="23"/>
         <image name="singlePage_off" width="25" height="23"/>
@@ -461,5 +474,7 @@
         <image name="twoUp_off" width="25" height="23"/>
         <image name="twoUp_on" width="25" height="23"/>
         <image name="vline" width="1" height="18"/>
+        <image name="zoomIn" width="23" height="23"/>
+        <image name="zoomOut" width="23" height="23"/>
     </resources>
 </document>

@@ -1,7 +1,4 @@
 
-/* Class = "NSMenuItem"; title = "Customize Toolbar…"; ObjectID = "1UK-8n-QPP"; */
-"1UK-8n-QPP.title" = "Customize Toolbar…";
-
 /* Class = "NSMenuItem"; title = "Document-based2"; ObjectID = "1Xt-HY-uBw"; */
 "1Xt-HY-uBw.title" = "Document-based2";
 
@@ -33,10 +30,10 @@
 "4EN-yA-p0u.title" = "Find";
 
 /* Class = "NSMenuItem"; title = "Quit Document-based2"; ObjectID = "4sb-4s-VLi"; */
-"4sb-4s-VLi.title" = "Quit Document-based2";
+"4sb-4s-VLi.title" = "Document-based2 を終了";
 
 /* Class = "NSMenuItem"; title = "Edit"; ObjectID = "5QF-Oa-p0T"; */
-"5QF-Oa-p0T.title" = "Edit";
+"5QF-Oa-p0T.title" = "編集";
 
 /* Class = "NSMenuItem"; title = "Copy Style"; ObjectID = "5Vv-lz-BsD"; */
 "5Vv-lz-BsD.title" = "Copy Style";
@@ -78,7 +75,7 @@
 "Dv1-io-Yv7.title" = "Spelling and Grammar";
 
 /* Class = "NSMenu"; title = "Help"; ObjectID = "F2S-fz-NVQ"; */
-"F2S-fz-NVQ.title" = "Help";
+"F2S-fz-NVQ.title" = "ヘルプ";
 
 /* Class = "NSMenuItem"; title = "Document-based2 Help"; ObjectID = "FKE-Sm-Kum"; */
 "FKE-Sm-Kum.title" = "Document-based2 Help";
@@ -104,17 +101,47 @@
 /* Class = "NSMenuItem"; title = "Writing Direction"; ObjectID = "H1b-Si-o9J"; */
 "H1b-Si-o9J.title" = "Writing Direction";
 
-/* Class = "NSMenuItem"; title = "View"; ObjectID = "H8h-7b-M4v"; */
-"H8h-7b-M4v.title" = "View";
+// menu item View
+"HyV-fh-RgO.title" = "表示";
+// menu item Single Page
+"E8r-pm-WKX.title" = "単ページ表示";
+// menu item Single Page Continuous
+"dv7-5r-YBZ.title" = "単ページ連続表示";
+// menu item Two Pages
+"nUn-NX-nUC.title" = "見開表示";
+// menu item Two Pages Continuous
+"2SK-wh-zRc.title" = "見開連続表示";
+// memu item Actual Size
+"psd-Ef-9Ar.title" = "実際のサイズ";
+// menu item Zoom to Fit
+"DP4-OT-pV1.title" = "ウインドウに合わせる";
+// menu item Zoom In
+"p7o-Az-s8w.title" = "拡大";
+// menu item Zoom Out
+"Srb-vg-b48.title" = "縮小";
+
+// menu item Go
+"zGJ-dX-Oxx.title" = "移動";
+// menu item
+"Ob5-Z6-l9h.title" = "前ページへ";
+// menu item
+"Mgh-CW-Vyv.title" = "次ページへ";
+// menu item
+"kQh-sc-o3h.title" = "最初のページへ";
+// menu item
+"8TC-VT-XrE.title" = "最後のページへ";
+// menu item
+"lcz-oK-gwq.title" = "指定のページへ移動...";
+// menu item
+"6fn-SK-nKO.title" = "戻る";
+// menu item
+"OKp-5t-M2w.title" = "進む";
 
 /* Class = "NSMenuItem"; title = "Text Replacement"; ObjectID = "HFQ-gK-NFA"; */
 "HFQ-gK-NFA.title" = "Text Replacement";
 
 /* Class = "NSMenuItem"; title = "Show Spelling and Grammar"; ObjectID = "HFo-cy-zxI"; */
 "HFo-cy-zxI.title" = "Show Spelling and Grammar";
-
-/* Class = "NSMenu"; title = "View"; ObjectID = "HyV-fh-RgO"; */
-"HyV-fh-RgO.title" = "View";
 
 /* Class = "NSMenuItem"; title = "Subscript"; ObjectID = "I0S-gh-46l"; */
 "I0S-gh-46l.title" = "Subscript";
@@ -189,7 +216,7 @@
 "S0p-oC-mLd.title" = "Jump to Selection";
 
 /* Class = "NSMenu"; title = "Window"; ObjectID = "Td7-aD-5lo"; */
-"Td7-aD-5lo.title" = "Window";
+"Td7-aD-5lo.title" = "ウインドウ";
 
 /* Class = "NSMenuItem"; title = "Capitalize"; ObjectID = "UEZ-Bs-lqG"; */
 "UEZ-Bs-lqG.title" = "Capitalize";
@@ -204,7 +231,7 @@
 "Vjx-xi-njq.title" = "Italic";
 
 /* Class = "NSMenu"; title = "Edit"; ObjectID = "W48-6f-4Dl"; */
-"W48-6f-4Dl.title" = "Edit";
+"W48-6f-4Dl.title" = "編集";
 
 /* Class = "NSMenuItem"; title = "Underline"; ObjectID = "WRG-CD-K1S"; */
 "WRG-CD-K1S.title" = "Underline";
@@ -237,7 +264,7 @@
 "aTl-1u-JFS.title" = "Print…";
 
 /* Class = "NSMenuItem"; title = "Window"; ObjectID = "aUF-d1-5bR"; */
-"aUF-d1-5bR.title" = "Window";
+"aUF-d1-5bR.title" = "ウインドウ";
 
 /* Class = "NSMenu"; title = "Font"; ObjectID = "aXa-aM-Jaq"; */
 "aXa-aM-Jaq.title" = "Font";
@@ -249,7 +276,7 @@
 "bgn-CT-cEk.title" = "Show Colors";
 
 /* Class = "NSMenu"; title = "File"; ObjectID = "bib-Uj-vzu"; */
-"bib-Uj-vzu.title" = "File";
+"bib-Uj-vzu.title" = "ファイル";
 
 /* Class = "NSMenuItem"; title = "Use Selection for Find"; ObjectID = "buJ-ug-pKt"; */
 "buJ-ug-pKt.title" = "Use Selection for Find";
@@ -273,7 +300,7 @@
 "d9c-me-L2H.title" = "Text";
 
 /* Class = "NSMenuItem"; title = "File"; ObjectID = "dMs-cI-mzQ"; */
-"dMs-cI-mzQ.title" = "File";
+"dMs-cI-mzQ.title" = "ファイル";
 
 /* Class = "NSMenuItem"; title = "Undo"; ObjectID = "dRJ-4n-Yzg"; */
 "dRJ-4n-Yzg.title" = "Undo";
@@ -335,9 +362,6 @@
 /* Class = "NSMenuItem"; title = "Smart Dashes"; ObjectID = "rgM-f4-ycn"; */
 "rgM-f4-ycn.title" = "Smart Dashes";
 
-/* Class = "NSMenuItem"; title = "Show Toolbar"; ObjectID = "snW-S8-Cw5"; */
-"snW-S8-Cw5.title" = "Show Toolbar";
-
 /* Class = "NSMenuItem"; title = "Data Detectors"; ObjectID = "tRr-pd-1PS"; */
 "tRr-pd-1PS.title" = "Data Detectors";
 
@@ -372,7 +396,7 @@
 "wb2-vD-lq4.title" = "Align Right";
 
 /* Class = "NSMenuItem"; title = "Help"; ObjectID = "wpr-3q-Mcd"; */
-"wpr-3q-Mcd.title" = "Help";
+"wpr-3q-Mcd.title" = "ヘルプ";
 
 /* Class = "NSMenuItem"; title = "Copy"; ObjectID = "x3v-GG-iWU"; */
 "x3v-GG-iWU.title" = "Copy";

@@ -10,6 +10,16 @@
 
 @interface AppDelegate : NSObject <NSApplicationDelegate>
 
+@property (weak) IBOutlet NSMenuItem *mnGoToPrevPg;
+@property (weak) IBOutlet NSMenuItem *mnGoToNextPg;
+@property (weak) IBOutlet NSMenuItem *mnGoToFirstPg;
+@property (weak) IBOutlet NSMenuItem *mnGoToLastPg;
+@property (weak) IBOutlet NSMenuItem *mnGoBack;
+@property (weak) IBOutlet NSMenuItem *mnGoFoward;
+@property (weak) IBOutlet NSMenuItem *mnZoomIn;
+@property (weak) IBOutlet NSMenuItem *mnZoomOut;
+
+- (void)setMnPageDisplayState:(NSInteger)tag;
 
 @end
 
