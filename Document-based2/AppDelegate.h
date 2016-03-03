@@ -15,7 +15,7 @@
 @property (weak) IBOutlet NSMenuItem *mnGoToFirstPg;
 @property (weak) IBOutlet NSMenuItem *mnGoToLastPg;
 @property (weak) IBOutlet NSMenuItem *mnGoBack;
-@property (weak) IBOutlet NSMenuItem *mnGoFoward;
+@property (weak) IBOutlet NSMenuItem *mnGoForward;
 @property (weak) IBOutlet NSMenuItem *mnZoomIn;
 @property (weak) IBOutlet NSMenuItem *mnZoomOut;
 

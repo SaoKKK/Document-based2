@@ -22,7 +22,7 @@
     IBOutlet NSButton *btnGoToNextPg;
     IBOutlet NSButton *btnGoToLastPg;
     IBOutlet NSButton *btnGoBack;
-    IBOutlet NSButton *btnGoFoward;
+    IBOutlet NSButton *btnGoForward;
     IBOutlet NSTextField *txtPg;
     IBOutlet NSTextField *txtTotalPg;
     IBOutlet NSNumberFormatter *txtPageFormatter;

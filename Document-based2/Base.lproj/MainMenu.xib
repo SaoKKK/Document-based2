@@ -15,7 +15,7 @@
         <customObject id="Voe-Tx-rLC" customClass="AppDelegate">
             <connections>
                 <outlet property="mnGoBack" destination="6fn-SK-nKO" id="AA7-ta-sYU"/>
-                <outlet property="mnGoFoward" destination="OKp-5t-M2w" id="dM2-ld-ICe"/>
+                <outlet property="mnGoForward" destination="OKp-5t-M2w" id="xRa-eV-vkw"/>
                 <outlet property="mnGoToFirstPg" destination="kQh-sc-o3h" id="Haf-DG-9DT"/>
                 <outlet property="mnGoToLastPg" destination="8TC-VT-XrE" id="KD6-u8-CgQ"/>
                 <outlet property="mnGoToNextPg" destination="Mgh-CW-Vyv" id="4Ub-Rb-EgW"/>
@@ -713,7 +713,7 @@ CA
                                     <action selector="goBack:" target="-1" id="ShN-M9-yuC"/>
                                 </connections>
                             </menuItem>
-                            <menuItem title="Go Foward" enabled="NO" keyEquivalent="]" id="OKp-5t-M2w">
+                            <menuItem title="Go Forward" enabled="NO" keyEquivalent="]" id="OKp-5t-M2w">
                                 <connections>
                                     <action selector="goForward:" target="-1" id="pma-E3-VlJ"/>
                                 </connections>

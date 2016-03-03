@@ -12,7 +12,7 @@
                 <outlet property="_pdfView" destination="5KT-rY-Wiy" id="iQ9-j2-wQi"/>
                 <outlet property="_splitView" destination="tBr-9N-2cD" id="DWd-y0-7wL"/>
                 <outlet property="btnGoBack" destination="iNp-yS-421" id="PV7-sQ-s44"/>
-                <outlet property="btnGoFoward" destination="mRN-9D-oFm" id="y8C-Cg-fQX"/>
+                <outlet property="btnGoForward" destination="mRN-9D-oFm" id="gA0-ef-icj"/>
                 <outlet property="btnGoToFirstPg" destination="350-Zi-nk1" id="BXC-C9-NdQ"/>
                 <outlet property="btnGoToLastPg" destination="SpU-MM-oJh" id="YaJ-Fe-0bz"/>
                 <outlet property="btnGoToNextPg" destination="Qv9-3u-e1P" id="tdL-XD-JG0"/>
@@ -103,10 +103,10 @@
                             <action selector="goToPreviousPage:" target="5KT-rY-Wiy" id="07t-rq-jnM"/>
                         </connections>
                     </button>
-                    <button toolTip="Go foward" verticalHuggingPriority="750" id="mRN-9D-oFm">
+                    <button toolTip="Go forward" verticalHuggingPriority="750" id="mRN-9D-oFm">
                         <rect key="frame" x="234" y="0.0" width="23" height="23"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="goFoward" imagePosition="overlaps" alignment="center" lineBreakMode="truncatingTail" state="on" imageScaling="proportionallyDown" inset="2" id="Dr9-cJ-v25">
+                        <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="goForward" imagePosition="overlaps" alignment="center" lineBreakMode="truncatingTail" state="on" imageScaling="proportionallyDown" inset="2" id="Dr9-cJ-v25">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                             <font key="font" metaFont="system"/>
                         </buttonCell>
@@ -459,7 +459,7 @@
         <image name="NSListViewTemplate" width="14" height="10"/>
         <image name="fitToWindow" width="23" height="23"/>
         <image name="goBack" width="23" height="23"/>
-        <image name="goFoward" width="23" height="23"/>
+        <image name="goForward" width="23" height="23"/>
         <image name="goLast" width="23" height="23"/>
         <image name="goNext" width="23" height="23"/>
         <image name="goPrev" width="23" height="23"/>

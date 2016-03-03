@@ -9,7 +9,6 @@
 #import "AppDelegate.h"
 
 @interface AppDelegate (){
-    
     IBOutlet NSMenuItem *mnSinglePage;
     IBOutlet NSMenuItem *mnSingleCont;
     IBOutlet NSMenuItem *mnTwoPages;
@@ -36,6 +35,7 @@
 }
 
 #pragma mark - menu action
+
 - (void)mnCurrentDocument:(id)sender{
     NSDocumentController *docCtr = [NSDocumentController sharedDocumentController];
     //アクティブウインドウのドキュメントへの参照

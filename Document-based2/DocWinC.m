@@ -119,11 +119,11 @@
             [[APPD mnGoBack]setEnabled:NO];
         }
         if (_pdfView.canGoForward) {
-            [btnGoFoward setEnabled:YES];
-            [[APPD mnGoFoward]setEnabled:YES];
+            [btnGoForward setEnabled:YES];
+            [[APPD mnGoForward]setEnabled:YES];
         } else {
-            [btnGoFoward setEnabled:NO];
-            [[APPD mnGoFoward]setEnabled:NO];
+            [btnGoForward setEnabled:NO];
+            [[APPD mnGoForward]setEnabled:NO];
         }
         //ページ表示テキストフィールドの値を変更
         [self updateTxtPg];
@@ -277,7 +277,7 @@
     [_pdfView goBack:nil];
 }
 
-- (IBAction)goFoward:(id)sender{
+- (IBAction)goForward:(id)sender{
     [_pdfView goForward:nil];
 }
 
