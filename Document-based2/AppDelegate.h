@@ -9,7 +9,6 @@
 #import <Cocoa/Cocoa.h>
 
 @interface AppDelegate : NSObject <NSApplicationDelegate>
-
 @property (weak) IBOutlet NSMenuItem *mnGoToPrevPg;
 @property (weak) IBOutlet NSMenuItem *mnGoToNextPg;
 @property (weak) IBOutlet NSMenuItem *mnGoToFirstPg;
@@ -20,6 +19,7 @@
 @property (weak) IBOutlet NSMenuItem *mnZoomOut;
 
 - (void)setMnPageDisplayState:(NSInteger)tag;
+- (void)documentMenuSetEnabled:(BOOL)enabled;
 
 @end
 

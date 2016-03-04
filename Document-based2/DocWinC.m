@@ -80,77 +80,115 @@
         //プログレス・パネルを終了させる
         [self.window endSheet:progressWin returnCode:0];
     }];
+    //メインウインドウ変更
+    [[NSNotificationCenter defaultCenter] addObserverForName:NSWindowDidBecomeMainNotification object:self.window queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification *notif){
+        [APPD documentMenuSetEnabled:YES];
+        //ページ移動メニューの有効/無効の切り替え
+        [self updateGoButtonEnabled];
+        //倍率変更メニューの有効／無効の切り替え
+        [self updateSizingBtnEnabled];
+        //ディスプレイ・モード変更メニューのステータス変更
+        [self updateDisplayModeMenuStatus];
+    }];
+    [[NSNotificationCenter defaultCenter] addObserverForName:NSWindowWillCloseNotification object:self.window queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification *notif){
+        NSDocumentController *docCtr = [NSDocumentController sharedDocumentController];
+        if (docCtr.documents.count == 1) {
+            [APPD documentMenuSetEnabled:NO];
+       }
+     }];
     //ページ移動
     [[NSNotificationCenter defaultCenter] addObserverForName:PDFViewPageChangedNotification object:_pdfView queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification *notif){
         //ページ移動ボタンの有効/無効の切り替え
-        if (_pdfView.canGoToFirstPage) {
-            [btnGoToFirstPg setEnabled:YES];
-            [[APPD mnGoToFirstPg]setEnabled:YES];
-        } else {
-            [btnGoToFirstPg setEnabled:NO];
-            [[APPD mnGoToFirstPg]setEnabled:NO];
-        }
-        if (_pdfView.canGoToPreviousPage) {
-            [btnGoToPrevPg setEnabled:YES];
-            [[APPD mnGoToPrevPg]setEnabled:YES];
-        } else {
-            [btnGoToPrevPg setEnabled:NO];
-            [[APPD mnGoToPrevPg]setEnabled:NO];
-        }
-        if (_pdfView.canGoToNextPage){
-            [btnGoToNextPg setEnabled:YES];
-            [[APPD mnGoToNextPg]setEnabled:YES];
-        } else {
-            [btnGoToNextPg setEnabled:NO];
-            [[APPD mnGoToNextPg]setEnabled:NO];
-        }
-        if (_pdfView.canGoToLastPage){
-            [btnGoToLastPg setEnabled:YES];
-            [[APPD mnGoToLastPg]setEnabled:YES];
-        } else {
-            [btnGoToLastPg setEnabled:NO];
-            [[APPD mnGoToLastPg]setEnabled:NO];
-        }
-        if (_pdfView.canGoBack) {
-            [btnGoBack setEnabled:YES];
-            [[APPD mnGoBack]setEnabled:YES];
-        } else {
-            [btnGoBack setEnabled:NO];
-            [[APPD mnGoBack]setEnabled:NO];
-        }
-        if (_pdfView.canGoForward) {
-            [btnGoForward setEnabled:YES];
-            [[APPD mnGoForward]setEnabled:YES];
-        } else {
-            [btnGoForward setEnabled:NO];
-            [[APPD mnGoForward]setEnabled:NO];
-        }
+        [self updateGoButtonEnabled];
         //ページ表示テキストフィールドの値を変更
         [self updateTxtPg];
     }];
     //表示倍率変更
     [[NSNotificationCenter defaultCenter]addObserverForName:PDFViewScaleChangedNotification object:_pdfView queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification *notif){
-        if (_pdfView.scaleFactor < 5.0) {
-            [segZoom setEnabled:YES forSegment:0];
-            [[APPD mnZoomIn]setEnabled:YES];
-        } else {
-            [segZoom setEnabled:NO forSegment:0];
-            [[APPD mnZoomIn]setEnabled:NO];
-        }
-        if (_pdfView.canZoomOut) {
-            [segZoom setEnabled:YES forSegment:1];
-            [[APPD mnZoomOut]setEnabled:YES];
-        } else {
-            [segZoom setEnabled:NO forSegment:1];
-            [[APPD mnZoomOut]setEnabled:NO];
-        }
+        //倍率変更ボタン／メニューの有効／無効の切り替え
+        [self updateSizingBtnEnabled];
+    }];
+    //ディスプレイモード変更
+    [[NSNotificationCenter defaultCenter]addObserverForName:PDFViewDisplayBoxChangedNotification object:_pdfView queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification *notif){
+        //ディスプレイ・モード変更メニューのステータス変更
+        [self updateDisplayModeMenuStatus];
     }];
 }
 
+//ページ表示フィールドの値を更新
 - (void) updateTxtPg {
     PDFDocument *doc = _pdfView.document;
     NSUInteger index = [doc indexForPage:[_pdfView currentPage]] + 1;
     [txtPg setStringValue:[NSString stringWithFormat:@"%li",index]];
+}
+
+//ページ移動ボタン／メニューの有効/無効の切り替え
+- (void)updateGoButtonEnabled{
+    if (_pdfView.canGoToFirstPage) {
+        [btnGoToFirstPg setEnabled:YES];
+        [[APPD mnGoToFirstPg]setEnabled:YES];
+    } else {
+        [btnGoToFirstPg setEnabled:NO];
+        [[APPD mnGoToFirstPg]setEnabled:NO];
+    }
+    if (_pdfView.canGoToPreviousPage) {
+        [btnGoToPrevPg setEnabled:YES];
+        [[APPD mnGoToPrevPg]setEnabled:YES];
+    } else {
+        [btnGoToPrevPg setEnabled:NO];
+        [[APPD mnGoToPrevPg]setEnabled:NO];
+    }
+    if (_pdfView.canGoToNextPage){
+        [btnGoToNextPg setEnabled:YES];
+        [[APPD mnGoToNextPg]setEnabled:YES];
+    } else {
+        [btnGoToNextPg setEnabled:NO];
+        [[APPD mnGoToNextPg]setEnabled:NO];
+    }
+    if (_pdfView.canGoToLastPage){
+        [btnGoToLastPg setEnabled:YES];
+        [[APPD mnGoToLastPg]setEnabled:YES];
+    } else {
+        [btnGoToLastPg setEnabled:NO];
+        [[APPD mnGoToLastPg]setEnabled:NO];
+    }
+    if (_pdfView.canGoBack) {
+        [btnGoBack setEnabled:YES];
+        [[APPD mnGoBack]setEnabled:YES];
+    } else {
+        [btnGoBack setEnabled:NO];
+        [[APPD mnGoBack]setEnabled:NO];
+    }
+    if (_pdfView.canGoForward) {
+        [btnGoForward setEnabled:YES];
+        [[APPD mnGoForward]setEnabled:YES];
+    } else {
+        [btnGoForward setEnabled:NO];
+        [[APPD mnGoForward]setEnabled:NO];
+    }
+}
+
+//倍率変更ボタン／メニューの有効／無効の切り替え
+- (void)updateSizingBtnEnabled{
+    if (_pdfView.scaleFactor < 5.0) {
+        [segZoom setEnabled:YES forSegment:0];
+        [[APPD mnZoomIn]setEnabled:YES];
+    } else {
+        [segZoom setEnabled:NO forSegment:0];
+        [[APPD mnZoomIn]setEnabled:NO];
+    }
+    if (_pdfView.canZoomOut) {
+        [segZoom setEnabled:YES forSegment:1];
+        [[APPD mnZoomOut]setEnabled:YES];
+    } else {
+        [segZoom setEnabled:NO forSegment:1];
+        [[APPD mnZoomOut]setEnabled:NO];
+    }
+}
+
+//ディスプレイ・モード変更ボタン／メニューのステータス変更
+- (void)updateDisplayModeMenuStatus{
+    [APPD setMnPageDisplayState:[matrixDisplayMode selectedColumn]];
 }
 
 #pragma mark - Actions
@@ -196,6 +234,7 @@
             [_pdfView setDisplayMode:kPDFDisplaySinglePageContinuous];
             break;
     }
+    [self updateDisplayModeMenuStatus];
 }
 
 - (IBAction)segZoom:(id)sender {
@@ -234,26 +273,26 @@
 
 - (IBAction)mnSinglePage:(id)sender{
     [matrixDisplayMode selectCellWithTag:0];
-    [APPD setMnPageDisplayState:0];
     [self matrixDisplayMode:matrixDisplayMode];
+    [self updateDisplayModeMenuStatus];
 }
 
 - (IBAction)mnSingleCont:(id)sender{
     [matrixDisplayMode selectCellWithTag:1];
-    [APPD setMnPageDisplayState:1];
     [self matrixDisplayMode:matrixDisplayMode];
+    [self updateDisplayModeMenuStatus];
 }
 
 - (IBAction)mnTwoPages:(id)sender{
     [matrixDisplayMode selectCellWithTag:2];
-    [APPD setMnPageDisplayState:2];
     [self matrixDisplayMode:matrixDisplayMode];
+    [self updateDisplayModeMenuStatus];
 }
 
 - (IBAction)mnTwoPagesCont:(id)sender{
     [matrixDisplayMode selectCellWithTag:3];
-    [APPD setMnPageDisplayState:3];
     [self matrixDisplayMode:matrixDisplayMode];
+    [self updateDisplayModeMenuStatus];
 }
 
 //移動メニュー
