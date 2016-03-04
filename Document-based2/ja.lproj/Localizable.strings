@@ -1,0 +1,11 @@
+/* 
+  Localizable.strings
+  Document-based2
+
+  Created by 河野 さおり on 2016/03/04.
+  Copyright © 2016年 河野 さおり. All rights reserved.
+*/
+
+//View menu item title strings
+"MnTitleEnterFullScreen" = "フルスクリーンにする";
+"MnTitleExitFullScreen" = "フルスクリーンを解除";

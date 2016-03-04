@@ -14,6 +14,7 @@
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
         <customObject id="Voe-Tx-rLC" customClass="AppDelegate">
             <connections>
+                <outlet property="mnFullScreen" destination="o98-2n-b0I" id="0wi-q7-H4x"/>
                 <outlet property="mnGo" destination="zGJ-dX-Oxx" id="qQj-4n-PEu"/>
                 <outlet property="mnGoBack" destination="6fn-SK-nKO" id="AA7-ta-sYU"/>
                 <outlet property="mnGoForward" destination="OKp-5t-M2w" id="xRa-eV-vkw"/>
@@ -670,10 +671,10 @@ CA
                                 </connections>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="ECg-Hs-GPr"/>
-                            <menuItem title="Enter Full Screen" enabled="NO" keyEquivalent="f" id="P9e-mz-M85">
+                            <menuItem title="Enter Full Screen" enabled="NO" keyEquivalent="f" id="o98-2n-b0I">
                                 <modifierMask key="keyEquivalentModifierMask" control="YES" command="YES"/>
                                 <connections>
-                                    <action selector="toggleFullScreen:" target="-1" id="KkR-Vn-QyY"/>
+                                    <action selector="toggleFullScreen:" target="-1" id="f1j-HL-qKd"/>
                                 </connections>
                             </menuItem>
                         </items>

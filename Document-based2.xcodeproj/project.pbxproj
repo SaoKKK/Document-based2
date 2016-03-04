@@ -39,6 +39,7 @@
 		B9BBD7281C82CEBE006CF6DC /* vline.png in Resources */ = {isa = PBXBuildFile; fileRef = B9BBD7211C82CEBE006CF6DC /* vline.png */; };
 		B9D6AEFA1C78CFD900381A32 /* Quartz.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B9D6AEF91C78CFD900381A32 /* Quartz.framework */; };
 		B9D6AF001C78D27E00381A32 /* MyPDFView.m in Sources */ = {isa = PBXBuildFile; fileRef = B9D6AEFF1C78D27E00381A32 /* MyPDFView.m */; };
+		B9DBE8B51C8963C10058B92D /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = B9DBE8B31C8963C00058B92D /* Localizable.strings */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -80,6 +81,8 @@
 		B9D6AEF91C78CFD900381A32 /* Quartz.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Quartz.framework; path = System/Library/Frameworks/Quartz.framework; sourceTree = SDKROOT; };
 		B9D6AEFE1C78D27E00381A32 /* MyPDFView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyPDFView.h; sourceTree = "<group>"; };
 		B9D6AEFF1C78D27E00381A32 /* MyPDFView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyPDFView.m; sourceTree = "<group>"; };
+		B9DBE8B41C8963C10058B92D /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
+		B9DBE8B61C8963C90058B92D /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
 		B9E21BE51C7AF86E004DDB0F /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/MainMenu.strings; sourceTree = "<group>"; };
 		B9E21BE61C7AF86E004DDB0F /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Document.strings; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -135,6 +138,7 @@
 			children = (
 				B9AD99BE1C771044008C29A4 /* Info.plist */,
 				B9AD99B11C771044008C29A4 /* main.m */,
+				B9DBE8B31C8963C00058B92D /* Localizable.strings */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -233,6 +237,7 @@
 			knownRegions = (
 				en,
 				Base,
+				ja,
 			);
 			mainGroup = B9AD99A11C771043008C29A4;
 			productRefGroup = B9AD99AB1C771044008C29A4 /* Products */;
@@ -262,6 +267,7 @@
 				B93FD59E1C86F85D00B68959 /* zoomIn.png in Resources */,
 				B9A095C31C86B640004C0DFB /* twoUp_off.png in Resources */,
 				B9BBD7231C82CEBE006CF6DC /* goForward.png in Resources */,
+				B9DBE8B51C8963C10058B92D /* Localizable.strings in Resources */,
 				B9A095C21C86B640004C0DFB /* twoCont_on.png in Resources */,
 				B93FD5A31C8726A500B68959 /* fitToWindow.png in Resources */,
 				B9A095C11C86B640004C0DFB /* twoCont_off.png in Resources */,
@@ -309,6 +315,15 @@
 				B9E21BE51C7AF86E004DDB0F /* ja */,
 			);
 			name = MainMenu.xib;
+			sourceTree = "<group>";
+		};
+		B9DBE8B31C8963C00058B92D /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				B9DBE8B41C8963C10058B92D /* Base */,
+				B9DBE8B61C8963C90058B92D /* ja */,
+			);
+			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

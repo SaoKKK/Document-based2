@@ -119,6 +119,8 @@
 "p7o-Az-s8w.title" = "拡大";
 // menu item Zoom Out
 "Srb-vg-b48.title" = "縮小";
+// menu item Enter Full Screen
+"o98-2n-b0I.title" = "フルスクリーンにする";
 
 // menu item Go
 "zGJ-dX-Oxx.title" = "移動";

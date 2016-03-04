@@ -34,6 +34,7 @@
     IBOutlet NSSearchField *searchField;
     NSURL *docURL; //ドキュメントのfileURL保持用
     CGFloat oldTocWidth; //目次エリアの変更前の幅保持用
+    BOOL bFullscreen;   //スクリーンモード保持用
 }
 
 - (NSData *)pdfViewDocumentData;

@@ -420,6 +420,14 @@
                             <action selector="segZoom:" target="-2" id="7e8-0n-HdR"/>
                         </connections>
                     </segmentedControl>
+                    <button verticalHuggingPriority="750" id="QzM-3e-6tV">
+                        <rect key="frame" x="202" y="572" width="81" height="32"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <buttonCell key="cell" type="push" title="Button" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Rwb-9i-wmg">
+                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                            <font key="font" metaFont="system"/>
+                        </buttonCell>
+                    </button>
                 </subviews>
             </view>
             <connections>

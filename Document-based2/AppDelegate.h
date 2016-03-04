@@ -17,9 +17,9 @@
 @property (weak) IBOutlet NSMenuItem *mnGoForward;
 @property (weak) IBOutlet NSMenuItem *mnZoomIn;
 @property (weak) IBOutlet NSMenuItem *mnZoomOut;
+@property (weak) IBOutlet NSMenuItem *mnFullScreen;
 
 - (void)setMnPageDisplayState:(NSInteger)tag;
 - (void)documentMenuSetEnabled:(BOOL)enabled;
-
 @end
 

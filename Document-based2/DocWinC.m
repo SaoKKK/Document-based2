@@ -24,6 +24,8 @@
 
 - (void)windowDidLoad {
     [super windowDidLoad];
+    //スクリーンモード保持用変数を初期化
+    bFullscreen = NO;
     //ファイルから読み込まれたPDFドキュメントをビューに表示
     docURL = [[self document] fileURL];
     PDFDocument *doc = [[PDFDocument alloc]initWithURL:docURL];
@@ -89,6 +91,8 @@
         [self updateSizingBtnEnabled];
         //ディスプレイ・モード変更メニューのステータス変更
         [self updateDisplayModeMenuStatus];
+        //スクリーンモード変更メニューのタイトルを変更
+        [self mnFullScreenSetTitle];
     }];
     [[NSNotificationCenter defaultCenter] addObserverForName:NSWindowWillCloseNotification object:self.window queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification *notif){
         NSDocumentController *docCtr = [NSDocumentController sharedDocumentController];
@@ -112,6 +116,15 @@
     [[NSNotificationCenter defaultCenter]addObserverForName:PDFViewDisplayBoxChangedNotification object:_pdfView queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification *notif){
         //ディスプレイ・モード変更メニューのステータス変更
         [self updateDisplayModeMenuStatus];
+    }];
+    //スクリーンモード変更
+    [[NSNotificationCenter defaultCenter]addObserverForName:NSWindowDidEnterFullScreenNotification object:self.window queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification *notif){
+        bFullscreen = YES;
+        [self mnFullScreenSetTitle];
+    }];
+    [[NSNotificationCenter defaultCenter]addObserverForName:NSWindowDidExitFullScreenNotification object:self.window queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification *notif){
+        bFullscreen = NO;
+        [self mnFullScreenSetTitle];
     }];
 }
 
@@ -189,6 +202,15 @@
 //ディスプレイ・モード変更ボタン／メニューのステータス変更
 - (void)updateDisplayModeMenuStatus{
     [APPD setMnPageDisplayState:[matrixDisplayMode selectedColumn]];
+}
+
+//スクリーンモード変更メニューのタイトルを変更
+- (void)mnFullScreenSetTitle{
+    if (bFullscreen) {
+        [[APPD mnFullScreen]setTitle:NSLocalizedString(@"MnTitleExitFullScreen", @"")];
+    } else {
+        [[APPD mnFullScreen]setTitle:NSLocalizedString(@"MnTitleEnterFullScreen", @"")];
+    }
 }
 
 #pragma mark - Actions
