@@ -31,7 +31,9 @@
     IBOutlet NSSplitView *_splitView;
     IBOutlet NSView *tocView;
     IBOutlet NSTabView *tabToc;
+    IBOutlet NSSegmentedControl *segTabTocSelect;
     IBOutlet NSSearchField *searchField;
+    IBOutlet NSOutlineView *_olView;
     NSURL *docURL; //ドキュメントのfileURL保持用
     CGFloat oldTocWidth; //目次エリアの変更前の幅保持用
     BOOL bFullscreen;   //スクリーンモード保持用

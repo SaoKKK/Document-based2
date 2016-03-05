@@ -46,6 +46,12 @@
     oldTocWidth = 165.0F;
     //サムネイルビューの選択規則を設定
     [thumbView setAllowsMultipleSelection:YES];
+    //アウトラインルートがあるかどうかチェック
+    if ([[_pdfView document]outlineRoot]) {
+        //アウトラインビューのデータを読み込み
+        [_olView reloadData];
+        [_olView expandItem:nil expandChildren:YES];
+    }
 }
 
 #pragma mark - document save/open support
@@ -223,7 +229,24 @@
 
 //コンテンツ・エリアのビューを切り替え
 - (IBAction)segSelContentsView:(id)sender {
-    [tabToc selectTabViewItemAtIndex:[sender selectedSegment]];
+    if ([sender selectedSegment]==1 && ![[_pdfView document]outlineRoot]) {
+        //ドキュメントにアウトラインがない時にアウトライン表示が選択された
+        NSAlert *alert = [[NSAlert alloc]init];
+        alert.messageText = NSLocalizedString(@"NotExistOutline_msg", @"");
+        [alert setInformativeText:NSLocalizedString(@"NotExistOutline_info", @"")];
+        [alert addButtonWithTitle:@"OK"];
+        [alert setAlertStyle:NSInformationalAlertStyle];
+        [alert beginSheetModalForWindow:self.window completionHandler:^(NSModalResponse returnCode){
+            //セグメントの選択を元に戻す
+            if ([[[tabToc selectedTabViewItem] identifier]integerValue] == 0) {
+                [segTabTocSelect setSelectedSegment:0];
+            } else {
+                [segTabTocSelect setSelected:NO forSegment:1];
+            }
+        }];
+    } else {
+        [tabToc selectTabViewItemAtIndex:[sender selectedSegment]];
+    }
 }
 
 //コンテンツ・エリアの表示／非表示を切り替え

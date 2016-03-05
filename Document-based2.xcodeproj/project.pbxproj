@@ -40,6 +40,7 @@
 		B9D6AEFA1C78CFD900381A32 /* Quartz.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B9D6AEF91C78CFD900381A32 /* Quartz.framework */; };
 		B9D6AF001C78D27E00381A32 /* MyPDFView.m in Sources */ = {isa = PBXBuildFile; fileRef = B9D6AEFF1C78D27E00381A32 /* MyPDFView.m */; };
 		B9DBE8B51C8963C10058B92D /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = B9DBE8B31C8963C00058B92D /* Localizable.strings */; };
+		B9F961D81C8AB00B0034A940 /* OLController.m in Sources */ = {isa = PBXBuildFile; fileRef = B9F961D71C8AB00B0034A940 /* OLController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -85,6 +86,8 @@
 		B9DBE8B61C8963C90058B92D /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
 		B9E21BE51C7AF86E004DDB0F /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/MainMenu.strings; sourceTree = "<group>"; };
 		B9E21BE61C7AF86E004DDB0F /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Document.strings; sourceTree = "<group>"; };
+		B9F961D61C8AB00B0034A940 /* OLController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OLController.h; sourceTree = "<group>"; };
+		B9F961D71C8AB00B0034A940 /* OLController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OLController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -190,6 +193,8 @@
 				B9AD99B41C771044008C29A4 /* Document.m */,
 				B9825A711C77838500F7AD4A /* DocWinC.h */,
 				B9825A721C77838500F7AD4A /* DocWinC.m */,
+				B9F961D61C8AB00B0034A940 /* OLController.h */,
+				B9F961D71C8AB00B0034A940 /* OLController.m */,
 				B9D6AEFE1C78D27E00381A32 /* MyPDFView.h */,
 				B9D6AEFF1C78D27E00381A32 /* MyPDFView.m */,
 			);
@@ -292,6 +297,7 @@
 				B9AD99B51C771044008C29A4 /* Document.m in Sources */,
 				B9AD99B21C771044008C29A4 /* main.m in Sources */,
 				B9AD99AF1C771044008C29A4 /* AppDelegate.m in Sources */,
+				B9F961D81C8AB00B0034A940 /* OLController.m in Sources */,
 				B9825A731C77838500F7AD4A /* DocWinC.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

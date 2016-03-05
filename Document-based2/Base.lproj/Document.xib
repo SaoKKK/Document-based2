@@ -9,6 +9,7 @@
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="DocWinC">
             <connections>
+                <outlet property="_olView" destination="reD-FV-HUc" id="H5h-AE-Jxp"/>
                 <outlet property="_pdfView" destination="5KT-rY-Wiy" id="iQ9-j2-wQi"/>
                 <outlet property="_splitView" destination="tBr-9N-2cD" id="DWd-y0-7wL"/>
                 <outlet property="btnGoBack" destination="iNp-yS-421" id="PV7-sQ-s44"/>
@@ -21,6 +22,7 @@
                 <outlet property="progressWin" destination="hPb-14-zhA" id="UjU-D2-2P7"/>
                 <outlet property="savingProgBar" destination="iTd-5B-A8m" id="qIm-vH-Z9B"/>
                 <outlet property="searchField" destination="iF3-08-ku3" id="UEp-rK-VaH"/>
+                <outlet property="segTabTocSelect" destination="u4J-Mz-Qvz" id="nDV-V4-BIb"/>
                 <outlet property="segZoom" destination="IJb-7H-oEx" id="KMg-FF-cmg"/>
                 <outlet property="tabToc" destination="d8t-uS-kSi" id="Few-ho-iHI"/>
                 <outlet property="thumbView" destination="5je-Lx-eSc" id="Wah-qh-327"/>
@@ -29,6 +31,12 @@
                 <outlet property="txtPg" destination="6ly-SK-3Vt" id="mNf-Ep-Nb6"/>
                 <outlet property="txtTotalPg" destination="LLf-xL-Fwr" id="9ms-mn-yRD"/>
                 <outlet property="window" destination="xOd-HO-29H" id="t0q-Kb-qFt"/>
+            </connections>
+        </customObject>
+        <customObject id="LWQ-OY-Ucc" customClass="OLController">
+            <connections>
+                <outlet property="_olView" destination="reD-FV-HUc" id="RWp-N7-IE3"/>
+                <outlet property="_pdfView" destination="5KT-rY-Wiy" id="QOq-ap-9xZ"/>
             </connections>
         </customObject>
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
@@ -214,7 +222,7 @@
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                         <font key="font" metaFont="system"/>
                                         <tabViewItems>
-                                            <tabViewItem label="Tab" identifier="1" id="yVa-TK-PQu">
+                                            <tabViewItem label="Thumb" identifier="0" id="yVa-TK-PQu">
                                                 <view key="view" id="G8j-nj-jSr">
                                                     <rect key="frame" x="0.0" y="0.0" width="165" height="523"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -230,7 +238,7 @@
                                                     </subviews>
                                                 </view>
                                             </tabViewItem>
-                                            <tabViewItem label="View" identifier="2" id="K63-aT-MN1">
+                                            <tabViewItem label="Outline" identifier="1" id="K63-aT-MN1">
                                                 <view key="view" id="3ya-bM-u10">
                                                     <rect key="frame" x="0.0" y="0.0" width="165" height="523"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -242,14 +250,14 @@
                                                                 <rect key="frame" x="1" y="0.0" width="163" height="522"/>
                                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                 <subviews>
-                                                                    <outlineView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" multipleSelection="NO" autosaveColumns="NO" rowSizeStyle="automatic" headerView="7N2-Cn-9q5" viewBased="YES" indentationPerLevel="16" outlineTableColumn="Off-CF-tak" id="reD-FV-HUc">
+                                                                    <outlineView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="firstColumnOnly" alternatingRowBackgroundColors="YES" autosaveColumns="NO" rowSizeStyle="automatic" headerView="7N2-Cn-9q5" viewBased="YES" indentationPerLevel="16" outlineTableColumn="Off-CF-tak" id="reD-FV-HUc">
                                                                         <rect key="frame" x="0.0" y="0.0" width="163" height="0.0"/>
                                                                         <autoresizingMask key="autoresizingMask"/>
                                                                         <size key="intercellSpacing" width="3" height="2"/>
                                                                         <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                                         <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
                                                                         <tableColumns>
-                                                                            <tableColumn width="116" minWidth="40" maxWidth="1000" id="Off-CF-tak">
+                                                                            <tableColumn identifier="label" width="127" minWidth="40" maxWidth="1000" id="Off-CF-tak">
                                                                                 <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border">
                                                                                     <font key="font" metaFont="smallSystem"/>
                                                                                     <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -263,11 +271,11 @@
                                                                                 <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                                                 <prototypeCellViews>
                                                                                     <tableCellView id="lPa-mR-gxA">
-                                                                                        <rect key="frame" x="1" y="1" width="116" height="17"/>
+                                                                                        <rect key="frame" x="1" y="1" width="127" height="17"/>
                                                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                                         <subviews>
                                                                                             <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" id="Vf6-p7-oyH">
-                                                                                                <rect key="frame" x="0.0" y="3" width="116" height="14"/>
+                                                                                                <rect key="frame" x="0.0" y="3" width="127" height="14"/>
                                                                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                                                                                 <textFieldCell key="cell" controlSize="small" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="Table View Cell" id="3Vr-DH-AbC">
                                                                                                     <font key="font" metaFont="smallSystem"/>
@@ -282,7 +290,7 @@
                                                                                     </tableCellView>
                                                                                 </prototypeCellViews>
                                                                             </tableColumn>
-                                                                            <tableColumn width="41" minWidth="40" maxWidth="1000" id="OJx-kN-9Ew">
+                                                                            <tableColumn identifier="page" width="30" minWidth="30" maxWidth="1000" id="OJx-kN-9Ew">
                                                                                 <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border">
                                                                                     <font key="font" metaFont="smallSystem"/>
                                                                                     <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -296,13 +304,13 @@
                                                                                 <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                                                 <prototypeCellViews>
                                                                                     <tableCellView id="ntS-xE-WkN">
-                                                                                        <rect key="frame" x="120" y="1" width="41" height="17"/>
+                                                                                        <rect key="frame" x="131" y="1" width="30" height="17"/>
                                                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                                         <subviews>
                                                                                             <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" id="4OW-tA-SRJ">
-                                                                                                <rect key="frame" x="0.0" y="3" width="85" height="14"/>
+                                                                                                <rect key="frame" x="0.0" y="3" width="30" height="14"/>
                                                                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
-                                                                                                <textFieldCell key="cell" controlSize="small" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="Table View Cell" id="jXA-GZ-ue5">
+                                                                                                <textFieldCell key="cell" controlSize="small" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" alignment="right" title="Table View Cell" id="jXA-GZ-ue5">
                                                                                                     <font key="font" metaFont="smallSystem"/>
                                                                                                     <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                                                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
@@ -316,6 +324,11 @@
                                                                                 </prototypeCellViews>
                                                                             </tableColumn>
                                                                         </tableColumns>
+                                                                        <connections>
+                                                                            <action selector="selectRow:" target="LWQ-OY-Ucc" id="itC-7Z-erZ"/>
+                                                                            <outlet property="dataSource" destination="LWQ-OY-Ucc" id="qbv-7D-DKR"/>
+                                                                            <outlet property="delegate" destination="LWQ-OY-Ucc" id="lhf-Yo-B7o"/>
+                                                                        </connections>
                                                                     </outlineView>
                                                                 </subviews>
                                                                 <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -336,7 +349,7 @@
                                                     </subviews>
                                                 </view>
                                             </tabViewItem>
-                                            <tabViewItem label="Item 2" identifier="" id="XX7-sd-t5i">
+                                            <tabViewItem label="Search" identifier="2" id="XX7-sd-t5i">
                                                 <view key="view" id="DJY-MS-cys">
                                                     <rect key="frame" x="0.0" y="0.0" width="165" height="523"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
