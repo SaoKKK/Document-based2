@@ -42,8 +42,6 @@
     [txtPageFormatter setMaximum:[NSNumber numberWithInteger:totalPg]];
     //ページ表示テキストフィールドの値を変更
     [self updateTxtPg];
-    //目次エリア幅保持用変数に初期値を保存
-    oldTocWidth = 165.0F;
     //サムネイルビューの選択規則を設定
     [thumbView setAllowsMultipleSelection:YES];
     //アウトラインルートがあるかどうかチェック
@@ -51,7 +49,12 @@
         //アウトラインビューのデータを読み込み
         [_olView reloadData];
         [_olView expandItem:nil expandChildren:YES];
+        //目次エリアの初期表示をアウトラインに変更
+        [segTabTocSelect setSelected:YES forSegment:1];
+        [self segSelContentsView:segTabTocSelect];
     }
+    //検索結果保持用配列を初期化
+    searchResult = [NSMutableArray array];
 }
 
 #pragma mark - document save/open support
@@ -91,7 +94,9 @@
     //メインウインドウ変更
     [[NSNotificationCenter defaultCenter] addObserverForName:NSWindowDidBecomeMainNotification object:self.window queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification *notif){
         [APPD documentMenuSetEnabled:YES];
-        //ページ移動メニューの有効/無効の切り替え
+        //検索メニューの有効／無効の切り替え
+        [APPD findMenuSetEnabled:YES];
+        //ページ移動メニューの有効／無効の切り替え
         [self updateGoButtonEnabled];
         //倍率変更メニューの有効／無効の切り替え
         [self updateSizingBtnEnabled];
@@ -238,7 +243,7 @@
         [alert setAlertStyle:NSInformationalAlertStyle];
         [alert beginSheetModalForWindow:self.window completionHandler:^(NSModalResponse returnCode){
             //セグメントの選択を元に戻す
-            if ([[[tabToc selectedTabViewItem] identifier]integerValue] == 0) {
+            if ([tabToc indexOfTabViewItem:[tabToc selectedTabViewItem]] == 0) {
                 [segTabTocSelect setSelectedSegment:0];
             } else {
                 [segTabTocSelect setSelected:NO forSegment:1];
@@ -367,6 +372,81 @@
 
 - (IBAction)mnGoToPage:(id)sender{
     [self.window makeFirstResponder:txtPg];
+}
+
+- (IBAction)mnFindInPDF:(id)sender{
+    [self.window makeFirstResponder:searchField];
+}
+
+#pragma mark - search in document
+
+- (IBAction)searchField:(id)sender {
+    NSString *searchString = [sender stringValue];
+    if ([searchString isEqualToString:@""]) {
+        //目次エリアの表示を元に戻す
+        [self segSelContentsView:segTabTocSelect];
+        return;
+    }
+    //検索実行
+    PDFDocument *doc = [_pdfView document];
+    [doc beginFindString:searchString withOptions:NSCaseInsensitiveSearch];
+}
+
+- (void)didMatchString:(PDFSelection *)instance{
+    //元の選択領域を保持
+    PDFSelection *sel = instance.copy;
+    //テーブルの結果列の項目作成
+    [instance extendSelectionAtStart:10];
+    [instance extendSelectionAtEnd:10];
+    NSString *labelString = [self stringByRemoveLine:instance.string];
+    labelString = [NSString stringWithFormat:@"...%@...",labelString];
+    //テーブルのページ列の項目作成
+    PDFPage *page = [[instance pages]objectAtIndex:0];
+    NSString *pageLabel = page.label;
+    
+    //検索結果を作成
+    NSDictionary *result = [NSDictionary dictionaryWithObjectsAndKeys:sel,@"selection",labelString,@"result",pageLabel,@"page",nil];
+    [searchResult addObject:result];
+    //検索結果を表示
+    [tabToc selectTabViewItemAtIndex:2];
+    [_tbView reloadData];
+}
+
+//改行を削除した文字列を返す
+- (NSString*)stringByRemoveLine:(NSString*)string{
+    NSMutableArray *lines = [NSMutableArray array];
+    [string enumerateLinesUsingBlock:^(NSString *line,BOOL *stop){
+        [lines addObject:line];
+    }];
+    NSString *newStr = [lines componentsJoinedByString:@" "];
+    return newStr;
+}
+
+- (void)documentDidBeginDocumentFind:(NSNotification *)notification{
+    [searchResult removeAllObjects];
+    [_tbView reloadData];
+}
+
+#pragma mark - table view data source
+
+- (NSInteger)numberOfRowsInTableView:(NSTableView *)tableView{
+    return searchResult.count;
+}
+
+- (NSView *)tableView:(NSTableView *)tableView viewForTableColumn:(NSTableColumn *)tableColumn row:(NSInteger)row{
+    NSString *identifier = tableColumn.identifier;
+    NSDictionary *result = [searchResult objectAtIndex:row];
+    NSTableCellView *view = [tableView makeViewWithIdentifier:identifier owner:self];
+    if ([identifier isEqualToString:@"page"]){
+        view.textField.stringValue = [result objectForKey:identifier];
+    } else {
+        NSMutableAttributedString *labelTxt = [[NSMutableAttributedString alloc]initWithString:[result objectForKey:identifier]];
+        NSDictionary *attr = @{NSFontAttributeName:[NSFont systemFontOfSize:11 weight:NSFontWeightBold]};
+        NSRange range = [[result objectForKey:identifier] rangeOfString:searchField.stringValue options:NSCaseInsensitiveSearch];
+        [labelTxt setAttributes:attr range:range];
+        [view.textField setAttributedStringValue:labelTxt];
+    }
+    return view;
 }
 
 #pragma mark - split view delegate

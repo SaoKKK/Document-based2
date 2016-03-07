@@ -22,6 +22,7 @@
                 <outlet property="mnGoToLastPg" destination="8TC-VT-XrE" id="KD6-u8-CgQ"/>
                 <outlet property="mnGoToNextPg" destination="Mgh-CW-Vyv" id="4Ub-Rb-EgW"/>
                 <outlet property="mnGoToPrevPg" destination="Ob5-Z6-l9h" id="vZQ-nT-Mis"/>
+                <outlet property="mnItemFindInPDF" destination="A5a-73-2Rg" id="4tI-eo-VDn"/>
                 <outlet property="mnItemGo" destination="ai2-GZ-jD6" id="Wes-6j-mUJ"/>
                 <outlet property="mnItemView" destination="H8h-7b-M4v" id="fUk-XX-8Gq"/>
                 <outlet property="mnSingleCont" destination="dv7-5r-YBZ" id="1OH-gG-Xuu"/>
@@ -192,37 +193,39 @@ CA
                             <menuItem isSeparatorItem="YES" id="uyl-h8-XO2"/>
                             <menuItem title="Find" id="4EN-yA-p0u">
                                 <modifierMask key="keyEquivalentModifierMask"/>
-                                <menu key="submenu" title="Find" id="1b7-l0-nxx">
+                                <menu key="submenu" title="Find" autoenablesItems="NO" id="1b7-l0-nxx">
                                     <items>
-                                        <menuItem title="Find…" tag="1" keyEquivalent="f" id="Xz5-n4-O0W">
+                                        <menuItem title="Find in PDF Document" keyEquivalent="F" id="A5a-73-2Rg">
+                                            <modifierMask key="keyEquivalentModifierMask" shift="YES" command="YES"/>
+                                            <connections>
+                                                <action selector="mnFindInPDF:" target="-1" id="OHk-U0-jMm"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem isSeparatorItem="YES" id="S4D-Es-xRg"/>
+                                        <menuItem title="Find…" tag="1" enabled="NO" keyEquivalent="f" id="Xz5-n4-O0W">
                                             <connections>
                                                 <action selector="performFindPanelAction:" target="-1" id="cD7-Qs-BN4"/>
                                             </connections>
                                         </menuItem>
-                                        <menuItem title="Find and Replace…" tag="12" keyEquivalent="f" id="YEy-JH-Tfz">
+                                        <menuItem title="Find and Replace…" tag="12" enabled="NO" keyEquivalent="f" id="YEy-JH-Tfz">
                                             <modifierMask key="keyEquivalentModifierMask" option="YES" command="YES"/>
                                             <connections>
                                                 <action selector="performFindPanelAction:" target="-1" id="WD3-Gg-5AJ"/>
                                             </connections>
                                         </menuItem>
-                                        <menuItem title="Find Next" tag="2" keyEquivalent="g" id="q09-fT-Sye">
+                                        <menuItem title="Find Next" tag="2" enabled="NO" keyEquivalent="g" id="q09-fT-Sye">
                                             <connections>
                                                 <action selector="performFindPanelAction:" target="-1" id="NDo-RZ-v9R"/>
                                             </connections>
                                         </menuItem>
-                                        <menuItem title="Find Previous" tag="3" keyEquivalent="G" id="OwM-mh-QMV">
+                                        <menuItem title="Find Previous" tag="3" enabled="NO" keyEquivalent="G" id="OwM-mh-QMV">
                                             <connections>
                                                 <action selector="performFindPanelAction:" target="-1" id="HOh-sY-3ay"/>
                                             </connections>
                                         </menuItem>
-                                        <menuItem title="Use Selection for Find" tag="7" keyEquivalent="e" id="buJ-ug-pKt">
+                                        <menuItem title="Use Selection for Find" tag="7" enabled="NO" keyEquivalent="e" id="buJ-ug-pKt">
                                             <connections>
                                                 <action selector="performFindPanelAction:" target="-1" id="U76-nv-p5D"/>
-                                            </connections>
-                                        </menuItem>
-                                        <menuItem title="Jump to Selection" keyEquivalent="j" id="S0p-oC-mLd">
-                                            <connections>
-                                                <action selector="centerSelectionInVisibleArea:" target="-1" id="IOG-6D-g5B"/>
                                             </connections>
                                         </menuItem>
                                     </items>

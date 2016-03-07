@@ -21,5 +21,7 @@
 
 - (void)setMnPageDisplayState:(NSInteger)tag;
 - (void)documentMenuSetEnabled:(BOOL)enabled;
+- (void)findMenuSetEnabled:(BOOL)enabled;
+
 @end
 

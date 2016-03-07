@@ -11,7 +11,7 @@
 
 @class MyPDFView;
 
-@interface DocWinC : NSWindowController<NSWindowDelegate,NSSplitViewDelegate>{
+@interface DocWinC : NSWindowController<NSWindowDelegate,NSSplitViewDelegate,NSTableViewDataSource,NSTableViewDelegate>{
     IBOutlet NSWindow *window;
     IBOutlet NSWindow *progressWin;
     IBOutlet NSProgressIndicator *savingProgBar;
@@ -33,10 +33,12 @@
     IBOutlet NSTabView *tabToc;
     IBOutlet NSSegmentedControl *segTabTocSelect;
     IBOutlet NSSearchField *searchField;
+    IBOutlet NSTableView *_tbView;
     IBOutlet NSOutlineView *_olView;
     NSURL *docURL; //ドキュメントのfileURL保持用
     CGFloat oldTocWidth; //目次エリアの変更前の幅保持用
-    BOOL bFullscreen;   //スクリーンモード保持用
+    BOOL bFullscreen; //スクリーンモード保持用
+    NSMutableArray *searchResult; //検索結果保持用
 }
 
 - (NSData *)pdfViewDocumentData;
