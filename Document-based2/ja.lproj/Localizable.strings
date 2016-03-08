@@ -13,3 +13,6 @@
 //PDFOutline not exist dialog message
 "NotExistOutline_msg" = "このドキュメントにはしおりのデータが含まれていません。";
 "NotExistOutline_info" = "しおりが必要な場合は、しおりメニューから「しおりを新規作成」を選択してください。";
+
+//table view header title
+"RESULT" = "結果：";

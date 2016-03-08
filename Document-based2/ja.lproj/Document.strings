@@ -13,3 +13,7 @@
 
 /* Class = "NSWindow"; title = "Window"; ObjectID = "xOd-HO-29H"; */
 "xOd-HO-29H.title" = "Window";
+
+//TableView header title
+"lTG-dn-Uyl.headerCell.title" = "ページ";
+"7nX-hD-dkh.headerCell.title" = "結果";

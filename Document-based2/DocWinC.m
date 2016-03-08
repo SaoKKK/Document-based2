@@ -409,6 +409,7 @@
     [searchResult addObject:result];
     //検索結果を表示
     [tabToc selectTabViewItemAtIndex:2];
+    [[[_tbView.tableColumns objectAtIndex:1]headerCell] setTitle:[NSString stringWithFormat:@"%@%li",NSLocalizedString(@"RESULT", @""),searchResult.count]];
     [_tbView reloadData];
 }
 
@@ -427,7 +428,7 @@
     [_tbView reloadData];
 }
 
-#pragma mark - table view data source
+#pragma mark - table view data source and delegate
 
 - (NSInteger)numberOfRowsInTableView:(NSTableView *)tableView{
     return searchResult.count;
@@ -447,6 +448,19 @@
         [view.textField setAttributedStringValue:labelTxt];
     }
     return view;
+}
+
+//行選択時
+- (void)tableViewSelectionDidChange:(NSNotification *)notification{
+    //選択行を取得
+    NSInteger row = [_tbView selectedRow];
+    if (row != -1){
+        //選択領域を取得
+        PDFSelection *sel = [[searchResult objectAtIndex:row] objectForKey:@"selection"];
+        //選択領域を表示
+        [_pdfView setCurrentSelection:sel];
+        [_pdfView scrollSelectionToVisible:self];
+    }
 }
 
 #pragma mark - split view delegate
