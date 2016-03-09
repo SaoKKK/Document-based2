@@ -18,7 +18,9 @@
 
 @end
 
-@implementation DocWinC
+@implementation DocWinC{
+    PDFSelection *testSel;
+}
 
 #pragma mark - Window Controller Method
 
@@ -378,6 +380,21 @@
     [self.window makeFirstResponder:searchField];
 }
 
+- (IBAction)test:(id)sender {
+    testSel = _pdfView.currentSelection;
+}
+- (IBAction)test2:(id)sender {
+    [testSel setColor:[NSColor yellowColor]];
+    [_pdfView setCurrentSelection:testSel];
+}
+
+- (IBAction)test3:(id)sender {
+    NSArray *pages = testSel.pages;
+    [testSel setColor:[NSColor yellowColor]];
+    [testSel drawForPage:[pages objectAtIndex:0] active:YES];
+    [_pdfView setNeedsDisplay:YES];
+}
+
 #pragma mark - search in document
 
 - (IBAction)searchField:(id)sender {
@@ -458,6 +475,7 @@
         //選択領域を取得
         PDFSelection *sel = [[searchResult objectAtIndex:row] objectForKey:@"selection"];
         //選択領域を表示
+        [sel setColor:[NSColor yellowColor]];
         [_pdfView setCurrentSelection:sel];
         [_pdfView scrollSelectionToVisible:self];
     }
