@@ -18,9 +18,7 @@
 
 @end
 
-@implementation DocWinC{
-    PDFSelection *testSel;
-}
+@implementation DocWinC
 
 #pragma mark - Window Controller Method
 
@@ -47,7 +45,7 @@
     //サムネイルビューの選択規則を設定
     [thumbView setAllowsMultipleSelection:YES];
     //アウトラインルートがあるかどうかチェック
-    if ([[_pdfView document]outlineRoot]) {
+    if ([self isOLExists]) {
         //アウトラインビューのデータを読み込み
         [_olView reloadData];
         [_olView expandItem:nil expandChildren:YES];
@@ -57,6 +55,15 @@
     }
     //検索結果保持用配列を初期化
     searchResult = [NSMutableArray array];
+}
+
+//アウトライン情報があるかどうかを返す
+- (BOOL)isOLExists{
+    if ([[_pdfView document]outlineRoot]) {
+        return YES;
+    } else {
+        return NO;
+    }
 }
 
 #pragma mark - document save/open support
@@ -95,6 +102,8 @@
     }];
     //メインウインドウ変更
     [[NSNotificationCenter defaultCenter] addObserverForName:NSWindowDidBecomeMainNotification object:self.window queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification *notif){
+        (APPD).isDocWinMain = YES;
+        (APPD).isOLExists = [self isOLExists];
         [APPD documentMenuSetEnabled:YES];
         //検索メニューの有効／無効の切り替え
         [APPD findMenuSetEnabled:YES];
@@ -107,9 +116,13 @@
         //スクリーンモード変更メニューのタイトルを変更
         [self mnFullScreenSetTitle];
     }];
+    //ウインドウが閉じられた
     [[NSNotificationCenter defaultCenter] addObserverForName:NSWindowWillCloseNotification object:self.window queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification *notif){
         NSDocumentController *docCtr = [NSDocumentController sharedDocumentController];
         if (docCtr.documents.count == 1) {
+            (APPD).isDocWinMain = NO;
+            (APPD).isOLExists = NO;
+            (APPD).isOLSelected = NO;
             [APPD documentMenuSetEnabled:NO];
        }
      }];
@@ -381,18 +394,100 @@
 }
 
 - (IBAction)test:(id)sender {
-    testSel = _pdfView.currentSelection;
+    PDFDocument *doc = [_pdfView document];
+    //ルートアイテムがない場合は作成
+    PDFOutline *root = [[PDFOutline alloc]init];
+    if (![doc outlineRoot]) {
+        [doc setOutlineRoot:root];
+    } else {
+        root = [doc outlineRoot];
+    }
+    //PDFOutlineを作成
+    PDFSelection *sel = [_pdfView currentSelection];
+    NSString *label = [sel string];
+    PDFPage *page = [[sel pages]objectAtIndex:0];
+    NSRect rect = [sel boundsForPage:page];
+    NSPoint point = NSMakePoint(rect.origin.x, rect.origin.y + rect.size.height);
+    PDFDestination *destination = [[PDFDestination alloc]initWithPage:page atPoint:point];
+    PDFOutline *ol = [[PDFOutline alloc]init];
+    [ol setLabel:label];
+    [ol setDestination:destination];
+    [root insertChild:ol atIndex:root.numberOfChildren];
+    [_olView reloadData];
 }
+
 - (IBAction)test2:(id)sender {
-    [testSel setColor:[NSColor yellowColor]];
-    [_pdfView setCurrentSelection:testSel];
+    PDFOutline *root = [[PDFOutline alloc]init];
+    root = [[_pdfView document]outlineRoot];
+    PDFOutline *ol = [[PDFOutline alloc]init];
+    ol = [root childAtIndex:1];
+    
+    PDFSelection *sel = [_pdfView currentSelection];
+    NSString *label = [sel string];
+    PDFPage *page = [[sel pages]objectAtIndex:0];
+    NSRect rect = [sel boundsForPage:page];
+    NSPoint point = NSMakePoint(rect.origin.x, rect.origin.y + rect.size.height);
+    PDFDestination *destination = [[PDFDestination alloc]initWithPage:page atPoint:point];
+    PDFOutline *ol2 = [[PDFOutline alloc]init];
+    [ol2 setLabel:label];
+    [ol2 setDestination:destination];
+    [ol insertChild:ol2 atIndex:0];
+    [ol setIsOpen:YES];
+    [_olView reloadData];
+    [_olView expandItem:nil expandChildren:YES];
 }
 
 - (IBAction)test3:(id)sender {
-    NSArray *pages = testSel.pages;
-    [testSel setColor:[NSColor yellowColor]];
-    [testSel drawForPage:[pages objectAtIndex:0] active:YES];
-    [_pdfView setNeedsDisplay:YES];
+    id item = [_olView itemAtRow:1];
+    NSLog (@"%@",item);
+}
+
+#pragma mark - outline data control
+
+- (IBAction)mnNewBookmark:(id)sender{
+    [self makeNewBookMark:NSLocalizedString(@"UntitledLabal", @"") withDestination:nil];
+}
+
+- (IBAction)mnNewBookmarkFromSelection:(id)sender{
+    PDFSelection *sel = [_pdfView currentSelection];
+    NSString *label = [sel string];
+    PDFPage *page = [[sel pages]objectAtIndex:0];
+    NSRect rect = [sel boundsForPage:page];
+    NSPoint point = NSMakePoint(rect.origin.x, rect.origin.y + rect.size.height);
+    PDFDestination *destination = [[PDFDestination alloc]initWithPage:page atPoint:point];
+    [self makeNewBookMark:label withDestination:destination];
+}
+
+- (void)makeNewBookMark:(NSString *)label withDestination:(PDFDestination *)destination{
+    PDFDocument *doc = [_pdfView document];
+    //ルートアイテムがない場合は作成
+    if (! doc.outlineRoot) {
+        PDFOutline *root = [[PDFOutline alloc]init];
+        [doc setOutlineRoot:root];
+    }
+    PDFOutline *ol = [[PDFOutline alloc]init];
+    [ol setLabel:label];
+    [ol setDestination:destination];
+    [self addNewDataToSelection:ol];
+}
+
+- (void)addNewDataToSelection:(PDFOutline*)ol{
+    PDFOutline *parentOL = [[PDFOutline alloc]init];
+    if (_olView.selectedRow == -1){
+        //何も選択されていない = ルートが親
+        parentOL = [[_pdfView document]outlineRoot];
+    } else {
+        //選択行が親
+        parentOL = [[_olView itemAtRow:[_olView selectedRow]]objectForKey:@"PDFOutline"];
+    }
+    //親の小グループの末尾に追加
+    NSInteger index = parentOL.numberOfChildren;
+    NSLog (@"%li",parentOL.numberOfChildren);
+    [parentOL insertChild:ol atIndex:index];
+    [_olView reloadData];
+    //追加行を編集状態にする
+    NSInteger newIndex = [ol index];
+    [_olView editColumn:0 row:newIndex withEvent:nil select:YES];
 }
 
 #pragma mark - search in document

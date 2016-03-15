@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 #import <Quartz/Quartz.h>
+#import "MyPDFView.h"
 
 @interface OLController : NSObject<NSOutlineViewDelegate,NSOutlineViewDataSource>
+- (void)updateSelectedRowInfo;
 @end

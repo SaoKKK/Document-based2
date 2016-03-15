@@ -150,6 +150,17 @@
 // menu item
 "OKp-5t-M2w.title" = "進む";
 
+// menu Bookmark
+"N8n-kF-4Fg.title" = "しおり";
+// menu item New Bookmark
+"YzT-Wr-ftV.title" = "新規しおり作成";
+// menu item New Bookmark from Selecton
+"i60-bZ-Xpi.title" = "選択範囲から新規しおり作成";
+// menu item Remove Bookmark
+"1zJ-gs-4qR.title" = "しおりを削除";
+// menu item Clear Bookmark
+"Jgp-vQ-7XD.title" = "しおりデータをクリア";
+
 /* Class = "NSMenuItem"; title = "Text Replacement"; ObjectID = "HFQ-gK-NFA"; */
 "HFQ-gK-NFA.title" = "Text Replacement";
 

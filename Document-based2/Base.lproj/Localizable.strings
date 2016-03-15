@@ -16,3 +16,6 @@
 
 //table view header title
 "RESULT" = "Result: ";
+
+//New Bookmark Undefined Label
+"UntitledLabal" = "Untitled";

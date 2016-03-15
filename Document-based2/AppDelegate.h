@@ -18,6 +18,10 @@
 @property (weak) IBOutlet NSMenuItem *mnZoomIn;
 @property (weak) IBOutlet NSMenuItem *mnZoomOut;
 @property (weak) IBOutlet NSMenuItem *mnFullScreen;
+@property (assign) BOOL isDocWinMain;
+@property (assign) BOOL isOLExists;
+@property (assign) BOOL isOLSelected;
+@property (readwrite,nonatomic)NSMutableDictionary *olInfo;
 
 - (void)setMnPageDisplayState:(NSInteger)tag;
 - (void)documentMenuSetEnabled:(BOOL)enabled;
