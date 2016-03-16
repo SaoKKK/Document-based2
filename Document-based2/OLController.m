@@ -222,7 +222,6 @@
         }
         //ペースト元のしおりを削除
         [oldOL removeFromParent];
-        [_olView reloadData];
         //ドロップ先にペーストボードアイテムを挿入
         [targetOL insertChild:[dragOLArray objectAtIndex:i] atIndex:index];
         [_olView reloadData];
