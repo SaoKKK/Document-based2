@@ -35,10 +35,12 @@
     IBOutlet NSSearchField *searchField;
     IBOutlet NSTableView *_tbView;
     IBOutlet NSOutlineView *_olView;
+    IBOutlet NSSegmentedControl *segPageViewMode;
     NSURL *docURL; //ドキュメントのfileURL保持用
     CGFloat oldTocWidth; //目次エリアの変更前の幅保持用
     BOOL bFullscreen; //スクリーンモード保持用
     NSMutableArray *searchResult; //検索結果保持用
+    BOOL bOLEdited; //Outline更新フラグ
 }
 
 - (NSData *)pdfViewDocumentData;

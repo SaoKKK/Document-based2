@@ -24,8 +24,9 @@
 
 - (void)windowDidLoad {
     [super windowDidLoad];
-    //スクリーンモード保持用変数を初期化
+    //インスタンス変数を初期化
     bFullscreen = NO;
+    bOLEdited = NO;
     //ファイルから読み込まれたPDFドキュメントをビューに表示
     docURL = [[self document] fileURL];
     PDFDocument *doc = [[PDFDocument alloc]initWithURL:docURL];
@@ -66,6 +67,45 @@
     }
 }
 
+//しおりが更新されていた場合のウインドウを閉じる動作
+- (BOOL)windowShouldClose:(id)sender{
+    if ([(NSDocument*)self.document isDocumentEdited]) {
+        bOLEdited = NO;
+    } else {
+        if (bOLEdited) {
+            [self outlineChangedAlert];
+        }
+    }
+    return !bOLEdited;
+}
+
+- (void)outlineChangedAlert{
+    NSAlert *alert = [[NSAlert alloc]init];
+    NSString *errMsgTxt,*errInfoTxt;
+    NSString *language = [[NSLocale preferredLanguages] objectAtIndex:0];
+    if ([language isEqualToString:@"en"]){
+        errMsgTxt = [NSString stringWithFormat:@"Do you want to save the changes made to the document \"%@\" ?",docURL.path.lastPathComponent];
+        errInfoTxt = @"Your changes will be lost if you don't save.";
+    } else {
+        errMsgTxt = [NSString stringWithFormat:@"書類 \"%@\" に加えた変更を保存しますか?",docURL.path.lastPathComponent];
+        errInfoTxt = @"保存しないと変更は失われます。";
+    }
+    alert.messageText = errMsgTxt;
+    [alert setInformativeText:errInfoTxt];
+    [alert addButtonWithTitle:NSLocalizedString(@"Save",@"")];
+    [alert addButtonWithTitle:NSLocalizedString(@"Cancel",@"")];
+    [alert addButtonWithTitle:NSLocalizedString(@"Don't Save",@"")];
+    [alert setAlertStyle:NSWarningAlertStyle];
+    [alert beginSheetModalForWindow:self.window completionHandler:^(NSModalResponse returnCode){
+        if (returnCode == NSAlertFirstButtonReturn) {
+            [self.document saveDocument:nil];
+            [self.window orderOut:self];
+        } else if (returnCode == NSAlertThirdButtonReturn){
+            [self.window orderOut:self];
+        }
+    }];
+}
+
 #pragma mark - document save/open support
 
 - (NSData *)pdfViewDocumentData{
@@ -99,6 +139,8 @@
     [[NSNotificationCenter defaultCenter] addObserverForName:@"PDFDidEndPageWrite" object:[_pdfView document] queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification *notif){
         //プログレス・パネルを終了させる
         [self.window endSheet:progressWin returnCode:0];
+        //ドキュメント更新フラグを初期化
+        bOLEdited = NO;
     }];
     //メインウインドウ変更
     [[NSNotificationCenter defaultCenter] addObserverForName:NSWindowDidBecomeMainNotification object:self.window queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification *notif){
@@ -440,27 +482,43 @@
 
 #pragma mark - outline data control
 
+//メニュー／新規しおり作成
 - (IBAction)mnNewBookmark:(id)sender{
-    [self makeNewBookMark:NSLocalizedString(@"UntitledLabal", @"") withDestination:nil];
+    PDFPage *page = [[_pdfView document]pageAtIndex:0];
+    NSRect rect = [page boundsForBox:kPDFDisplayBoxArtBox];
+    PDFDestination *destination = [[PDFDestination alloc]initWithPage:page atPoint:NSMakePoint(0, rect.size.height)];
+    [self makeNewBookMark:NSLocalizedString(@"UntitledLabal", @"") withDestination:destination];
 }
 
+//メニュー／選択範囲から新規しおり作成
 - (IBAction)mnNewBookmarkFromSelection:(id)sender{
     PDFSelection *sel = [_pdfView currentSelection];
-    NSString *label = [sel string];
-    PDFPage *page = [[sel pages]objectAtIndex:0];
-    NSRect rect = [sel boundsForPage:page];
-    NSPoint point = NSMakePoint(rect.origin.x, rect.origin.y + rect.size.height);
-    PDFDestination *destination = [[PDFDestination alloc]initWithPage:page atPoint:point];
-    [self makeNewBookMark:label withDestination:destination];
+    if (!sel) {
+        [self showNoSelectAlert];
+    } else {
+        NSString *label = [sel string];
+        PDFPage *page = [[sel pages]objectAtIndex:0];
+        NSRect rect = [sel boundsForPage:page];
+        NSPoint point = NSMakePoint(rect.origin.x, rect.origin.y + rect.size.height);
+        PDFDestination *destination = [[PDFDestination alloc]initWithPage:page atPoint:point];
+        [self makeNewBookMark:label withDestination:destination];
+    }
 }
 
+//未選択アラート表示
+- (void)showNoSelectAlert{
+    NSAlert *alert = [[NSAlert alloc]init];
+    alert.messageText = NSLocalizedString(@"NoSelectBM_msg", @"");
+    [alert setInformativeText:NSLocalizedString(@"NoSelectBM_info", @"")];
+    [alert addButtonWithTitle:@"OK"];
+    [alert setAlertStyle:NSInformationalAlertStyle];
+    [alert beginSheetModalForWindow:self.window completionHandler:^(NSModalResponse returnCode){
+        return;
+    }];
+}
+
+//新規PDFアウトライン作成
 - (void)makeNewBookMark:(NSString *)label withDestination:(PDFDestination *)destination{
-    PDFDocument *doc = [_pdfView document];
-    //ルートアイテムがない場合は作成
-    if (! doc.outlineRoot) {
-        PDFOutline *root = [[PDFOutline alloc]init];
-        [doc setOutlineRoot:root];
-    }
     PDFOutline *ol = [[PDFOutline alloc]init];
     [ol setLabel:label];
     [ol setDestination:destination];
@@ -468,22 +526,64 @@
 }
 
 - (void)addNewDataToSelection:(PDFOutline*)ol{
+    [self viewToEditBMMode];
     PDFOutline *parentOL = [[PDFOutline alloc]init];
-    if (_olView.selectedRow == -1){
+    NSInteger selectedRow = _olView.selectedRow;
+    if (selectedRow == -1){
         //何も選択されていない = ルートが親
         parentOL = [[_pdfView document]outlineRoot];
     } else {
         //選択行が親
-        parentOL = [[_olView itemAtRow:[_olView selectedRow]]objectForKey:@"PDFOutline"];
+        parentOL = (PDFOutline *)[_olView itemAtRow:selectedRow];
     }
     //親の小グループの末尾に追加
     NSInteger index = parentOL.numberOfChildren;
-    NSLog (@"%li",parentOL.numberOfChildren);
     [parentOL insertChild:ol atIndex:index];
     [_olView reloadData];
-    //追加行を編集状態にする
-    NSInteger newIndex = [ol index];
-    [_olView editColumn:0 row:newIndex withEvent:nil select:YES];
+    //追加行が名称未設定Bookmarkの場合、ラベルを編集状態にする
+    [_olView expandItem:[_olView itemAtRow:selectedRow] expandChildren:YES];
+    if ([ol.label isEqualToString:NSLocalizedString(@"UntitledLabal", @"")]) {
+        [_olView editColumn:0 row:[_olView rowForItem:ol] withEvent:nil select:YES];
+    }
+    bOLEdited = YES;
+}
+
+//メニュー／しおり削除
+- (IBAction)removeOutline:(id)sender{
+    NSIndexSet *selectedRows = _olView.selectedRowIndexes;
+    NSInteger index = selectedRows.lastIndex;
+    while (index != NSNotFound) {
+        PDFOutline *ol = [_olView itemAtRow:index];
+        [ol removeFromParent];
+        index = [selectedRows indexLessThanIndex:index];
+    }
+    [_olView reloadData];
+    bOLEdited = YES;
+}
+
+//メニュー／しおりクリア
+- (IBAction)clearOutline:(id)sender{
+    PDFOutline *root = _pdfView.document.outlineRoot;
+    for (int i = 0; i<root.numberOfChildren; i++) {
+        PDFOutline *ol = [root childAtIndex:i];
+        [ol removeFromParent];
+    }
+    [_olView reloadData];
+    (APPD).isOLExists = NO;
+    bOLEdited = YES;
+}
+
+//ビューをしおり編集モードに
+- (void)viewToEditBMMode{
+    //ルートアイテムがない場合は作成
+    if (![[_pdfView document]outlineRoot]) {
+        PDFOutline *root = [[PDFOutline alloc]init];
+        [[_pdfView document] setOutlineRoot:root];
+        (APPD).isOLExists = YES;
+    }
+    [segTabTocSelect setSelectedSegment:1];
+    [self segSelContentsView:segTabTocSelect];
+    [segPageViewMode setSelected:YES forSegment:1];
 }
 
 #pragma mark - search in document
@@ -498,6 +598,13 @@
     //検索実行
     PDFDocument *doc = [_pdfView document];
     [doc beginFindString:searchString withOptions:NSCaseInsensitiveSearch];
+    [tabToc selectTabViewItemAtIndex:2];
+}
+
+- (void)documentDidEndDocumentFind:(NSNotification *)notification{
+    //検索結果を表示
+    [[[_tbView.tableColumns objectAtIndex:1]headerCell] setTitle:[NSString stringWithFormat:@"%@%li",NSLocalizedString(@"RESULT", @""),searchResult.count]];
+    [_tbView reloadData];
 }
 
 - (void)didMatchString:(PDFSelection *)instance{
@@ -515,10 +622,6 @@
     //検索結果を作成
     NSDictionary *result = [NSDictionary dictionaryWithObjectsAndKeys:sel,@"selection",labelString,@"result",pageLabel,@"page",nil];
     [searchResult addObject:result];
-    //検索結果を表示
-    [tabToc selectTabViewItemAtIndex:2];
-    [[[_tbView.tableColumns objectAtIndex:1]headerCell] setTitle:[NSString stringWithFormat:@"%@%li",NSLocalizedString(@"RESULT", @""),searchResult.count]];
-    [_tbView reloadData];
 }
 
 //改行を削除した文字列を返す

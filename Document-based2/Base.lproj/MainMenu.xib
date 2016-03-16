@@ -501,6 +501,7 @@ CA
 CA
 </string>
                                 <connections>
+                                    <action selector="removeOutline:" target="-1" id="hEy-vz-icJ"/>
                                     <binding destination="Voe-Tx-rLC" name="enabled2" keyPath="self.isOLExists" previousBinding="cwQ-Gd-unS" id="Beg-pI-BpT">
                                         <dictionary key="options">
                                             <integer key="NSMultipleValuesPlaceholder" value="-1"/>
@@ -515,6 +516,7 @@ CA
                             <menuItem title="Clear Bookmark" enabled="NO" id="Jgp-vQ-7XD">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <connections>
+                                    <action selector="clearOutline:" target="-1" id="ftC-wx-1qo"/>
                                     <binding destination="Voe-Tx-rLC" name="enabled" keyPath="self.isOLExists" id="jmp-yH-Msp"/>
                                 </connections>
                             </menuItem>
