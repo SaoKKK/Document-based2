@@ -7,6 +7,8 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import "DocInfoPanel.h"
+#import "DocTextPanel.h"
 
 @interface AppDelegate : NSObject <NSApplicationDelegate>
 @property (weak) IBOutlet NSMenuItem *mnGoToPrevPg;

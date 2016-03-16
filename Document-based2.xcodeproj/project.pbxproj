@@ -40,6 +40,10 @@
 		B9D6AEFA1C78CFD900381A32 /* Quartz.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B9D6AEF91C78CFD900381A32 /* Quartz.framework */; };
 		B9D6AF001C78D27E00381A32 /* MyPDFView.m in Sources */ = {isa = PBXBuildFile; fileRef = B9D6AEFF1C78D27E00381A32 /* MyPDFView.m */; };
 		B9DBE8B51C8963C10058B92D /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = B9DBE8B31C8963C00058B92D /* Localizable.strings */; };
+		B9F79D091C99A76C00E06911 /* DocInfoPanel.m in Sources */ = {isa = PBXBuildFile; fileRef = B9F79D071C99A76C00E06911 /* DocInfoPanel.m */; };
+		B9F79D0A1C99A76C00E06911 /* DocInfoPanel.xib in Resources */ = {isa = PBXBuildFile; fileRef = B9F79D081C99A76C00E06911 /* DocInfoPanel.xib */; };
+		B9F79D0E1C99A78900E06911 /* DocTextPanel.m in Sources */ = {isa = PBXBuildFile; fileRef = B9F79D0C1C99A78900E06911 /* DocTextPanel.m */; };
+		B9F79D0F1C99A78900E06911 /* DocTextPanel.xib in Resources */ = {isa = PBXBuildFile; fileRef = B9F79D0D1C99A78900E06911 /* DocTextPanel.xib */; };
 		B9F961D81C8AB00B0034A940 /* OLController.m in Sources */ = {isa = PBXBuildFile; fileRef = B9F961D71C8AB00B0034A940 /* OLController.m */; };
 /* End PBXBuildFile section */
 
@@ -86,6 +90,12 @@
 		B9DBE8B61C8963C90058B92D /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
 		B9E21BE51C7AF86E004DDB0F /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/MainMenu.strings; sourceTree = "<group>"; };
 		B9E21BE61C7AF86E004DDB0F /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Document.strings; sourceTree = "<group>"; };
+		B9F79D061C99A76C00E06911 /* DocInfoPanel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DocInfoPanel.h; sourceTree = "<group>"; };
+		B9F79D071C99A76C00E06911 /* DocInfoPanel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DocInfoPanel.m; sourceTree = "<group>"; };
+		B9F79D081C99A76C00E06911 /* DocInfoPanel.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DocInfoPanel.xib; sourceTree = "<group>"; };
+		B9F79D0B1C99A78900E06911 /* DocTextPanel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DocTextPanel.h; sourceTree = "<group>"; };
+		B9F79D0C1C99A78900E06911 /* DocTextPanel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DocTextPanel.m; sourceTree = "<group>"; };
+		B9F79D0D1C99A78900E06911 /* DocTextPanel.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DocTextPanel.xib; sourceTree = "<group>"; };
 		B9F961D61C8AB00B0034A940 /* OLController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OLController.h; sourceTree = "<group>"; };
 		B9F961D71C8AB00B0034A940 /* OLController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OLController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -130,6 +140,8 @@
 				B9AD99BB1C771044008C29A4 /* MainMenu.xib */,
 				B9AD99B91C771044008C29A4 /* Assets.xcassets */,
 				B9E21BE41C7A759F004DDB0F /* Document */,
+				B9F79D051C99A70C00E06911 /* DocInfoPanel */,
+				B9F79D041C99A70600E06911 /* DocTextPanel */,
 				B9BBD71A1C82CE2D006CF6DC /* Graphics */,
 				B9AD99B01C771044008C29A4 /* Supporting Files */,
 			);
@@ -199,6 +211,26 @@
 				B9D6AEFF1C78D27E00381A32 /* MyPDFView.m */,
 			);
 			name = Document;
+			sourceTree = "<group>";
+		};
+		B9F79D041C99A70600E06911 /* DocTextPanel */ = {
+			isa = PBXGroup;
+			children = (
+				B9F79D0D1C99A78900E06911 /* DocTextPanel.xib */,
+				B9F79D0B1C99A78900E06911 /* DocTextPanel.h */,
+				B9F79D0C1C99A78900E06911 /* DocTextPanel.m */,
+			);
+			name = DocTextPanel;
+			sourceTree = "<group>";
+		};
+		B9F79D051C99A70C00E06911 /* DocInfoPanel */ = {
+			isa = PBXGroup;
+			children = (
+				B9F79D081C99A76C00E06911 /* DocInfoPanel.xib */,
+				B9F79D061C99A76C00E06911 /* DocInfoPanel.h */,
+				B9F79D071C99A76C00E06911 /* DocInfoPanel.m */,
+			);
+			name = DocInfoPanel;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -272,6 +304,7 @@
 				B93FD59E1C86F85D00B68959 /* zoomIn.png in Resources */,
 				B9A095C31C86B640004C0DFB /* twoUp_off.png in Resources */,
 				B9BBD7231C82CEBE006CF6DC /* goForward.png in Resources */,
+				B9F79D0A1C99A76C00E06911 /* DocInfoPanel.xib in Resources */,
 				B9DBE8B51C8963C10058B92D /* Localizable.strings in Resources */,
 				B9A095C21C86B640004C0DFB /* twoCont_on.png in Resources */,
 				B93FD5A31C8726A500B68959 /* fitToWindow.png in Resources */,
@@ -282,6 +315,7 @@
 				B93FD59D1C86F85D00B68959 /* zoom.png in Resources */,
 				B9AD99B81C771044008C29A4 /* Document.xib in Resources */,
 				B9BBD7281C82CEBE006CF6DC /* vline.png in Resources */,
+				B9F79D0F1C99A78900E06911 /* DocTextPanel.xib in Resources */,
 				B9AD99BD1C771044008C29A4 /* MainMenu.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -295,7 +329,9 @@
 			files = (
 				B9D6AF001C78D27E00381A32 /* MyPDFView.m in Sources */,
 				B9AD99B51C771044008C29A4 /* Document.m in Sources */,
+				B9F79D091C99A76C00E06911 /* DocInfoPanel.m in Sources */,
 				B9AD99B21C771044008C29A4 /* main.m in Sources */,
+				B9F79D0E1C99A78900E06911 /* DocTextPanel.m in Sources */,
 				B9AD99AF1C771044008C29A4 /* AppDelegate.m in Sources */,
 				B9F961D81C8AB00B0034A940 /* OLController.m in Sources */,
 				B9825A731C77838500F7AD4A /* DocWinC.m in Sources */,

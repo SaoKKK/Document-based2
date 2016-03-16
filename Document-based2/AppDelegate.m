@@ -8,6 +8,30 @@
 
 #import "AppDelegate.h"
 
+#pragma mark - WindowController
+
+@interface NSWindowController(ConvenienceWC)
+- (BOOL)isWindowShown;
+- (void)showOrHideWindow;
+@end
+
+@implementation NSWindowController(ConvenienceWC)
+
+- (BOOL)isWindowShown{
+    return [[self window]isVisible];
+}
+
+- (void)showOrHideWindow{
+    NSWindow *window = [self window];
+    if ([window isVisible]) {
+        [window orderOut:self];
+    } else {
+        [self showWindow:self];
+    }
+}
+
+@end
+
 @interface AppDelegate (){
     IBOutlet NSMenuItem *mnSinglePage;
     IBOutlet NSMenuItem *mnSingleCont;

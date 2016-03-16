@@ -25,7 +25,6 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(pageChanged) name:PDFViewPageChangedNotification object:_pdfView];
     //ドラッグ＆ドロップするデータタイプを設定
     [_olView registerForDraggedTypes:[NSArray arrayWithObjects:MyPBoardType, nil]];
-    [_olView setDraggingSourceOperationMask:NSDragOperationEvery forLocal:NO];
 }
 
 //現在のドキュメントのウインドウコントローラを返す
@@ -47,7 +46,6 @@
 
 - (id)outlineView: (NSOutlineView *) outlineView child: (NSInteger) index ofItem: (id) item{
     if (! item) {
-        //ルートの場合はPDFOutlineを取得
         return [[[_pdfView document]outlineRoot] childAtIndex:index];
     } else {
         return [(PDFOutline *)item childAtIndex:index];

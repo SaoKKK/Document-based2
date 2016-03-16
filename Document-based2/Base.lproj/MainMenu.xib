@@ -120,7 +120,13 @@
                                     <action selector="revertDocumentToSaved:" target="-1" id="iJ3-Pv-kwq"/>
                                 </connections>
                             </menuItem>
+                            <menuItem isSeparatorItem="YES" id="b0m-ym-f5M"/>
+                            <menuItem title="Get Text Data" id="I4O-Fj-zfb">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                            </menuItem>
                             <menuItem isSeparatorItem="YES" id="aJh-i4-bef"/>
+                            <menuItem title="Show Document Info" keyEquivalent="i" id="F6H-ZL-3LG"/>
+                            <menuItem isSeparatorItem="YES" id="lTG-bF-hCr"/>
                             <menuItem title="Page Setup…" keyEquivalent="P" id="qIS-W8-SiK">
                                 <modifierMask key="keyEquivalentModifierMask" shift="YES" command="YES"/>
                                 <connections>

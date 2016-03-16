@@ -99,6 +99,13 @@
 /* Class = "NSMenuItem"; title = "Writing Direction"; ObjectID = "H1b-Si-o9J"; */
 "H1b-Si-o9J.title" = "Writing Direction";
 
+//menu file
+
+//menu item "Get Text Data"
+"I4O-Fj-zfb.title" = "テキスト情報の取得";
+//menu item "Show Document Info"
+"F6H-ZL-3LG.title" = "文書情報を見る";
+
 // menu Edit
 "W48-6f-4Dl.title" = "編集";
 // menu item Find
