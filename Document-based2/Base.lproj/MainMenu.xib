@@ -15,21 +15,16 @@
         <customObject id="Voe-Tx-rLC" customClass="AppDelegate">
             <connections>
                 <outlet property="mnFullScreen" destination="o98-2n-b0I" id="0wi-q7-H4x"/>
-                <outlet property="mnGo" destination="zGJ-dX-Oxx" id="qQj-4n-PEu"/>
                 <outlet property="mnGoBack" destination="6fn-SK-nKO" id="AA7-ta-sYU"/>
                 <outlet property="mnGoForward" destination="OKp-5t-M2w" id="xRa-eV-vkw"/>
                 <outlet property="mnGoToFirstPg" destination="kQh-sc-o3h" id="Haf-DG-9DT"/>
                 <outlet property="mnGoToLastPg" destination="8TC-VT-XrE" id="KD6-u8-CgQ"/>
                 <outlet property="mnGoToNextPg" destination="Mgh-CW-Vyv" id="4Ub-Rb-EgW"/>
                 <outlet property="mnGoToPrevPg" destination="Ob5-Z6-l9h" id="vZQ-nT-Mis"/>
-                <outlet property="mnItemFindInPDF" destination="A5a-73-2Rg" id="4tI-eo-VDn"/>
-                <outlet property="mnItemGo" destination="ai2-GZ-jD6" id="Wes-6j-mUJ"/>
-                <outlet property="mnItemView" destination="H8h-7b-M4v" id="fUk-XX-8Gq"/>
                 <outlet property="mnSingleCont" destination="dv7-5r-YBZ" id="1OH-gG-Xuu"/>
                 <outlet property="mnSinglePage" destination="E8r-pm-WKX" id="7w7-tr-Rnq"/>
                 <outlet property="mnTwoPageCont" destination="2SK-wh-zRc" id="Luh-MJ-h0q"/>
                 <outlet property="mnTwoPages" destination="nUn-NX-nUC" id="j6b-oq-cNl"/>
-                <outlet property="mnView" destination="HyV-fh-RgO" id="vZZ-ZJ-PCO"/>
                 <outlet property="mnZoomIn" destination="p7o-Az-s8w" id="37g-18-wZO"/>
                 <outlet property="mnZoomOut" destination="Srb-vg-b48" id="5ae-Cv-bSE"/>
             </connections>
@@ -199,6 +194,7 @@ CA
                                             <modifierMask key="keyEquivalentModifierMask" shift="YES" command="YES"/>
                                             <connections>
                                                 <action selector="mnFindInPDF:" target="-1" id="OHk-U0-jMm"/>
+                                                <binding destination="Voe-Tx-rLC" name="enabled" keyPath="self.isDocWinMain" id="Wcj-fp-nv4"/>
                                             </connections>
                                         </menuItem>
                                         <menuItem isSeparatorItem="YES" id="S4D-Es-xRg"/>
@@ -364,51 +360,59 @@ CA
                         </items>
                     </menu>
                 </menuItem>
-                <menuItem title="View" enabled="NO" id="H8h-7b-M4v">
+                <menuItem title="View" id="H8h-7b-M4v">
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <menu key="submenu" title="View" autoenablesItems="NO" id="HyV-fh-RgO">
                         <items>
                             <menuItem title="Single Page" enabled="NO" keyEquivalent="1" id="E8r-pm-WKX">
                                 <connections>
                                     <action selector="mnSinglePage:" target="-1" id="OTn-1H-Bxo"/>
+                                    <binding destination="Voe-Tx-rLC" name="enabled" keyPath="self.isDocWinMain" id="Ska-aP-JnT"/>
                                 </connections>
                             </menuItem>
                             <menuItem title="Single Page Continuous" state="on" enabled="NO" keyEquivalent="2" id="dv7-5r-YBZ">
                                 <connections>
                                     <action selector="mnSingleCont:" target="-1" id="98L-OG-fA8"/>
+                                    <binding destination="Voe-Tx-rLC" name="enabled" keyPath="self.isDocWinMain" id="u4L-nU-3kX"/>
                                 </connections>
                             </menuItem>
                             <menuItem title="Two Pages" enabled="NO" keyEquivalent="3" id="nUn-NX-nUC">
                                 <connections>
                                     <action selector="mnTwoPages:" target="-1" id="U9o-Rx-7ge"/>
+                                    <binding destination="Voe-Tx-rLC" name="enabled" keyPath="self.isDocWinMain" id="7f2-0D-FUv"/>
                                 </connections>
                             </menuItem>
                             <menuItem title="Two Pages Continuous" enabled="NO" keyEquivalent="4" id="2SK-wh-zRc">
                                 <connections>
                                     <action selector="mnTwoPagesCont:" target="-1" id="HoL-7e-UmG"/>
+                                    <binding destination="Voe-Tx-rLC" name="enabled" keyPath="self.isDocWinMain" id="uH1-3M-Ipf"/>
                                 </connections>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="kiX-Ta-Tzb"/>
                             <menuItem title="Zoom to Fit" enabled="NO" keyEquivalent="9" id="DP4-OT-pV1">
                                 <connections>
                                     <action selector="zoomImageToFit:" target="-1" id="gY6-Xo-DPZ"/>
+                                    <binding destination="Voe-Tx-rLC" name="enabled" keyPath="self.isDocWinMain" id="gcc-BS-Jue"/>
                                 </connections>
                             </menuItem>
                             <menuItem title="Actual Size" enabled="NO" keyEquivalent="0" id="psd-Ef-9Ar">
                                 <connections>
                                     <action selector="zoomImageToActualSize:" target="-1" id="9v1-mL-IvN"/>
+                                    <binding destination="Voe-Tx-rLC" name="enabled" keyPath="self.isDocWinMain" id="XMn-3q-TlQ"/>
                                 </connections>
                             </menuItem>
                             <menuItem title="Zoom In" enabled="NO" keyEquivalent="&gt;" id="p7o-Az-s8w">
                                 <modifierMask key="keyEquivalentModifierMask" shift="YES" command="YES"/>
                                 <connections>
                                     <action selector="zoomIn:" target="-1" id="5D8-o2-P5e"/>
+                                    <binding destination="Voe-Tx-rLC" name="enabled" keyPath="self.isDocWinMain" id="yXf-eA-j6P"/>
                                 </connections>
                             </menuItem>
                             <menuItem title="Zoom Out" enabled="NO" keyEquivalent="&lt;" id="Srb-vg-b48">
                                 <modifierMask key="keyEquivalentModifierMask" shift="YES" command="YES"/>
                                 <connections>
                                     <action selector="zoomOut:" target="-1" id="bXZ-Nz-vVu"/>
+                                    <binding destination="Voe-Tx-rLC" name="enabled" keyPath="self.isDocWinMain" id="0dW-uU-XgQ"/>
                                 </connections>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="ECg-Hs-GPr"/>
@@ -416,52 +420,60 @@ CA
                                 <modifierMask key="keyEquivalentModifierMask" control="YES" command="YES"/>
                                 <connections>
                                     <action selector="toggleFullScreen:" target="-1" id="f1j-HL-qKd"/>
+                                    <binding destination="Voe-Tx-rLC" name="enabled" keyPath="self.isDocWinMain" id="rS3-Bs-w6S"/>
                                 </connections>
                             </menuItem>
                         </items>
                     </menu>
                 </menuItem>
-                <menuItem title="Go" enabled="NO" id="ai2-GZ-jD6">
+                <menuItem title="Go" id="ai2-GZ-jD6">
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <menu key="submenu" title="Go" autoenablesItems="NO" id="zGJ-dX-Oxx">
                         <items>
                             <menuItem title="Previous Page" enabled="NO" keyEquivalent="" id="Ob5-Z6-l9h">
                                 <connections>
                                     <action selector="goToPreviousPage:" target="-1" id="Y2J-dL-Gvj"/>
+                                    <binding destination="Voe-Tx-rLC" name="enabled" keyPath="self.isDocWinMain" id="Swc-4n-EUv"/>
                                 </connections>
                             </menuItem>
                             <menuItem title="Next Page" enabled="NO" keyEquivalent="" id="Mgh-CW-Vyv">
                                 <connections>
                                     <action selector="goToNextPage:" target="-1" id="1lQ-59-Fzo"/>
+                                    <binding destination="Voe-Tx-rLC" name="enabled" keyPath="self.isDocWinMain" id="1vq-6W-D2I"/>
                                 </connections>
                             </menuItem>
                             <menuItem title="First Page" enabled="NO" id="kQh-sc-o3h">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <connections>
                                     <action selector="goToFirstPage:" target="-1" id="GPC-uq-K9w"/>
+                                    <binding destination="Voe-Tx-rLC" name="enabled" keyPath="self.isDocWinMain" id="4Pj-C2-cuD"/>
                                 </connections>
                             </menuItem>
                             <menuItem title="Last Page" enabled="NO" id="8TC-VT-XrE">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <connections>
                                     <action selector="goToLastPage:" target="-1" id="V6c-hq-zdp"/>
+                                    <binding destination="Voe-Tx-rLC" name="enabled" keyPath="self.isDocWinMain" id="oZG-KC-p2P"/>
                                 </connections>
                             </menuItem>
                             <menuItem title="Go To Page..." enabled="NO" keyEquivalent="g" id="lcz-oK-gwq" userLabel="Go To Specified Page...">
                                 <modifierMask key="keyEquivalentModifierMask" option="YES" command="YES"/>
                                 <connections>
                                     <action selector="mnGoToPage:" target="-1" id="n4m-ab-5u6"/>
+                                    <binding destination="Voe-Tx-rLC" name="enabled" keyPath="self.isDocWinMain" id="Hrc-eN-IVt"/>
                                 </connections>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="ymp-HJ-pmb"/>
                             <menuItem title="Go Back" enabled="NO" keyEquivalent="[" id="6fn-SK-nKO">
                                 <connections>
                                     <action selector="goBack:" target="-1" id="ShN-M9-yuC"/>
+                                    <binding destination="Voe-Tx-rLC" name="enabled" keyPath="self.isDocWinMain" id="e0b-OT-fPJ"/>
                                 </connections>
                             </menuItem>
                             <menuItem title="Go Forward" enabled="NO" keyEquivalent="]" id="OKp-5t-M2w">
                                 <connections>
                                     <action selector="goForward:" target="-1" id="pma-E3-VlJ"/>
+                                    <binding destination="Voe-Tx-rLC" name="enabled" keyPath="self.isDocWinMain" id="uFp-f8-mId"/>
                                 </connections>
                             </menuItem>
                         </items>
@@ -489,6 +501,14 @@ CA
 CA
 </string>
                                 <connections>
+                                    <binding destination="Voe-Tx-rLC" name="enabled2" keyPath="self.isOLExists" previousBinding="cwQ-Gd-unS" id="Beg-pI-BpT">
+                                        <dictionary key="options">
+                                            <integer key="NSMultipleValuesPlaceholder" value="-1"/>
+                                            <integer key="NSNoSelectionPlaceholder" value="-1"/>
+                                            <integer key="NSNotApplicablePlaceholder" value="-1"/>
+                                            <integer key="NSNullPlaceholder" value="-1"/>
+                                        </dictionary>
+                                    </binding>
                                     <binding destination="Voe-Tx-rLC" name="enabled" keyPath="self.isOLSelected" id="cwQ-Gd-unS"/>
                                 </connections>
                             </menuItem>

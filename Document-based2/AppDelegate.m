@@ -13,11 +13,6 @@
     IBOutlet NSMenuItem *mnSingleCont;
     IBOutlet NSMenuItem *mnTwoPages;
     IBOutlet NSMenuItem *mnTwoPageCont;
-    IBOutlet NSMenu *mnView;
-    IBOutlet NSMenuItem *mnItemView;
-    IBOutlet NSMenu *mnGo;
-    IBOutlet NSMenuItem *mnItemGo;
-    IBOutlet NSMenuItem *mnItemFindInPDF;
     NSArray *mnPageDisplay; //表示モード変更メニューグループ
 }
 
@@ -55,11 +50,6 @@
 
 #pragma mark - menu control
 
-//検索メニューの有効／無効を切り替え
-- (void)findMenuSetEnabled:(BOOL)enabled{
-    [mnItemFindInPDF setEnabled:enabled];
-}
-
 //ディスプレイモード変更メニューのステータス変更
 - (void)setMnPageDisplayState:(NSInteger)tag{
     for (int i=0; i < mnPageDisplay.count; i++) {
@@ -68,18 +58,6 @@
         } else {
             [[mnPageDisplay objectAtIndex:i]setState:NO];
         }
-    }
-}
-
-//ドキュメントメニューの有効／無効を切り替え
-- (void)documentMenuSetEnabled:(BOOL)enabled{
-    [mnItemGo setEnabled:enabled];
-    [mnItemView setEnabled:enabled];
-    for (NSMenuItem *item in [mnGo itemArray]) {
-        [item setEnabled:enabled];
-    }
-    for (NSMenuItem *item in [mnView itemArray]){
-        [item setEnabled:enabled];
     }
 }
 

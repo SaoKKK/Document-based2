@@ -104,9 +104,6 @@
     [[NSNotificationCenter defaultCenter] addObserverForName:NSWindowDidBecomeMainNotification object:self.window queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification *notif){
         (APPD).isDocWinMain = YES;
         (APPD).isOLExists = [self isOLExists];
-        [APPD documentMenuSetEnabled:YES];
-        //検索メニューの有効／無効の切り替え
-        [APPD findMenuSetEnabled:YES];
         //ページ移動メニューの有効／無効の切り替え
         [self updateGoButtonEnabled];
         //倍率変更メニューの有効／無効の切り替え
@@ -123,7 +120,6 @@
             (APPD).isDocWinMain = NO;
             (APPD).isOLExists = NO;
             (APPD).isOLSelected = NO;
-            [APPD documentMenuSetEnabled:NO];
        }
      }];
     //ページ移動
