@@ -19,6 +19,7 @@
 @end
 
 @implementation DocWinC
+@synthesize bOLEdited;
 
 #pragma mark - Window Controller Method
 

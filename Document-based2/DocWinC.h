@@ -40,8 +40,8 @@
     CGFloat oldTocWidth; //目次エリアの変更前の幅保持用
     BOOL bFullscreen; //スクリーンモード保持用
     NSMutableArray *searchResult; //検索結果保持用
-    BOOL bOLEdited; //Outline更新フラグ
 }
+@property BOOL bOLEdited; //Outline更新フラグ
 
 - (NSData *)pdfViewDocumentData;
 - (void)revertDocumentToSaved;
