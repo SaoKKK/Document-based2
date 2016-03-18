@@ -92,8 +92,6 @@
     if ([_olView selectedRowIndexes].count == 1) {
         PDFOutline *ol = [_olView itemAtRow:[_olView selectedRow]];
         [_pdfView goToDestination:ol.destination];
-        //情報データを更新
-        [self updateOLInfo:ol];
     }
     [self updateSelectedRowInfo];
 }
@@ -105,21 +103,6 @@
     } else {
         (APPD).isOLSelected = NO;
     }
-}
-
-//PDFOutline情報の更新
-- (void)updateOLInfo:(PDFOutline*)ol{
-    PDFPage *page = ol.destination.page;
-    PDFDocument *doc = [_pdfView document];
-    NSRect rect = [page boundsForBox:kPDFDisplayBoxArtBox];
-    [(APPD).olInfo setObject:ol.label forKey:@"olLabel"];
-    [(APPD).olInfo setObject:ol.destination forKey:@"destination"];
-    [(APPD).olInfo setObject:page.label forKey:@"pageLabel"];
-    [(APPD).olInfo setObject:[NSNumber numberWithInteger:[doc indexForPage:page]] forKey:@"pageIndex"];
-    [(APPD).olInfo setObject:[NSNumber numberWithDouble:ol.destination.point.x] forKey:@"pointX"];
-    [(APPD).olInfo setObject:[NSNumber numberWithDouble:ol.destination.point.y] forKey:@"pointY"];
-    [(APPD).olInfo setObject:[NSNumber numberWithDouble:rect.size.width] forKey:@"xMax"];
-    [(APPD).olInfo setObject:[NSNumber numberWithDouble:rect.size.height] forKey:@"yMax"];
 }
 
 //ページ移動時

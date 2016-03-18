@@ -30,6 +30,7 @@
 		B9AD99B81C771044008C29A4 /* Document.xib in Resources */ = {isa = PBXBuildFile; fileRef = B9AD99B61C771044008C29A4 /* Document.xib */; };
 		B9AD99BA1C771044008C29A4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B9AD99B91C771044008C29A4 /* Assets.xcassets */; };
 		B9AD99BD1C771044008C29A4 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = B9AD99BB1C771044008C29A4 /* MainMenu.xib */; };
+		B9B14C5A1C9A9A43000A5401 /* HandleView.m in Sources */ = {isa = PBXBuildFile; fileRef = B9B14C591C9A9A43000A5401 /* HandleView.m */; };
 		B9BBD7221C82CEBE006CF6DC /* goBack.png in Resources */ = {isa = PBXBuildFile; fileRef = B9BBD71B1C82CEBE006CF6DC /* goBack.png */; };
 		B9BBD7231C82CEBE006CF6DC /* goForward.png in Resources */ = {isa = PBXBuildFile; fileRef = B9BBD71C1C82CEBE006CF6DC /* goForward.png */; };
 		B9BBD7241C82CEBE006CF6DC /* goLast.png in Resources */ = {isa = PBXBuildFile; fileRef = B9BBD71D1C82CEBE006CF6DC /* goLast.png */; };
@@ -76,6 +77,8 @@
 		B9AD99B91C771044008C29A4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B9AD99BC1C771044008C29A4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		B9AD99BE1C771044008C29A4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B9B14C581C9A9A42000A5401 /* HandleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HandleView.h; sourceTree = "<group>"; };
+		B9B14C591C9A9A43000A5401 /* HandleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HandleView.m; sourceTree = "<group>"; };
 		B9BBD71B1C82CEBE006CF6DC /* goBack.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = goBack.png; path = Graphics/goBack.png; sourceTree = "<group>"; };
 		B9BBD71C1C82CEBE006CF6DC /* goForward.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = goForward.png; path = Graphics/goForward.png; sourceTree = "<group>"; };
 		B9BBD71D1C82CEBE006CF6DC /* goLast.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = goLast.png; path = Graphics/goLast.png; sourceTree = "<group>"; };
@@ -209,6 +212,8 @@
 				B9F961D71C8AB00B0034A940 /* OLController.m */,
 				B9D6AEFE1C78D27E00381A32 /* MyPDFView.h */,
 				B9D6AEFF1C78D27E00381A32 /* MyPDFView.m */,
+				B9B14C581C9A9A42000A5401 /* HandleView.h */,
+				B9B14C591C9A9A43000A5401 /* HandleView.m */,
 			);
 			name = Document;
 			sourceTree = "<group>";
@@ -329,6 +334,7 @@
 			files = (
 				B9D6AF001C78D27E00381A32 /* MyPDFView.m in Sources */,
 				B9AD99B51C771044008C29A4 /* Document.m in Sources */,
+				B9B14C5A1C9A9A43000A5401 /* HandleView.m in Sources */,
 				B9F79D091C99A76C00E06911 /* DocInfoPanel.m in Sources */,
 				B9AD99B21C771044008C29A4 /* main.m in Sources */,
 				B9F79D0E1C99A78900E06911 /* DocTextPanel.m in Sources */,
