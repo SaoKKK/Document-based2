@@ -549,6 +549,11 @@
     bOLEdited = YES;
 }
 
+//メニュー／選択範囲からしおり更新
+- (IBAction)updateBMFromSelection:(id)sender{
+    
+}
+
 //メニュー／しおり削除
 - (IBAction)removeOutline:(id)sender{
     NSIndexSet *selectedRows = _olView.selectedRowIndexes;

@@ -17,5 +17,10 @@
 //table view header title
 "RESULT" = "結果：";
 
+//Document Changed Alert Dialog Button Title
+"Save" = "保存";
+"Cancel" = "キャンセル";
+"Don't Save" = "保存しない";
+
 //New Bookmark Undefined Label
 "UntitledLabal" = "名称未設定";

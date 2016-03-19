@@ -502,6 +502,21 @@ CA
                                     <binding destination="Voe-Tx-rLC" name="enabled" keyPath="self.isDocWinMain" id="8QT-w3-9XJ"/>
                                 </connections>
                             </menuItem>
+                            <menuItem title="Update Bookmark from Selection" enabled="NO" id="0Yq-YN-DV0">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="updateBMFromSelection:" target="-1" id="xRQ-UL-yaW"/>
+                                    <binding destination="Voe-Tx-rLC" name="enabled2" keyPath="self.isOLExists" previousBinding="dXo-aH-ZOo" id="tqI-bR-Xvl">
+                                        <dictionary key="options">
+                                            <integer key="NSMultipleValuesPlaceholder" value="-1"/>
+                                            <integer key="NSNoSelectionPlaceholder" value="-1"/>
+                                            <integer key="NSNotApplicablePlaceholder" value="-1"/>
+                                            <integer key="NSNullPlaceholder" value="-1"/>
+                                        </dictionary>
+                                    </binding>
+                                    <binding destination="Voe-Tx-rLC" name="enabled" keyPath="self.isOLSelected" id="dXo-aH-ZOo"/>
+                                </connections>
+                            </menuItem>
                             <menuItem title="Remove Bookmark" enabled="NO" id="1zJ-gs-4qR">
                                 <string key="keyEquivalent" base64-UTF8="YES">
 CA

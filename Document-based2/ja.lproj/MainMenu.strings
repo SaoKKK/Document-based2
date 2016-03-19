@@ -163,6 +163,8 @@
 "YzT-Wr-ftV.title" = "新規しおり作成";
 // menu item New Bookmark from Selecton
 "i60-bZ-Xpi.title" = "選択範囲から新規しおり作成";
+// menu item Update Bookmark from Selecton
+"0Yq-YN-DV0.title" = "選択範囲からしおり更新";
 // menu item Remove Bookmark
 "1zJ-gs-4qR.title" = "しおりを削除";
 // menu item Clear Bookmark

@@ -17,5 +17,10 @@
 //table view header title
 "RESULT" = "Result: ";
 
+//Document Changed Alert Dialog Button Title
+"Save" = "Save";
+"Cancel" = "Cancel";
+"Don't Save" = "Don't Save";
+
 //New Bookmark Undefined Label
 "UntitledLabal" = "Untitled";
