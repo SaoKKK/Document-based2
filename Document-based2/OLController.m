@@ -99,10 +99,15 @@
 
 //行の選択状況情報を更新
 - (void)updateSelectedRowInfo{
-    if ([_olView selectedRow] > 0) {
+    if ([_olView selectedRowIndexes].count == 1) {
         (APPD).isOLSelected = YES;
-    } else {
+        (APPD).isOLSelectedSingle = YES;
+    } else if ([_olView selectedRowIndexes].count == 0) {
+        (APPD).isOLSelectedSingle = NO;
         (APPD).isOLSelected = NO;
+    } else {
+        (APPD).isOLSelectedSingle = NO;
+        (APPD).isOLSelected = YES;
     }
 }
 

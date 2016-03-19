@@ -477,8 +477,8 @@
 }
 
 - (IBAction)test3:(id)sender {
-    id item = [_olView itemAtRow:1];
-    NSLog (@"%@",item);
+    [_olView expandItem:[_olView itemAtRow:[_olView selectedRow]] expandChildren:YES];
+
 }
 
 #pragma mark - outline data control
@@ -493,16 +493,24 @@
 
 //メニュー／選択範囲から新規しおり作成
 - (IBAction)mnNewBookmarkFromSelection:(id)sender{
+    if ([self BMDataFromSelection]) {
+        [self makeNewBookMark:selectedLabel withDestination:selectedDest];
+    }
+}
+
+//選択範囲からしおりのラベルと移動先を取得
+- (BOOL)BMDataFromSelection{
     PDFSelection *sel = [_pdfView currentSelection];
     if (!sel) {
         [self showNoSelectAlert];
+        return NO;
     } else {
-        NSString *label = [sel string];
+        selectedLabel = [sel string];
         PDFPage *page = [[sel pages]objectAtIndex:0];
         NSRect rect = [sel boundsForPage:page];
         NSPoint point = NSMakePoint(rect.origin.x, rect.origin.y + rect.size.height);
-        PDFDestination *destination = [[PDFDestination alloc]initWithPage:page atPoint:point];
-        [self makeNewBookMark:label withDestination:destination];
+        selectedDest = [[PDFDestination alloc]initWithPage:page atPoint:point];
+        return YES;
     }
 }
 
@@ -551,7 +559,13 @@
 
 //メニュー／選択範囲からしおり更新
 - (IBAction)updateBMFromSelection:(id)sender{
-    
+    if ([self BMDataFromSelection]) {
+        PDFOutline *ol = [_olView itemAtRow:[_olView selectedRow]];
+        [ol setLabel:selectedLabel];
+        [ol setDestination:selectedDest];
+        [_olView reloadData];
+        bOLEdited = YES;
+    }
 }
 
 //メニュー／しおり削除
@@ -565,6 +579,10 @@
     }
     [_olView reloadData];
     bOLEdited = YES;
+    (APPD).isOLSelected = NO;
+    if (_pdfView.document.outlineRoot.numberOfChildren == 0) {
+        (APPD).isOLExists = NO;
+    }
 }
 
 //メニュー／しおりクリア
@@ -585,11 +603,11 @@
     if (![[_pdfView document]outlineRoot]) {
         PDFOutline *root = [[PDFOutline alloc]init];
         [[_pdfView document] setOutlineRoot:root];
-        (APPD).isOLExists = YES;
     }
     [segTabTocSelect setSelectedSegment:1];
     [self segSelContentsView:segTabTocSelect];
     [segPageViewMode setSelected:YES forSegment:1];
+    (APPD).isOLExists = YES;
 }
 
 #pragma mark - search in document

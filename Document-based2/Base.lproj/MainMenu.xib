@@ -506,7 +506,7 @@ CA
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <connections>
                                     <action selector="updateBMFromSelection:" target="-1" id="xRQ-UL-yaW"/>
-                                    <binding destination="Voe-Tx-rLC" name="enabled2" keyPath="self.isOLExists" previousBinding="dXo-aH-ZOo" id="tqI-bR-Xvl">
+                                    <binding destination="Voe-Tx-rLC" name="enabled2" keyPath="self.isOLExists" previousBinding="kpW-h9-Y1Q" id="Ned-e1-za9">
                                         <dictionary key="options">
                                             <integer key="NSMultipleValuesPlaceholder" value="-1"/>
                                             <integer key="NSNoSelectionPlaceholder" value="-1"/>
@@ -514,7 +514,7 @@ CA
                                             <integer key="NSNullPlaceholder" value="-1"/>
                                         </dictionary>
                                     </binding>
-                                    <binding destination="Voe-Tx-rLC" name="enabled" keyPath="self.isOLSelected" id="dXo-aH-ZOo"/>
+                                    <binding destination="Voe-Tx-rLC" name="enabled" keyPath="self.isOLSelectedSingle" id="kpW-h9-Y1Q"/>
                                 </connections>
                             </menuItem>
                             <menuItem title="Remove Bookmark" enabled="NO" id="1zJ-gs-4qR">
@@ -523,7 +523,7 @@ CA
 </string>
                                 <connections>
                                     <action selector="removeOutline:" target="-1" id="hEy-vz-icJ"/>
-                                    <binding destination="Voe-Tx-rLC" name="enabled2" keyPath="self.isOLExists" previousBinding="cwQ-Gd-unS" id="Beg-pI-BpT">
+                                    <binding destination="Voe-Tx-rLC" name="enabled2" keyPath="self.isOLExists" previousBinding="cwQ-Gd-unS" id="nkf-Dm-IL1">
                                         <dictionary key="options">
                                             <integer key="NSMultipleValuesPlaceholder" value="-1"/>
                                             <integer key="NSNoSelectionPlaceholder" value="-1"/>

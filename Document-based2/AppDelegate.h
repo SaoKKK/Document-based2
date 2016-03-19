@@ -23,6 +23,7 @@
 @property (assign) BOOL isDocWinMain;
 @property (assign) BOOL isOLExists;
 @property (assign) BOOL isOLSelected;
+@property (assign) BOOL isOLSelectedSingle;
 
 - (void)setMnPageDisplayState:(NSInteger)tag;
 
