@@ -580,6 +580,7 @@
     [_olView reloadData];
     bOLEdited = YES;
     (APPD).isOLSelected = NO;
+    (APPD).isOLSelectedSingle = NO;
     if (_pdfView.document.outlineRoot.numberOfChildren == 0) {
         (APPD).isOLExists = NO;
     }
