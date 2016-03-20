@@ -43,7 +43,6 @@
     NSString *selectedLabel; //選択中の領域に含まれる文字列を保持
     PDFDestination *selectedDest; //選択中の領域のPDFDestinationを保持
 }
-@property BOOL bOLEdited; //Outline更新フラグ
 
 - (NSData *)pdfViewDocumentData;
 - (void)revertDocumentToSaved;

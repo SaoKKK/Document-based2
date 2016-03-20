@@ -19,7 +19,6 @@
 @end
 
 @implementation DocWinC
-@synthesize bOLEdited;
 
 #pragma mark - Window Controller Method
 
@@ -27,7 +26,6 @@
     [super windowDidLoad];
     //インスタンス変数を初期化
     bFullscreen = NO;
-    bOLEdited = NO;
     //ファイルから読み込まれたPDFドキュメントをビューに表示
     docURL = [[self document] fileURL];
     PDFDocument *doc = [[PDFDocument alloc]initWithURL:docURL];
@@ -68,45 +66,6 @@
     }
 }
 
-//しおりが更新されていた場合のウインドウを閉じる動作
-- (BOOL)windowShouldClose:(id)sender{
-    if ([(NSDocument*)self.document isDocumentEdited]) {
-        bOLEdited = NO;
-    } else {
-        if (bOLEdited) {
-            [self outlineChangedAlert];
-        }
-    }
-    return !bOLEdited;
-}
-
-- (void)outlineChangedAlert{
-    NSAlert *alert = [[NSAlert alloc]init];
-    NSString *errMsgTxt,*errInfoTxt;
-    NSString *language = [[NSLocale preferredLanguages] objectAtIndex:0];
-    if ([language isEqualToString:@"en"]){
-        errMsgTxt = [NSString stringWithFormat:@"Do you want to save the changes made to the document \"%@\" ?",docURL.path.lastPathComponent];
-        errInfoTxt = @"Your changes will be lost if you don't save.";
-    } else {
-        errMsgTxt = [NSString stringWithFormat:@"書類 \"%@\" に加えた変更を保存しますか?",docURL.path.lastPathComponent];
-        errInfoTxt = @"保存しないと変更は失われます。";
-    }
-    alert.messageText = errMsgTxt;
-    [alert setInformativeText:errInfoTxt];
-    [alert addButtonWithTitle:NSLocalizedString(@"Save",@"")];
-    [alert addButtonWithTitle:NSLocalizedString(@"Cancel",@"")];
-    [alert addButtonWithTitle:NSLocalizedString(@"Don't Save",@"")];
-    [alert setAlertStyle:NSWarningAlertStyle];
-    [alert beginSheetModalForWindow:self.window completionHandler:^(NSModalResponse returnCode){
-        if (returnCode == NSAlertFirstButtonReturn) {
-            [self.document saveDocument:nil];
-            [self.window orderOut:self];
-        } else if (returnCode == NSAlertThirdButtonReturn){
-            [self.window orderOut:self];
-        }
-    }];
-}
-
 #pragma mark - document save/open support
 
 - (NSData *)pdfViewDocumentData{
@@ -140,8 +99,6 @@
     [[NSNotificationCenter defaultCenter] addObserverForName:@"PDFDidEndPageWrite" object:[_pdfView document] queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification *notif){
         //プログレス・パネルを終了させる
         [self.window endSheet:progressWin returnCode:0];
-        //ドキュメント更新フラグを初期化
-        bOLEdited = NO;
     }];
     //メインウインドウ変更
     [[NSNotificationCenter defaultCenter] addObserverForName:NSWindowDidBecomeMainNotification object:self.window queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification *notif){
@@ -554,7 +511,7 @@
     if ([ol.label isEqualToString:NSLocalizedString(@"UntitledLabal", @"")]) {
         [_olView editColumn:0 row:[_olView rowForItem:ol] withEvent:nil select:YES];
     }
-    bOLEdited = YES;
+    [self.document updateChangeCount:NSChangeDone];
 }
 
 //メニュー／選択範囲からしおり更新
@@ -564,7 +521,7 @@
         [ol setLabel:selectedLabel];
         [ol setDestination:selectedDest];
         [_olView reloadData];
-        bOLEdited = YES;
+        [self.document updateChangeCount:NSChangeDone];
     }
 }
 
@@ -578,7 +535,7 @@
         index = [selectedRows indexLessThanIndex:index];
     }
     [_olView reloadData];
-    bOLEdited = YES;
+    [self.document updateChangeCount:NSChangeDone];
     (APPD).isOLSelected = NO;
     (APPD).isOLSelectedSingle = NO;
     if (_pdfView.document.outlineRoot.numberOfChildren == 0) {
@@ -595,7 +552,7 @@
     }
     [_olView reloadData];
     (APPD).isOLExists = NO;
-    bOLEdited = YES;
+    [self.document updateChangeCount:NSChangeDone];
 }
 
 //ビューをしおり編集モードに
