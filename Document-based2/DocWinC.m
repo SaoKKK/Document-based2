@@ -25,6 +25,7 @@
 - (void)windowDidLoad {
     [super windowDidLoad];
     //インスタンス変数を初期化
+    selectedViewMode = 0;
     bFullscreen = NO;
     //ファイルから読み込まれたPDFドキュメントをビューに表示
     docURL = [[self document] fileURL];
@@ -245,23 +246,29 @@
 
 //コンテンツ・エリアのビューを切り替え
 - (IBAction)segSelContentsView:(id)sender {
-    if ([sender selectedSegment]==1 && ![[_pdfView document]outlineRoot]) {
-        //ドキュメントにアウトラインがない時にアウトライン表示が選択された
-        NSAlert *alert = [[NSAlert alloc]init];
-        alert.messageText = NSLocalizedString(@"NotExistOutline_msg", @"");
-        [alert setInformativeText:NSLocalizedString(@"NotExistOutline_info", @"")];
-        [alert addButtonWithTitle:@"OK"];
-        [alert setAlertStyle:NSInformationalAlertStyle];
-        [alert beginSheetModalForWindow:self.window completionHandler:^(NSModalResponse returnCode){
-            //セグメントの選択を元に戻す
-            if ([tabToc indexOfTabViewItem:[tabToc selectedTabViewItem]] == 0) {
-                [segTabTocSelect setSelectedSegment:0];
-            } else {
-                [segTabTocSelect setSelected:NO forSegment:1];
-            }
-        }];
+    if ([sender selectedSegment]==1) {
+        if (![[_pdfView document]outlineRoot]) {
+            //ドキュメントにアウトラインがない時にアウトライン表示が選択された
+            NSAlert *alert = [[NSAlert alloc]init];
+            alert.messageText = NSLocalizedString(@"NotExistOutline_msg", @"");
+            [alert setInformativeText:NSLocalizedString(@"NotExistOutline_info", @"")];
+            [alert addButtonWithTitle:@"OK"];
+            [alert setAlertStyle:NSInformationalAlertStyle];
+            [alert beginSheetModalForWindow:self.window completionHandler:^(NSModalResponse returnCode){
+                //セグメントの選択を元に戻す
+                if ([tabToc indexOfTabViewItem:[tabToc selectedTabViewItem]] == 0) {
+                    [segTabTocSelect setSelectedSegment:0];
+                } else {
+                    [segTabTocSelect setSelected:NO forSegment:1];
+                }
+            }];
+        } else {
+            [tabToc selectTabViewItemAtIndex:[sender selectedSegment]];
+            [segOLViewMode setSelectedSegment:selectedViewMode];
+        }
     } else {
         [tabToc selectTabViewItemAtIndex:[sender selectedSegment]];
+        [segOLViewMode setSelectedSegment:1];
     }
 }
 
@@ -564,8 +571,21 @@
     }
     [segTabTocSelect setSelectedSegment:1];
     [self segSelContentsView:segTabTocSelect];
-    [segPageViewMode setSelected:YES forSegment:1];
+    [segOLViewMode setSelected:YES forSegment:1];
     (APPD).isOLExists = YES;
+}
+
+//アウトラインビューのモードを変更
+- (IBAction)segOLViewMode:(id)sender {
+    switch ([sender selectedSegment]) {
+        case 0:
+            selectedViewMode = 0;
+            break;
+            
+        default:
+            selectedViewMode = 1;
+            break;
+    }
 }
 
 #pragma mark - search in document

@@ -15,7 +15,7 @@
 @implementation OLController{
     IBOutlet NSOutlineView *_olView;
     IBOutlet MyPDFView *_pdfView;
-    IBOutlet NSSegmentedControl *segPageViewMode;
+    IBOutlet NSSegmentedControl *segOLViewMode;
     NSArray *dragOLArray; //ドラッグ中のしおりデータを保持
     NSMutableIndexSet *oldIndexes; //ドラッグ元の行インデクスを保持
 }
@@ -114,7 +114,7 @@
 //ページ移動時
 - (void)pageChanged{
     PDFDocument *doc = [_pdfView document];
-    if (!doc.outlineRoot||segPageViewMode.selectedSegment==1)
+    if (!doc.outlineRoot||segOLViewMode.selectedSegment==1)
         return;
     //現在のページインデクスを取得
     NSUInteger newPage = [doc indexForPage:[_pdfView currentDestination].page];

@@ -23,7 +23,7 @@
                 <outlet property="progressWin" destination="hPb-14-zhA" id="UjU-D2-2P7"/>
                 <outlet property="savingProgBar" destination="iTd-5B-A8m" id="qIm-vH-Z9B"/>
                 <outlet property="searchField" destination="iF3-08-ku3" id="UEp-rK-VaH"/>
-                <outlet property="segPageViewMode" destination="1ta-eu-o4l" id="biR-0a-KXh"/>
+                <outlet property="segOLViewMode" destination="1ta-eu-o4l" id="3ED-RP-2Nh"/>
                 <outlet property="segTabTocSelect" destination="u4J-Mz-Qvz" id="nDV-V4-BIb"/>
                 <outlet property="segZoom" destination="IJb-7H-oEx" id="KMg-FF-cmg"/>
                 <outlet property="tabToc" destination="d8t-uS-kSi" id="Few-ho-iHI"/>
@@ -35,11 +35,11 @@
                 <outlet property="window" destination="xOd-HO-29H" id="t0q-Kb-qFt"/>
             </connections>
         </customObject>
-        <customObject id="LWQ-OY-Ucc" customClass="OLController">
+        <customObject id="LWQ-OY-Ucc" userLabel="OLController" customClass="OLController">
             <connections>
                 <outlet property="_olView" destination="reD-FV-HUc" id="RWp-N7-IE3"/>
                 <outlet property="_pdfView" destination="5KT-rY-Wiy" id="QOq-ap-9xZ"/>
-                <outlet property="segPageViewMode" destination="1ta-eu-o4l" id="Sps-9k-H0a"/>
+                <outlet property="segOLViewMode" destination="1ta-eu-o4l" id="4sS-oy-2Nf"/>
             </connections>
         </customObject>
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
@@ -360,6 +360,9 @@
                                                                     <segment label="Edit Mode" width="113" tag="1"/>
                                                                 </segments>
                                                             </segmentedCell>
+                                                            <connections>
+                                                                <action selector="segOLViewMode:" target="-1" id="voY-1d-V07"/>
+                                                            </connections>
                                                         </segmentedControl>
                                                     </subviews>
                                                 </view>
