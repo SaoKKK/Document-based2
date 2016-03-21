@@ -10,7 +10,8 @@
 #import <Quartz/Quartz.h>
 #import "MyPDFView.h"
 #import "DocWinC.h"
+#import "AppDelegate.h"
 
 @interface OLController : NSObject<NSOutlineViewDelegate,NSOutlineViewDataSource>
-- (void)updateSelectedRowInfo;
+
 @end

@@ -24,6 +24,7 @@
 		B9A095C61C86BA1B004C0DFB /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B9A095C51C86BA1B004C0DFB /* Cocoa.framework */; };
 		B9A095C81C86BA25004C0DFB /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B9A095C71C86BA25004C0DFB /* Foundation.framework */; };
 		B9A095CA1C86C5E3004C0DFB /* AppKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B9A095C91C86C5E3004C0DFB /* AppKit.framework */; };
+		B9A301381C9FD6EB00407100 /* MYOLView.m in Sources */ = {isa = PBXBuildFile; fileRef = B9A301371C9FD6EB00407100 /* MYOLView.m */; };
 		B9AD99AF1C771044008C29A4 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B9AD99AE1C771044008C29A4 /* AppDelegate.m */; };
 		B9AD99B21C771044008C29A4 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = B9AD99B11C771044008C29A4 /* main.m */; };
 		B9AD99B51C771044008C29A4 /* Document.m in Sources */ = {isa = PBXBuildFile; fileRef = B9AD99B41C771044008C29A4 /* Document.m */; };
@@ -67,6 +68,8 @@
 		B9A095C51C86BA1B004C0DFB /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		B9A095C71C86BA25004C0DFB /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		B9A095C91C86C5E3004C0DFB /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
+		B9A301361C9FD6EB00407100 /* MYOLView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MYOLView.h; sourceTree = "<group>"; };
+		B9A301371C9FD6EB00407100 /* MYOLView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MYOLView.m; sourceTree = "<group>"; };
 		B9AD99AA1C771044008C29A4 /* Document-based2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Document-based2.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B9AD99AD1C771044008C29A4 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		B9AD99AE1C771044008C29A4 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -210,6 +213,8 @@
 				B9825A721C77838500F7AD4A /* DocWinC.m */,
 				B9F961D61C8AB00B0034A940 /* OLController.h */,
 				B9F961D71C8AB00B0034A940 /* OLController.m */,
+				B9A301361C9FD6EB00407100 /* MYOLView.h */,
+				B9A301371C9FD6EB00407100 /* MYOLView.m */,
 				B9D6AEFE1C78D27E00381A32 /* MyPDFView.h */,
 				B9D6AEFF1C78D27E00381A32 /* MyPDFView.m */,
 				B9B14C581C9A9A42000A5401 /* HandleView.h */,
@@ -339,6 +344,7 @@
 				B9AD99B21C771044008C29A4 /* main.m in Sources */,
 				B9F79D0E1C99A78900E06911 /* DocTextPanel.m in Sources */,
 				B9AD99AF1C771044008C29A4 /* AppDelegate.m in Sources */,
+				B9A301381C9FD6EB00407100 /* MYOLView.m in Sources */,
 				B9F961D81C8AB00B0034A940 /* OLController.m in Sources */,
 				B9825A731C77838500F7AD4A /* DocWinC.m in Sources */,
 			);

@@ -7,7 +7,6 @@
 //
 
 #import "OLController.h"
-#import "AppDelegate.h"
 
 #define APPD (AppDelegate *)[NSApp delegate]
 #define MyPBoardType @"MyPBoardType"
@@ -18,13 +17,10 @@
     IBOutlet NSSegmentedControl *segOLViewMode;
     NSArray *dragOLArray; //ドラッグ中のしおりデータを保持
     NSMutableIndexSet *oldIndexes; //ドラッグ元の行インデクスを保持
-    BOOL bRowClicked; //アウトラインの行がユーザに選択されたか
 }
 
 - (void)awakeFromNib{
-    bRowClicked = NO;
-    //ページ移動ノーティフィケーションを設定
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(pageChanged) name:PDFViewPageChangedNotification object:_pdfView];
+    (APPD).bRowClicked = NO;
     //ドラッグ＆ドロップするデータタイプを設定
     [_olView registerForDraggedTypes:[NSArray arrayWithObjects:MyPBoardType, nil]];
 }
@@ -86,86 +82,6 @@
     PDFOutline *ol = (PDFOutline*)[_olView itemAtRow:[_olView rowForView:sender]];
     [ol setLabel:[sender stringValue]];
     [[self currentDocWinController].document updateChangeCount:NSChangeDone];
-}
-
-#pragma mark - navigate between the destinations
-
-//選択行変更時
-- (IBAction)outlineViewRowClicked:(id)sender{
-    bRowClicked = YES;
-    if ([_olView selectedRowIndexes].count == 1) {
-        PDFOutline *ol = [_olView itemAtRow:[_olView selectedRow]];
-        [_pdfView goToDestination:ol.destination];
-    }
-    [self updateSelectedRowInfo];
-}
-
-//行の選択状況情報を更新
-- (void)updateSelectedRowInfo{
-    if ([_olView selectedRowIndexes].count == 1) {
-        (APPD).isOLSelected = YES;
-        (APPD).isOLSelectedSingle = YES;
-    } else if ([_olView selectedRowIndexes].count == 0) {
-        (APPD).isOLSelectedSingle = NO;
-        (APPD).isOLSelected = NO;
-    } else {
-        (APPD).isOLSelectedSingle = NO;
-        (APPD).isOLSelected = YES;
-    }
-}
-
-//ページ移動時
-- (void)pageChanged{
-    PDFDocument *doc = [_pdfView document];
-    if (!doc.outlineRoot||segOLViewMode.selectedSegment==1)
-        return;
-    //現在のページインデクスを取得
-    NSUInteger dPage = [doc indexForPage:[_pdfView currentDestination].page];
-    NSUInteger page = [doc indexForPage:[_pdfView currentPage]];
-    if (_olView.selectedRow >= 0) {
-        //現在のページと同ページのしおりが選択されている場合は選択行を変更しない
-        PDFOutline *selectedOL = [_olView itemAtRow:[_olView selectedRow]];
-        NSUInteger selectedRowPage = [doc indexForPage:selectedOL.destination.page];
-        if (bRowClicked && selectedRowPage == dPage) {
-            return;
-        }
-    }
-    //アウトラインを走査してページをチェック
-    NSInteger newRow = -1;
-    NSUInteger olPg = 0;
-    for (int i = 0; i < [_olView numberOfRows]; i++){
-        //PDFアウトラインのページを取得
-        PDFOutline  *ol = [_olView itemAtRow: i];
-        olPg = [doc indexForPage:ol.destination.page];
-        if (olPg == page){
-            //現在のページとPDFアウトラインのページが一致した場合
-            newRow = i;
-            break;
-        }
-        if (olPg > page){
-            //現在のページよりPDFアウトラインのページが後ろの場合
-            newRow = i - 1;
-            break;
-        }
-    }
-    //現在のページが最終行のページより後ろの場合
-    if (olPg < page) {
-        newRow = [_olView numberOfRows]-1;
-    }
-    //該当行を選択
-    if (newRow >= 0||!olPg < page){
-        [_olView selectRowIndexes:[NSIndexSet indexSetWithIndex:newRow] byExtendingSelection:NO];
-        [_olView scrollRowToVisible:newRow];
-    }
-    bRowClicked = NO;
-}
-
-//コンテナ開閉で選択行を移行
-- (void)outlineViewItemDidExpand:(NSNotification *)notification{
-    [self pageChanged];
-}
-- (void)outlineViewItemDidCollapse:(NSNotification *)notification{
-    [self pageChanged];
 }
 
 #pragma mark - drag and drop controll

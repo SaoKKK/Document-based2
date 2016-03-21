@@ -44,7 +44,7 @@
     PDFDestination *selectedDest; //選択中の領域のPDFDestinationを保持
     NSUInteger selectedViewMode; //指定ビューモード保持用
 }
-
+- (IBAction)outlineViewRowClicked:(id)sender;
 - (NSData *)pdfViewDocumentData;
 - (void)revertDocumentToSaved;
 @end

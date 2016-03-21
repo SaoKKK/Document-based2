@@ -129,6 +129,8 @@
         [self updateGoButtonEnabled];
         //ページ表示テキストフィールドの値を変更
         [self updateTxtPg];
+        //アウトラインビューの選択行変更
+        [self pageChanged];
     }];
     //表示倍率変更
     [[NSNotificationCenter defaultCenter]addObserverForName:PDFViewScaleChangedNotification object:_pdfView queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification *notif){
@@ -499,6 +501,9 @@
 }
 
 - (void)addNewDataToSelection:(PDFOutline*)ol{
+    //ルートアイテムがない場合は作成
+    [self createOLRoot];
+    //アウトラインビューを編集モードに変更
     [self viewToEditBMMode];
     PDFOutline *parentOL = [[PDFOutline alloc]init];
     NSInteger selectedRow = _olView.selectedRow;
@@ -562,17 +567,21 @@
     [self.document updateChangeCount:NSChangeDone];
 }
 
-//ビューをしおり編集モードに
-- (void)viewToEditBMMode{
-    //ルートアイテムがない場合は作成
+//しおりのルートアイテムを作成
+- (void)createOLRoot{
     if (![[_pdfView document]outlineRoot]) {
         PDFOutline *root = [[PDFOutline alloc]init];
         [[_pdfView document] setOutlineRoot:root];
     }
+    (APPD).isOLExists = YES;
+}
+
+//ビューをしおり編集モードに
+- (void)viewToEditBMMode{
     [segTabTocSelect setSelectedSegment:1];
     [self segSelContentsView:segTabTocSelect];
-    [segOLViewMode setSelected:YES forSegment:1];
-    (APPD).isOLExists = YES;
+    [segOLViewMode setSelectedSegment:1];
+    [self segOLViewMode:segOLViewMode];
 }
 
 //アウトラインビューのモードを変更
@@ -588,6 +597,84 @@
     }
 }
 
+//選択行変更
+- (IBAction)outlineViewRowClicked:(id)sender{
+    (APPD).bRowClicked = YES;
+    if ([_olView selectedRowIndexes].count == 1) {
+        PDFOutline *ol = [_olView itemAtRow:[_olView selectedRow]];
+        [_pdfView goToDestination:ol.destination];
+    }
+    [self updateSelectedRowInfo];
+}
+
+//行の選択状況情報を更新
+- (void)updateSelectedRowInfo{
+    if ([_olView selectedRowIndexes].count == 1) {
+        (APPD).isOLSelected = YES;
+        (APPD).isOLSelectedSingle = YES;
+    } else if ([_olView selectedRowIndexes].count == 0) {
+        (APPD).isOLSelectedSingle = NO;
+        (APPD).isOLSelected = NO;
+    } else {
+        (APPD).isOLSelectedSingle = NO;
+        (APPD).isOLSelected = YES;
+    }
+}
+
+//ページ移動時
+- (void)pageChanged{
+    PDFDocument *doc = [_pdfView document];
+    if (!doc.outlineRoot||segOLViewMode.selectedSegment==1)
+        return;
+    //現在のページインデクスを取得
+    NSUInteger dPage = [doc indexForPage:[_pdfView currentDestination].page];
+    NSUInteger page = [doc indexForPage:[_pdfView currentPage]];
+    if (_olView.selectedRow >= 0) {
+        //現在のページと同ページのしおりが選択されている場合は選択行を変更しない
+        PDFOutline *selectedOL = [_olView itemAtRow:[_olView selectedRow]];
+        NSUInteger selectedRowPage = [doc indexForPage:selectedOL.destination.page];
+        if ((APPD).bRowClicked && selectedRowPage == dPage) {
+            return;
+        }
+    }
+    //アウトラインを走査してページをチェック
+    NSInteger newRow = -1;
+    NSUInteger olPg = 0;
+    for (int i = 0; i < [_olView numberOfRows]; i++){
+        //PDFアウトラインのページを取得
+        PDFOutline  *ol = [_olView itemAtRow: i];
+        olPg = [doc indexForPage:ol.destination.page];
+        if (olPg == page){
+            //現在のページとPDFアウトラインのページが一致した場合
+            newRow = i;
+            break;
+        }
+        if (olPg > page){
+            //現在のページよりPDFアウトラインのページが後ろの場合
+            newRow = i - 1;
+            break;
+        }
+    }
+    //現在のページが最終行のページより後ろの場合
+    if (olPg < page) {
+        newRow = [_olView numberOfRows]-1;
+    }
+    //該当行を選択
+    if (newRow >= 0||!olPg < page){
+        [_olView selectRowIndexes:[NSIndexSet indexSetWithIndex:newRow] byExtendingSelection:NO];
+        [_olView scrollRowToVisible:newRow];
+    }
+    (APPD).bRowClicked = NO;
+}
+
+//コンテナ開閉で選択行を移行
+- (void)outlineViewItemDidExpand:(NSNotification *)notification{
+    [self pageChanged];
+}
+- (void)outlineViewItemDidCollapse:(NSNotification *)notification{
+    [self pageChanged];
+}
+
 #pragma mark - search in document
 
 - (IBAction)searchField:(id)sender {
@@ -601,6 +688,7 @@
     PDFDocument *doc = [_pdfView document];
     [doc beginFindString:searchString withOptions:NSCaseInsensitiveSearch];
     [tabToc selectTabViewItemAtIndex:2];
+    [segOLViewMode setSelectedSegment:1];
 }
 
 - (void)documentDidEndDocumentFind:(NSNotification *)notification{
