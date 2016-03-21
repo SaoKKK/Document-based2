@@ -62,6 +62,11 @@
     NSString *identifier = tableColumn.identifier;
     NSTableCellView *view = [olView makeViewWithIdentifier:identifier owner:self];
     if ([identifier isEqualToString:@"label"]){
+        if (segOLViewMode.selectedSegment == 1) {
+            [view.textField setEditable:YES];
+        } else {
+            [view.textField setEditable:NO];
+        }
         view.textField.stringValue = [item label];
     } else {
         PDFDocument *doc = [_pdfView document];

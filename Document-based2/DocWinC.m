@@ -443,8 +443,9 @@
 }
 
 - (IBAction)test3:(id)sender {
-    [_olView expandItem:[_olView itemAtRow:[_olView selectedRow]] expandChildren:YES];
-
+    NSMutableIndexSet *indexes = [[NSMutableIndexSet alloc]initWithIndexSet:_olView.selectedRowIndexes];
+    [indexes addIndex:_olView.selectedRowIndexes.firstIndex-1];
+    [_olView selectRowIndexes:indexes byExtendingSelection:YES];
 }
 
 #pragma mark - outline data control
@@ -595,6 +596,7 @@
             selectedViewMode = 1;
             break;
     }
+    [_olView reloadData];
 }
 
 //選択行変更
