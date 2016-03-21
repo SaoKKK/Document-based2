@@ -11,7 +11,7 @@
 #define APPD (AppDelegate *)[NSApp delegate]
 
 @implementation MYOLView
-@synthesize winController;
+@synthesize winC;
 
 - (void)drawRect:(NSRect)dirtyRect {
     [super drawRect:dirtyRect];
@@ -21,7 +21,7 @@
 
 - (void)keyDown:(NSEvent *)theEvent{
     NSLog(@"KeyDown pressed[%d]", [theEvent keyCode]);
-    winController = self.window.windowController;
+    winC = self.window.windowController;
     switch ([theEvent keyCode]) {
         case 125: //下矢印
             [self selectNextRow];
@@ -50,7 +50,7 @@
     if (self.selectedRow != self.numberOfRows-1) {
         //最終行でなければ下に移動
         [self selectRowIndexes:[NSIndexSet indexSetWithIndex:self.selectedRow+1] byExtendingSelection:NO];
-        [winController outlineViewRowClicked:nil];
+        [winC outlineViewRowClicked:nil];
     }
 }
 

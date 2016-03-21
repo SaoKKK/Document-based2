@@ -759,6 +759,7 @@
         //選択領域を取得
         PDFSelection *sel = [[searchResult objectAtIndex:row] objectForKey:@"selection"];
         //選択領域を表示
+        [sel setColor:[NSColor yellowColor]];
         [_pdfView setCurrentSelection:sel animate:YES];
         [_pdfView scrollSelectionToVisible:self];
     }

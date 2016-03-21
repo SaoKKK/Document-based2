@@ -12,6 +12,6 @@
 
 @interface MYOLView : NSOutlineView
 
-@property (strong)DocWinC *winController;
+@property (strong)DocWinC *winC;
 
 @end
