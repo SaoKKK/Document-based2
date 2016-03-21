@@ -334,6 +334,7 @@
                                                                             </tableColumn>
                                                                         </tableColumns>
                                                                         <connections>
+                                                                            <action selector="outlineViewRowClicked:" target="LWQ-OY-Ucc" id="kN1-P6-jET"/>
                                                                             <outlet property="dataSource" destination="LWQ-OY-Ucc" id="qbv-7D-DKR"/>
                                                                             <outlet property="delegate" destination="LWQ-OY-Ucc" id="lhf-Yo-B7o"/>
                                                                         </connections>
