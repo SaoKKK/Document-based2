@@ -7,7 +7,11 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import <QuartzCore/QuartzCore.h>
 
 @interface HandleView : NSView
+
+@property (nonatomic) NSPoint startPoint;
+@property (nonatomic, strong) CAShapeLayer *shapeLayer;
 
 @end

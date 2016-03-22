@@ -8,10 +8,29 @@
 
 #import "MyPDFView.h"
 
-@implementation MyPDFView
+@implementation MyPDFView{
+    HandleView *handleView;
+    NSView *view;
+}
+
+- (void)awakeFromNib{
+    handleView = [[HandleView alloc]init];
+    [self addSubview:handleView];
+}
+
+- (void)drawRect:(NSRect)dirtyRect{
+    
+}
+
+- (void)drawLayer:(CALayer *)layer inContext:(CGContextRef)ctx{
+    NSLog (@"ss");
+}
 
 - (void)drawPage:(PDFPage *)page{
     [super drawPage: page];
+    [handleView setFrame:self.documentView.frame];
+    //NSLog(@"%f,%f,%f,%f",self.documentView.frame.origin.x,self.documentView.frame.origin.y,self.documentView.frame.size.width,self.documentView.frame.size.height);
+    
     NSRect			bounds;
     NSBezierPath	*path;
     bounds = NSMakeRect(100, 100, 100, 100);
