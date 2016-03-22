@@ -422,30 +422,12 @@
 }
 
 - (IBAction)test2:(id)sender {
-    PDFOutline *root = [[PDFOutline alloc]init];
-    root = [[_pdfView document]outlineRoot];
-    PDFOutline *ol = [[PDFOutline alloc]init];
-    ol = [root childAtIndex:1];
-    
-    PDFSelection *sel = [_pdfView currentSelection];
-    NSString *label = [sel string];
-    PDFPage *page = [[sel pages]objectAtIndex:0];
-    NSRect rect = [sel boundsForPage:page];
-    NSPoint point = NSMakePoint(rect.origin.x, rect.origin.y + rect.size.height);
-    PDFDestination *destination = [[PDFDestination alloc]initWithPage:page atPoint:point];
-    PDFOutline *ol2 = [[PDFOutline alloc]init];
-    [ol2 setLabel:label];
-    [ol2 setDestination:destination];
-    [ol insertChild:ol2 atIndex:0];
-    [ol setIsOpen:YES];
-    [_olView reloadData];
-    [_olView expandItem:nil expandChildren:YES];
+    [_pdfView removeHundleView];
 }
 
 - (IBAction)test3:(id)sender {
-    NSMutableIndexSet *indexes = [[NSMutableIndexSet alloc]initWithIndexSet:_olView.selectedRowIndexes];
-    [indexes addIndex:_olView.selectedRowIndexes.firstIndex-1];
-    [_olView selectRowIndexes:indexes byExtendingSelection:YES];
+    [_pdfView drawHundleView];
+    [_pdfView displayIfNeeded];
 }
 
 #pragma mark - outline data control

@@ -14,5 +14,7 @@
 
 @interface MyPDFView : PDFView{
 }
+- (void)drawHundleView;
+- (void)removeHundleView;
 
 @end

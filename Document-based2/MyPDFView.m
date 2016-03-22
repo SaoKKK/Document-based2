@@ -13,9 +13,14 @@
     NSView *view;
 }
 
-- (void)awakeFromNib{
+- (void)drawHundleView{
     handleView = [[HandleView alloc]init];
     [self addSubview:handleView];
+    [handleView setFrame:self.documentView.frame];
+}
+
+- (void)removeHundleView{
+    [handleView removeFromSuperview];
 }
 
 - (void)drawRect:(NSRect)dirtyRect{
