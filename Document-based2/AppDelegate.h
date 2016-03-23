@@ -25,6 +25,7 @@
 @property (assign) BOOL isOLSelected;
 @property (assign) BOOL isOLSelectedSingle;
 @property (assign) BOOL bRowClicked;
+@property (readwrite,nonatomic) NSPoint selPoint;
 
 - (void)setMnPageDisplayState:(NSInteger)tag;
 

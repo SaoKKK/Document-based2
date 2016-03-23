@@ -8,6 +8,8 @@
 
 #import "HandleView.h"
 
+#define APPD (AppDelegate *)[NSApp delegate]
+
 @implementation HandleView{
     NSRect _spot_rect;
 }
@@ -20,7 +22,8 @@
 
 - (void)mouseDown:(NSEvent *)theEvent{
     self.startPoint = [self convertPoint:[theEvent locationInWindow] fromView:nil];
-    
+    (APPD).selPoint = self.startPoint;
+
     // create and configure shape layer
     
     self.shapeLayer = [CAShapeLayer layer];

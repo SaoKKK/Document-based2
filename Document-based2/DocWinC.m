@@ -321,6 +321,26 @@
     }
 }
 
+- (IBAction)segTool:(id)sender {
+    switch ([sender selectedSegment]) {
+        case 0:
+            [sender setImage:[NSImage imageNamed:@"selectText_on"] forSegment:0];
+            [sender setImage:[NSImage imageNamed:@"selectArea_off"] forSegment:1];
+            [sender setImage:[NSImage imageNamed:@"zoom_off"] forSegment:3];
+            break;
+        case 1:
+            [sender setImage:[NSImage imageNamed:@"selectText_off"] forSegment:0];
+            [sender setImage:[NSImage imageNamed:@"selectArea_on"] forSegment:1];
+            [sender setImage:[NSImage imageNamed:@"zoom_off"] forSegment:3];
+            break;
+        case 3:
+            [sender setImage:[NSImage imageNamed:@"selectText_off"] forSegment:0];
+            [sender setImage:[NSImage imageNamed:@"selectArea_off"] forSegment:1];
+            [sender setImage:[NSImage imageNamed:@"zoom_off"] forSegment:3];
+            break;
+    }
+}
+
 #pragma mark - menu action
 
 //表示メニュー
@@ -399,26 +419,10 @@
 }
 
 - (IBAction)test:(id)sender {
-    PDFDocument *doc = [_pdfView document];
-    //ルートアイテムがない場合は作成
-    PDFOutline *root = [[PDFOutline alloc]init];
-    if (![doc outlineRoot]) {
-        [doc setOutlineRoot:root];
-    } else {
-        root = [doc outlineRoot];
-    }
-    //PDFOutlineを作成
-    PDFSelection *sel = [_pdfView currentSelection];
-    NSString *label = [sel string];
-    PDFPage *page = [[sel pages]objectAtIndex:0];
-    NSRect rect = [sel boundsForPage:page];
-    NSPoint point = NSMakePoint(rect.origin.x, rect.origin.y + rect.size.height);
-    PDFDestination *destination = [[PDFDestination alloc]initWithPage:page atPoint:point];
-    PDFOutline *ol = [[PDFOutline alloc]init];
-    [ol setLabel:label];
-    [ol setDestination:destination];
-    [root insertChild:ol atIndex:root.numberOfChildren];
-    [_olView reloadData];
+    PDFPage *page = [_pdfView pageForPoint:(APPD).selPoint nearest:YES];
+    NSPoint point = [_pdfView convertPoint:(APPD).selPoint toPage:page];
+    NSLog (@"page-%li",[_pdfView.document indexForPage:page]);
+    NSLog (@"point-%f,%f",point.x,point.y);
 }
 
 - (IBAction)test2:(id)sender {
@@ -644,7 +648,7 @@
         newRow = [_olView numberOfRows]-1;
     }
     //該当行を選択
-    if (newRow >= 0||!olPg < page){
+    if (newRow >= 0||!(olPg < page)){
         [_olView selectRowIndexes:[NSIndexSet indexSetWithIndex:newRow] byExtendingSelection:NO];
         [_olView scrollRowToVisible:newRow];
     }

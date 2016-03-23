@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="9532" systemVersion="15D21" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none">
     <dependencies>
         <deployment version="1090" identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="9532"/>
-        <plugIn identifier="com.apple.pdfkit.ibplugin" version="9532"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="10116"/>
+        <plugIn identifier="com.apple.pdfkit.ibplugin" version="10116"/>
         <capability name="box content view" minToolsVersion="7.0"/>
     </dependencies>
     <objects>
@@ -230,11 +230,11 @@
                                         <tabViewItems>
                                             <tabViewItem label="Thumb" identifier="0" id="yVa-TK-PQu">
                                                 <view key="view" id="G8j-nj-jSr">
-                                                    <rect key="frame" x="0.0" y="0.0" width="165" height="523"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="219" height="623"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <subviews>
                                                         <pdfThumbnailView id="5je-Lx-eSc">
-                                                            <rect key="frame" x="0.0" y="1" width="165" height="521"/>
+                                                            <rect key="frame" x="0.0" y="1" width="219" height="621"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <size key="thumbnailSize" width="100" height="100"/>
                                                             <connections>
@@ -482,7 +482,7 @@
                                     </tabView>
                                 </subviews>
                             </customView>
-                            <pdfView autoresizesSubviews="NO" autoScales="YES" id="5KT-rY-Wiy" customClass="MyPDFView">
+                            <pdfView canDrawConcurrently="YES" autoScales="YES" id="5KT-rY-Wiy" customClass="MyPDFView">
                                 <rect key="frame" x="220" y="0.0" width="480" height="648"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </pdfView>
@@ -557,9 +557,9 @@
                         </connections>
                     </segmentedControl>
                     <button verticalHuggingPriority="750" id="QzM-3e-6tV">
-                        <rect key="frame" x="371" y="670" width="81" height="32"/>
+                        <rect key="frame" x="410" y="670" width="85" height="32"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                        <buttonCell key="cell" type="push" title="Button" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Rwb-9i-wmg">
+                        <buttonCell key="cell" type="push" title="remove" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Rwb-9i-wmg">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                             <font key="font" metaFont="system"/>
                         </buttonCell>
@@ -568,9 +568,9 @@
                         </connections>
                     </button>
                     <button verticalHuggingPriority="750" id="c06-SI-bel">
-                        <rect key="frame" x="290" y="670" width="81" height="32"/>
+                        <rect key="frame" x="346" y="670" width="71" height="32"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                        <buttonCell key="cell" type="push" title="Button" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="wQ9-KW-ng2">
+                        <buttonCell key="cell" type="push" title="point" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="wQ9-KW-ng2">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                             <font key="font" metaFont="system"/>
                         </buttonCell>
@@ -579,9 +579,9 @@
                         </connections>
                     </button>
                     <button verticalHuggingPriority="750" id="gkV-d3-zRm">
-                        <rect key="frame" x="452" y="670" width="81" height="32"/>
+                        <rect key="frame" x="485" y="670" width="63" height="32"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                        <buttonCell key="cell" type="push" title="Button" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="yJv-5x-E24">
+                        <buttonCell key="cell" type="push" title="add" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="yJv-5x-E24">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                             <font key="font" metaFont="system"/>
                         </buttonCell>
@@ -589,6 +589,30 @@
                             <action selector="test3:" target="-2" id="o8m-M6-y4J"/>
                         </connections>
                     </button>
+                    <segmentedControl verticalHuggingPriority="750" id="tYz-sM-ZRh">
+                        <rect key="frame" x="189" y="675" width="141" height="25"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <segmentedCell key="cell" borderStyle="border" alignment="left" style="texturedSquare" trackingMode="selectOne" id="agT-7r-a8l">
+                            <font key="font" metaFont="system"/>
+                            <segments>
+                                <segment image="selectText_on" imageScaling="none" width="34" selected="YES">
+                                    <nil key="label"/>
+                                </segment>
+                                <segment image="selectArea_off" imageScaling="none" width="34" tag="1">
+                                    <nil key="label"/>
+                                </segment>
+                                <segment image="scroll" imageScaling="none" width="34">
+                                    <nil key="label"/>
+                                </segment>
+                                <segment image="zoom_off" width="34">
+                                    <nil key="label"/>
+                                </segment>
+                            </segments>
+                        </segmentedCell>
+                        <connections>
+                            <action selector="segTool:" target="-2" id="dbt-eG-Bs9"/>
+                        </connections>
+                    </segmentedControl>
                 </subviews>
             </view>
             <connections>
@@ -634,6 +658,9 @@
         <image name="goNext" width="23" height="23"/>
         <image name="goPrev" width="23" height="23"/>
         <image name="goTop" width="23" height="23"/>
+        <image name="scroll" width="18" height="19"/>
+        <image name="selectArea_off" width="29" height="18"/>
+        <image name="selectText_on" width="29" height="18"/>
         <image name="sidebar" width="22" height="18"/>
         <image name="singleCon_off" width="25" height="23"/>
         <image name="singleCon_on" width="25" height="23"/>
@@ -646,5 +673,6 @@
         <image name="vline" width="1" height="18"/>
         <image name="zoomIn" width="23" height="23"/>
         <image name="zoomOut" width="23" height="23"/>
+        <image name="zoom_off" width="23" height="23"/>
     </resources>
 </document>
