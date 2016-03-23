@@ -11,10 +11,13 @@
 #import <QuartzCore/QuartzCore.h>
 #import "Document.h"
 #import "HandleView.h"
+#import "ZoomView.h"
+#import "HandScrollView.h"
 
-@interface MyPDFView : PDFView{
-}
-- (void)drawHundleView;
-- (void)removeHundleView;
+@interface MyPDFView : PDFView
 
+- (void)loadHundleView;
+- (void)loadHandScrollView;
+- (void)loadZoomView;
+- (void)removeSubView;
 @end

@@ -10,18 +10,10 @@
 
 #define APPD (AppDelegate *)[NSApp delegate]
 
-@implementation MYOLView{
-    DocWinC *winC;
-}
-
-- (void)drawRect:(NSRect)dirtyRect {
-    [super drawRect:dirtyRect];
-    
-    // Drawing code here.
-}
+@implementation MYOLView
 
 - (void)keyDown:(NSEvent *)theEvent{
-    winC = self.window.windowController;
+    DocWinC *winC = self.window.windowController;
     switch ([theEvent keyCode]) {
         case 125: //下矢印
             if (self.selectedRowIndexes.lastIndex != self.numberOfRows-1) {
@@ -54,32 +46,10 @@
                 }
             }
             break;
-        case 123: //左矢印
-            //展開している場合は閉じる
-            [self collapseItem:[self itemAtRow:self.selectedRow]];
-            break;
-        case 124: //右矢印
-            //閉じている場合は展開する
-            [self expandItem:[self itemAtRow:self.selectedRow]];
-            break;
-        case 36: //リターンキー(book)
-            [self acceptInput];
-            break;
-        case 76: //エンターキー
-            [self acceptInput];
-            break;
-        case 52: //リターンキー
-            [self acceptInput];
-            break;
         default:
-            
+            [super keyDown:theEvent];
             break;
     }
-}
-
-//行を編集状態にする
-- (void)acceptInput{
-    [self editColumn:0 row:self.selectedRow withEvent:nil select:YES];
 }
 
 @end

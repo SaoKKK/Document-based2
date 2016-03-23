@@ -10,6 +10,8 @@
 
 @implementation MyPDFView{
     HandleView *handleView;
+    HandScrollView *handScrollView;
+    ZoomView *zoomView;
 }
 
 - (void)awakeFromNib{
@@ -20,14 +22,28 @@
     }];
 }
 
-- (void)drawHundleView{
+- (void)loadHundleView{
+    [self removeSubView];
     handleView = [[HandleView alloc]initWithFrame:self.bounds];
-    [handleView setAutoresizingMask:NSViewWidthSizable | NSViewHeightSizable];
     [self addSubview:handleView];
 }
 
-- (void)removeHundleView{
+- (void)loadHandScrollView{
+    [self removeSubView];
+    handScrollView = [[HandScrollView alloc]initWithFrame:self.bounds];
+    [self addSubview:handScrollView];
+}
+
+- (void)loadZoomView{
+    [self removeSubView];
+    zoomView = [[ZoomView alloc]initWithFrame:self.bounds];
+    [self addSubview:zoomView];
+}
+
+- (void)removeSubView{
     [handleView removeFromSuperview];
+    [handScrollView removeFromSuperview];
+    [zoomView removeFromSuperview];
 }
 
 - (void)resizeSubviewsWithOldSize:(NSSize)oldSize{
