@@ -20,6 +20,8 @@
 
 @implementation DocWinC
 
+@synthesize segTool,_pdfView;
+
 #pragma mark - Window Controller Method
 
 - (void)windowDidLoad {
@@ -344,7 +346,7 @@
         case 3:
             [sender setImage:[NSImage imageNamed:@"selectText_off"] forSegment:0];
             [sender setImage:[NSImage imageNamed:@"selectArea_off"] forSegment:1];
-            [sender setImage:[NSImage imageNamed:@"zoom_off"] forSegment:3];
+            [sender setImage:[NSImage imageNamed:@"zoom_on"] forSegment:3];
             [_pdfView loadZoomView];
             break;
     }

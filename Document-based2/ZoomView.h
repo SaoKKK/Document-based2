@@ -9,6 +9,8 @@
 #import <Cocoa/Cocoa.h>
 #import <QuartzCore/QuartzCore.h>
 #import "AppDelegate.h"
+#import "DocWinC.h"
+#import "MyPDFView.h"
 
 @interface ZoomView : NSView
 

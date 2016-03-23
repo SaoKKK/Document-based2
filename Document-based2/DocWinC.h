@@ -15,7 +15,6 @@
     IBOutlet NSWindow *window;
     IBOutlet NSWindow *progressWin;
     IBOutlet NSProgressIndicator *savingProgBar;
-    IBOutlet MyPDFView *_pdfView;
     IBOutlet PDFThumbnailView *thumbView;
     IBOutlet NSButton *btnGoToFirstPg;
     IBOutlet NSButton *btnGoToPrevPg;
@@ -44,7 +43,13 @@
     PDFDestination *selectedDest; //選択中の領域のPDFDestinationを保持
     NSUInteger selectedViewMode; //指定ビューモード保持用
 }
+@property (strong) IBOutlet NSSegmentedControl *segTool;
+@property (strong) IBOutlet MyPDFView *_pdfView;
+
 - (IBAction)outlineViewRowClicked:(id)sender;
 - (NSData *)pdfViewDocumentData;
 - (void)revertDocumentToSaved;
+- (IBAction)zoomIn:(id)sender;
+- (IBAction)zoomOut:(id)sender;
+
 @end

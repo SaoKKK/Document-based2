@@ -13,6 +13,7 @@
 #import "HandleView.h"
 #import "ZoomView.h"
 #import "HandScrollView.h"
+#import "DocWinC.h"
 
 @interface MyPDFView : PDFView
 

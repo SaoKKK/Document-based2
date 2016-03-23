@@ -8,19 +8,27 @@
 
 #import "MyPDFView.h"
 
+#define APPD (AppDelegate *)[NSApp delegate]
+#define WINC (DocWinC *)self.window.windowController
+
 @implementation MyPDFView{
     HandleView *handleView;
     HandScrollView *handScrollView;
     ZoomView *zoomView;
+    BOOL isZoomCursolSet;
 }
 
 - (void)awakeFromNib{
+    isZoomCursolSet = NO;
     [[NSNotificationCenter defaultCenter] addObserverForName:NSWindowDidResizeNotification object:self.window queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification *notif){
-        if (handleView) {
-            [handleView setFrame:self.bounds];
-        }
+        //ウインドウのリサイズ時→サブビューをリサイズする
+        [handleView setFrame:self.bounds];
+        [handScrollView setFrame:self.bounds];
+        [zoomView setFrame:self.bounds];
     }];
 }
+
+#pragma mark - sub view control
 
 - (void)loadHundleView{
     [self removeSubView];
@@ -46,9 +54,90 @@
     [zoomView removeFromSuperview];
 }
 
-- (void)resizeSubviewsWithOldSize:(NSSize)oldSize{
-    NSLog(@"ddd");
+- (void)setCursorForAreaOfInterest:(PDFAreaOfInterest)area{
+    switch ([(WINC).segTool selectedSegment]){
+        case 0: //テキスト選択ツール選択時
+            [super setCursorForAreaOfInterest:area];
+            break;
+        case 1: //エリア選択ツール選択時
+            switch (area) {
+                case 0:
+                    [super setCursorForAreaOfInterest:area];
+                    break;
+                case 1:
+                    [[NSCursor crosshairCursor] set];
+                    break;
+            }
+            break;
+        case 2: //スクロールツール選択時
+            switch (area) {
+                case 0:
+                    [super setCursorForAreaOfInterest:area];
+                    break;
+                case 1:
+                    [[NSCursor openHandCursor] set];
+                    break;
+            }
+            break;
+        case 3: //ズームツール選択時
+            switch (area) {
+                case 0:
+                    [super setCursorForAreaOfInterest:area];
+                    isZoomCursolSet = NO;
+                    break;
+                case 1:{
+                    NSCursor *cursor;
+                    isZoomCursolSet = YES;
+                    if ([NSEvent modifierFlags] & NSAlternateKeyMask) {
+                        if (self.canZoomOut) {
+                            cursor = [[NSCursor alloc]initWithImage:[NSImage imageNamed:@"cZoomOut"] hotSpot:NSMakePoint(7, 7)];
+                        } else {
+                            cursor = [[NSCursor alloc]initWithImage:[NSImage imageNamed:@"cZoom"] hotSpot:NSMakePoint(7, 7)];
+                        }
+                    } else {
+                        if (self.scaleFactor < 5.0) {
+                            cursor = [[NSCursor alloc]initWithImage:[NSImage imageNamed:@"cZoomIn"] hotSpot:NSMakePoint(7, 7)];
+                        } else {
+                            cursor = [[NSCursor alloc]initWithImage:[NSImage imageNamed:@"cZoom"] hotSpot:NSMakePoint(7, 7)];
+                        }
+                    }
+                    [cursor set];
+                }
+                break;
+            }
+            break;
+    }
 }
+
+//ズームカーソルになっている時にoptionキーが押されたら縮小カーソルに変更
+- (void)flagsChanged:(NSEvent *)theEvent{
+    if (isZoomCursolSet){
+        [self updateZoomCursor];
+    } else {
+        [super flagsChanged:theEvent];
+    }
+}
+
+//ズームカーソル更新
+- (void)updateZoomCursor{
+    NSCursor *cursor;
+    if ([NSEvent modifierFlags] & NSAlternateKeyMask) {
+        if (self.canZoomOut) {
+            cursor = [[NSCursor alloc]initWithImage:[NSImage imageNamed:@"cZoomOut"] hotSpot:NSMakePoint(7, 7)];
+        } else {
+            cursor = [[NSCursor alloc]initWithImage:[NSImage imageNamed:@"cZoom"] hotSpot:NSMakePoint(7, 7)];
+        }
+    } else {
+        if (self.scaleFactor < 5) {
+            cursor = [[NSCursor alloc]initWithImage:[NSImage imageNamed:@"cZoomIn"] hotSpot:NSMakePoint(7, 7)];
+        } else {
+            cursor = [[NSCursor alloc]initWithImage:[NSImage imageNamed:@"cZoom"] hotSpot:NSMakePoint(7, 7)];
+        }
+    }
+    [cursor set];
+}
+
+#pragma mark - draw page
 
 - (void)drawPage:(PDFPage *)page{
     [super drawPage: page];

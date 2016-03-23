@@ -9,9 +9,10 @@
 #import "ZoomView.h"
 
 #define APPD (AppDelegate *)[NSApp delegate]
+#define WINC (DocWinC *)self.window.windowController
 
 @implementation ZoomView{
-    NSPoint startPoint;
+    NSPoint downPoint;
     CAShapeLayer *shapeLayer;
 }
 
@@ -22,8 +23,8 @@
 }
 
 - (void)mouseDown:(NSEvent *)theEvent{
-    startPoint = [self convertPoint:[theEvent locationInWindow] fromView:nil];
-    (APPD).selPoint = startPoint;
+    downPoint = [self convertPoint:[theEvent locationInWindow] fromView:nil];
+    (APPD).selPoint = downPoint;
     
     // create and configure shape layer
     
@@ -53,10 +54,10 @@
     // create path for the shape layer
     
     CGMutablePathRef path = CGPathCreateMutable();
-    CGPathMoveToPoint(path, NULL, startPoint.x, startPoint.y);
-    CGPathAddLineToPoint(path, NULL, startPoint.x, point.y);
+    CGPathMoveToPoint(path, NULL, downPoint.x, downPoint.y);
+    CGPathAddLineToPoint(path, NULL, downPoint.x, point.y);
     CGPathAddLineToPoint(path, NULL, point.x, point.y);
-    CGPathAddLineToPoint(path, NULL, point.x, startPoint.y);
+    CGPathAddLineToPoint(path, NULL, point.x, downPoint.y);
     CGPathCloseSubpath(path);
     
     // set the shape layer's path
@@ -67,8 +68,18 @@
     [self setNeedsDisplay:YES];
 }
 
-- (void)mouseUp:(NSEvent *)theEvent
-{
+- (void)mouseUp:(NSEvent *)theEvent{
+    NSPoint upPoint = [self convertPoint:[theEvent locationInWindow] fromView:nil];
+    //シングルクリックの場合
+    if (upPoint.x == downPoint.x && upPoint.y == downPoint.y){
+        if ([NSEvent modifierFlags] & NSAlternateKeyMask){
+            [WINC zoomOut:nil];
+        } else {
+            if ((WINC)._pdfView.scaleFactor <5) {
+                [WINC zoomIn:nil];
+            }
+        }
+    }
     [shapeLayer removeFromSuperlayer];
     shapeLayer = nil;
 }

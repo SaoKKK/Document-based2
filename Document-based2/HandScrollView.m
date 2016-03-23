@@ -10,13 +10,16 @@
 
 @implementation HandScrollView
 
-- (void)drawRect:(NSRect)dirtyRect {
-    [super drawRect:dirtyRect];
-    
-    // Drawing code here.
+- (void)mouseDown:(NSEvent *)theEvent{
+    NSLog(@"down");
 }
 
-- (void)mouseDown:(NSEvent *)theEvent{
-    NSLog(@"handscroll");
+- (void)mouseDragged:(NSEvent *)theEvent{
+    NSLog(@"drag");
 }
+
+- (void)mouseUp:(NSEvent *)theEvent{
+    NSLog(@"up");
+}
+
 @end

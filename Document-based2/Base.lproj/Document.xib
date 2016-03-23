@@ -25,7 +25,8 @@
                 <outlet property="searchField" destination="iF3-08-ku3" id="UEp-rK-VaH"/>
                 <outlet property="segOLViewMode" destination="1ta-eu-o4l" id="3ED-RP-2Nh"/>
                 <outlet property="segTabTocSelect" destination="u4J-Mz-Qvz" id="nDV-V4-BIb"/>
-                <outlet property="segZoom" destination="IJb-7H-oEx" id="KMg-FF-cmg"/>
+                <outlet property="segTool" destination="tYz-sM-ZRh" id="zFZ-tV-4bZ"/>
+                <outlet property="segZoom" destination="IJb-7H-oEx" id="v6K-1r-Zbt"/>
                 <outlet property="tabToc" destination="d8t-uS-kSi" id="Few-ho-iHI"/>
                 <outlet property="thumbView" destination="5je-Lx-eSc" id="Wah-qh-327"/>
                 <outlet property="tocView" destination="74F-id-FBp" id="oHO-Jk-evz"/>
