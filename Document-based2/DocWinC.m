@@ -789,4 +789,19 @@
     [rightView setFrame:rightFrame];
 }
 
+#pragma mark - convert value between view and PDFView
+
+//PDFビューの領域をPDF座標系に変換して返す
+- (NSRect)ConvertSuperViewRect{
+    return [_pdfView convertRect:_pdfView.bounds toPage:_pdfView.currentPage];
+}
+
+//矩形をPDF座標系の下にあるページでの矩形に変換して返す
+- (NSRect)ConvertRectToPage:(NSRect)rect{
+    PDFPage *page = [_pdfView pageForPoint:NSMakePoint(rect.origin.x, rect.origin.y) nearest:YES];
+    return [_pdfView convertRect:rect toPage:page];
+}
+
+
+
 @end

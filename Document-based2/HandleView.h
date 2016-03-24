@@ -9,10 +9,9 @@
 #import <Cocoa/Cocoa.h>
 #import <QuartzCore/QuartzCore.h>
 #import "AppDelegate.h"
+#import "DocWinC.h"
+#import "MyPDFView.h"
 
 @interface HandleView : NSView
-
-@property (nonatomic) NSPoint startPoint;
-@property (nonatomic, strong) CAShapeLayer *shapeLayer;
 
 @end

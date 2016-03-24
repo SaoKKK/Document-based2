@@ -51,5 +51,6 @@
 - (void)revertDocumentToSaved;
 - (IBAction)zoomIn:(id)sender;
 - (IBAction)zoomOut:(id)sender;
-
+- (NSRect)ConvertRectToPage:(NSRect)rect;
+- (NSRect)ConvertSuperViewRect;
 @end
