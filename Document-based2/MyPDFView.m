@@ -12,11 +12,9 @@
 #define WINC (DocWinC *)self.window.windowController
 
 @implementation MyPDFView{
-    HandleView *handleView;
-    HandScrollView *handScrollView;
-    ZoomView *zoomView;
     BOOL isZoomCursolSet;
 }
+@synthesize _rect,handleView,handScrollView,zoomView;
 
 - (void)awakeFromNib{
     isZoomCursolSet = NO;
@@ -143,15 +141,15 @@
     [super drawPage: page];
     
     //NSLog(@"%f,%f,%f,%f",self.documentView.frame.origin.x,self.documentView.frame.origin.y,self.documentView.frame.size.width,self.documentView.frame.size.height);
-    NSRect rect = [self.currentPage boundsForBox:kPDFDisplayBoxArtBox];
-
+    //NSRect rect = [self.currentPage boundsForBox:kPDFDisplayBoxArtBox]; //アートボックス
+    NSSize size = [self rowSizeForPage:self.currentPage]; //ページサイズ？
     NSRect			bounds;
     NSBezierPath	*path;
-    bounds = NSMakeRect(0, 0, rect.size.width, rect.size.height);
+    bounds = NSMakeRect(0, 0, size.width, size.height);
     CGFloat lineDash[2];
     lineDash[0]=6;
     lineDash[1]=4;
-    path = [NSBezierPath bezierPathWithRect: bounds];
+    path = [NSBezierPath bezierPathWithRect: _rect];
     //[path setLineJoinStyle: NSRoundLineJoinStyle];
     [path setLineDash:lineDash count:2 phase:0.0];
     [path setLineWidth:0.1];
@@ -159,7 +157,6 @@
     [path fill];
     [[NSColor blackColor] set];
     [path stroke];
-    
 }
 
 @end

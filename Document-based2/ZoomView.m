@@ -21,7 +21,6 @@
 - (void)drawRect:(NSRect)dirtyRect {
     [self setLayer:[CALayer new]];
     [self setWantsLayer:YES];
-    [self.layer setBackgroundColor:CGColorCreateGenericRGB(0.0, 0.0, 0.5, 0.2)];
 }
 
 - (void)mouseDown:(NSEvent *)theEvent{
@@ -105,7 +104,20 @@
             if (enlargementFactor > 5.0) {
                 enlargementFactor = 5.0;
             }
+            //拡大エリアをPDF座標系に変換
+            NSRect expPDFArea = [(WINC)._pdfView convertRect:expArea toPage:page];
+            //拡大実行
             [(WINC)._pdfView setScaleFactor:(WINC)._pdfView.scaleFactor * MIN(enlargementFactorFromWidth,enlargementFactorFromHeight)];
+            //拡大後の移動エリアを作成
+            NSRect viewArea = [(WINC)._pdfView convertRect:(WINC)._pdfView.bounds toPage:page];
+            if (expPDFArea.size.width < viewArea.size.width) {
+                expPDFArea.origin.x = expPDFArea.origin.x - (viewArea.size.width - expPDFArea.size.width)/2;
+            }
+            if (expPDFArea.size.height < viewArea.size.height) {
+                expPDFArea.origin.y = expPDFArea.origin.y + (viewArea.size.height - expPDFArea.size.height)/2;
+            }
+            //拡大エリアに移動
+            [(WINC)._pdfView goToRect:expPDFArea onPage:page];
         }
     }
     [shapeLayer removeFromSuperlayer];

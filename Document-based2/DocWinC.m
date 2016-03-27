@@ -430,17 +430,26 @@
 }
 
 - (IBAction)test:(id)sender {
-    PDFPage *page = [_pdfView pageForPoint:(APPD).selPoint nearest:YES];
-    NSPoint point = [_pdfView convertPoint:(APPD).selPoint toPage:page];
-    NSLog (@"page-%li",[_pdfView.document indexForPage:page]);
-    NSLog (@"point-%f,%f",point.x,point.y);
+    //scroll to point
+    //NSPoint point;
+    //NSScrollView *scrollView = _pdfView.enclosingScrollView;
+    //NSLog(@"%hhi",scrollView.isFlipped);
+    //[_pdfView.documentView scrollPoint:NSMakePoint(0, 0)];
+    NSView *documentView = _pdfView.documentView;
+    NSRect currentRect = [documentView visibleRect];
+    NSLog (@"%f,%f,%f,%f",currentRect.origin.x,currentRect.origin.y,currentRect.size.width,currentRect.size.height);
+    //currentRect.origin.y -= 200;//現在の表示状態から上に200スクロール
+    //[documentView scrollRectToVisible:currentRect];
 }
 
 - (IBAction)test2:(id)sender {
+    [_pdfView goToRect:NSMakeRect(200, 100, 200, 100) onPage:_pdfView.currentPage];
 }
 
 - (IBAction)test3:(id)sender {
-    
+    //NSSize pgSize = [_pdfView rowSizeForPage:_pdfView.currentPage];
+    _pdfView._rect = NSMakeRect(200, 100, 200, 100);
+    [_pdfView displayIfNeeded];
 }
 
 #pragma mark - outline data control

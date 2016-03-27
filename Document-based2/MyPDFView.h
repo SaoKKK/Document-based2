@@ -15,10 +15,20 @@
 #import "HandScrollView.h"
 #import "DocWinC.h"
 
+@class HandleView;
+@class HandScrollView;
+@class ZoomView;
+
 @interface MyPDFView : PDFView
+
+@property (assign)NSRect _rect;
+@property (strong)HandleView *handleView;
+@property (strong)HandScrollView *handScrollView;
+@property (strong)ZoomView *zoomView;
 
 - (void)loadHundleView;
 - (void)loadHandScrollView;
 - (void)loadZoomView;
 - (void)removeSubView;
+
 @end
