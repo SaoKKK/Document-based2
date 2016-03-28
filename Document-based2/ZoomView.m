@@ -56,12 +56,12 @@
     NSPoint point = [self convertPoint:[theEvent locationInWindow] fromView:nil];
     NSPoint dragPoint;
     if (NSPointInRect(point, pageRect)) {
-        //ドラッグ座標がページ領域内であればその座標をstartPointに格納
+        //ドラッグ座標がページ領域内であればその座標をdragPointに格納
         dragPoint = point;
     } else {
+        //ドラッグ座標がページ領域外だった場合
         dragPoint = [self areaPointFromOutPoint:point];
     }
-    //ドラッグ座標がページ領域外だった場合は
     //shape layerのパスを作成
     CGMutablePathRef path = CGPathCreateMutable();
     CGPathMoveToPoint(path, NULL, startPoint.x, startPoint.y);

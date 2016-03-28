@@ -67,16 +67,6 @@
                     break;
             }
             break;
-        case 2: //スクロールツール選択時
-            switch (area) {
-                case 0:
-                    [super setCursorForAreaOfInterest:area];
-                    break;
-                case 1:
-                    [[NSCursor openHandCursor] set];
-                    break;
-            }
-            break;
         case 3: //ズームツール選択時
             switch (area) {
                 case 0:

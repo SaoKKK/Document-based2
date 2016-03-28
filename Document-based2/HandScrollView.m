@@ -8,10 +8,39 @@
 
 #import "HandScrollView.h"
 
-@implementation HandScrollView
+@implementation HandScrollView{
+    NSTrackingArea *track;
+}
+
+- (id)initWithFrame:(NSRect)frame {
+    self = [super initWithFrame:frame];
+    if (self) {
+        [self createTrackingArea];
+    }
+    return self;
+}
+
+- (void)updateTrackingAreas {
+    [self removeTrackingArea:track];
+    track = nil;
+    [self createTrackingArea];
+}
+
+//トラッキング・エリアを設定
+-(void)createTrackingArea{
+    NSTrackingAreaOptions trackOption = NSTrackingCursorUpdate;
+    trackOption |= NSTrackingMouseEnteredAndExited;
+    trackOption |= NSTrackingEnabledDuringMouseDrag;
+    trackOption |= NSTrackingActiveInActiveApp;
+    track = [[NSTrackingArea alloc] initWithRect:self.bounds options:trackOption owner:self userInfo:nil];
+    [self addTrackingArea:track];
+}
+
+- (void)cursorUpdate:(NSEvent *)event{
+}
 
 - (void)mouseDown:(NSEvent *)theEvent{
-    NSLog(@"down");
+     [[NSCursor closedHandCursor] set];
 }
 
 - (void)mouseDragged:(NSEvent *)theEvent{
@@ -19,7 +48,20 @@
 }
 
 - (void)mouseUp:(NSEvent *)theEvent{
-    NSLog(@"up");
+    NSPoint point = [self convertPoint:[theEvent locationInWindow] fromView:nil];
+    NSLog(@"up%f",point.x);
+}
+
+- (void)mouseEntered:(NSEvent *)theEvent{
+    NSLog(@"enter");
+    [self discardCursorRects];
+    [[NSCursor openHandCursor]set];
+}
+
+- (void)mouseExited:(NSEvent *)theEvent{
+    NSLog(@"exit");
+    [self discardCursorRects];
+    [[NSCursor closedHandCursor] set];
 }
 
 @end
