@@ -20,6 +20,7 @@
     isZoomCursolSet = NO;
     [[NSNotificationCenter defaultCenter] addObserverForName:NSWindowDidResizeNotification object:self.window queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification *notif){
         //ウインドウのリサイズ時→サブビューをリサイズする
+        [self layoutDocumentView];
         [handleView setFrame:self.bounds];
         [handScrollView setFrame:self.bounds];
         [zoomView setFrame:self.bounds];
