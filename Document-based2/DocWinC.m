@@ -430,20 +430,11 @@
 }
 
 - (IBAction)test:(id)sender {
-    //scroll to point
-    //NSPoint point;
-    //NSScrollView *scrollView = _pdfView.enclosingScrollView;
-    //NSLog(@"%hhi",scrollView.isFlipped);
-    //[_pdfView.documentView scrollPoint:NSMakePoint(0, 0)];
-    NSView *documentView = _pdfView.documentView;
-    NSRect currentRect = [documentView visibleRect];
-    NSLog (@"%f,%f,%f,%f",currentRect.origin.x,currentRect.origin.y,currentRect.size.width,currentRect.size.height);
-    //currentRect.origin.y -= 200;//現在の表示状態から上に200スクロール
-    //[documentView scrollRectToVisible:currentRect];
+    [[NSCursor openHandCursor]set];
 }
 
 - (IBAction)test2:(id)sender {
-    [_pdfView goToRect:NSMakeRect(200, 100, 200, 100) onPage:_pdfView.currentPage];
+    [[NSCursor closedHandCursor]set];
 }
 
 - (IBAction)test3:(id)sender {

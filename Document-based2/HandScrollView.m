@@ -8,60 +8,34 @@
 
 #import "HandScrollView.h"
 
+#define WINC (DocWinC *)self.window.windowController
+
 @implementation HandScrollView{
-    NSTrackingArea *track;
+    NSPoint movePoint;
 }
 
-- (id)initWithFrame:(NSRect)frame {
-    self = [super initWithFrame:frame];
-    if (self) {
-        [self createTrackingArea];
-    }
-    return self;
-}
-
-- (void)updateTrackingAreas {
-    [self removeTrackingArea:track];
-    track = nil;
-    [self createTrackingArea];
-}
-
-//トラッキング・エリアを設定
--(void)createTrackingArea{
-    NSTrackingAreaOptions trackOption = NSTrackingCursorUpdate;
-    trackOption |= NSTrackingMouseEnteredAndExited;
-    trackOption |= NSTrackingEnabledDuringMouseDrag;
-    trackOption |= NSTrackingActiveInActiveApp;
-    track = [[NSTrackingArea alloc] initWithRect:self.bounds options:trackOption owner:self userInfo:nil];
-    [self addTrackingArea:track];
-}
-
-- (void)cursorUpdate:(NSEvent *)event{
+- (void)resetCursorRects{
+    [self discardCursorRects];
+    [self addCursorRect:self.bounds cursor:[NSCursor openHandCursor]];
 }
 
 - (void)mouseDown:(NSEvent *)theEvent{
-     [[NSCursor closedHandCursor] set];
+    [[NSCursor closedHandCursor] set];
+    movePoint = [self convertPoint:[theEvent locationInWindow] fromView:nil];
 }
 
 - (void)mouseDragged:(NSEvent *)theEvent{
-    NSLog(@"drag");
+    NSPoint point = [self convertPoint:[theEvent locationInWindow] fromView:nil];
+    float dx = movePoint.x - point.x;
+    float dy = movePoint.y - point.y;
+    NSView *documentView = (WINC)._pdfView.documentView;
+    NSRect visibleRect = documentView.visibleRect;
+    [documentView scrollPoint:NSMakePoint(visibleRect.origin.x+dx, visibleRect.origin.y+dy)];
+    movePoint = point;
 }
 
 - (void)mouseUp:(NSEvent *)theEvent{
-    NSPoint point = [self convertPoint:[theEvent locationInWindow] fromView:nil];
-    NSLog(@"up%f",point.x);
-}
-
-- (void)mouseEntered:(NSEvent *)theEvent{
-    NSLog(@"enter");
-    [self discardCursorRects];
     [[NSCursor openHandCursor]set];
-}
-
-- (void)mouseExited:(NSEvent *)theEvent{
-    NSLog(@"exit");
-    [self discardCursorRects];
-    [[NSCursor closedHandCursor] set];
 }
 
 @end
