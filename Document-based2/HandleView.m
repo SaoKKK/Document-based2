@@ -10,6 +10,7 @@
 
 #define APPD (AppDelegate *)[NSApp delegate]
 #define WINC (DocWinC *)self.window.windowController
+#define PVIEW (WINC)._pdfView
 
 //static CGFloat HandleWidth = 8.0f;
 
@@ -39,9 +40,9 @@ enum UNDEROBJ_TYPE{
 - (void)mouseDown:(NSEvent *)theEvent{
     NSPoint point = [self convertPoint:[theEvent locationInWindow] fromView:nil];
     //下にある最も近いページの領域をNSView座標系で取得
-    page = [(WINC)._pdfView pageForPoint:point nearest:YES];
-    pageRect = [(WINC)._pdfView convertRect:[page boundsForBox:kPDFDisplayBoxArtBox] fromPage:page];
-    if ([(WINC)._pdfView pageForPoint:point nearest:NO]) {
+    page = [PVIEW pageForPoint:point nearest:YES];
+    pageRect = [PVIEW convertRect:[page boundsForBox:kPDFDisplayBoxArtBox] fromPage:page];
+    if ([PVIEW pageForPoint:point nearest:NO]) {
         //マウスダウンの座標がページ領域内であればその座標をstartPointに格納
         startPoint = point;
     } else {
@@ -106,8 +107,8 @@ enum UNDEROBJ_TYPE{
         //拡大エリアが作成された場合
         NSRect expArea = NSMakeRect(MIN(startPoint.x,endPoint.x), MIN(startPoint.y,endPoint.y), fabs(startPoint.x-endPoint.x), fabs(startPoint.y-endPoint.y));
         //拡大率を決定(縦横で倍率を出して小さい方を採用)
-        float enlargementFactorFromWidth = (WINC)._pdfView.bounds.size.width/expArea.size.width;
-        float enlargementFactorFromHeight = (WINC)._pdfView.bounds.size.height/expArea.size.height;
+        float enlargementFactorFromWidth = (PVIEW).bounds.size.width/expArea.size.width;
+        float enlargementFactorFromHeight = (PVIEW).bounds.size.height/expArea.size.height;
         float enlargementFactor = MIN(enlargementFactorFromWidth,enlargementFactorFromHeight);
         if (enlargementFactor > 5.0) {
             enlargementFactor = 5.0;
