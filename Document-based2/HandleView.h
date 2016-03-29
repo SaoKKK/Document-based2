@@ -14,4 +14,8 @@
 
 @interface HandleView : NSView
 
+@property (readonly,nonatomic)PDFPage *page;
+
+- (void)createShapePath;
+
 @end
