@@ -26,15 +26,13 @@ enum UNDEROBJ_TYPE{
 
 @implementation HandleView{
     NSPoint startPoint;
-    MyCALayer *_layer;
     CAShapeLayer *shapeLayer;
     PDFPage *page;
     NSRect pageRect;
 }
 
 - (void)drawRect:(NSRect)dirtyRect {
-    _layer = [MyCALayer new];
-    [self setLayer:_layer];
+    [self setLayer:[CALayer new]];
     [self setWantsLayer:YES];
 }
 

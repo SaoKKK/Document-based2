@@ -54,7 +54,6 @@
 		B9D6AEFA1C78CFD900381A32 /* Quartz.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B9D6AEF91C78CFD900381A32 /* Quartz.framework */; };
 		B9D6AF001C78D27E00381A32 /* MyPDFView.m in Sources */ = {isa = PBXBuildFile; fileRef = B9D6AEFF1C78D27E00381A32 /* MyPDFView.m */; };
 		B9DBE8B51C8963C10058B92D /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = B9DBE8B31C8963C00058B92D /* Localizable.strings */; };
-		B9E3FFB01CA9564400607A49 /* MyCALayer.m in Sources */ = {isa = PBXBuildFile; fileRef = B9E3FFAF1CA9564300607A49 /* MyCALayer.m */; };
 		B9F79D091C99A76C00E06911 /* DocInfoPanel.m in Sources */ = {isa = PBXBuildFile; fileRef = B9F79D071C99A76C00E06911 /* DocInfoPanel.m */; };
 		B9F79D0A1C99A76C00E06911 /* DocInfoPanel.xib in Resources */ = {isa = PBXBuildFile; fileRef = B9F79D081C99A76C00E06911 /* DocInfoPanel.xib */; };
 		B9F79D0E1C99A78900E06911 /* DocTextPanel.m in Sources */ = {isa = PBXBuildFile; fileRef = B9F79D0C1C99A78900E06911 /* DocTextPanel.m */; };
@@ -123,8 +122,6 @@
 		B9DBE8B61C8963C90058B92D /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
 		B9E21BE51C7AF86E004DDB0F /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/MainMenu.strings; sourceTree = "<group>"; };
 		B9E21BE61C7AF86E004DDB0F /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Document.strings; sourceTree = "<group>"; };
-		B9E3FFAE1CA9564300607A49 /* MyCALayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyCALayer.h; sourceTree = "<group>"; };
-		B9E3FFAF1CA9564300607A49 /* MyCALayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyCALayer.m; sourceTree = "<group>"; };
 		B9F79D061C99A76C00E06911 /* DocInfoPanel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DocInfoPanel.h; sourceTree = "<group>"; };
 		B9F79D071C99A76C00E06911 /* DocInfoPanel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DocInfoPanel.m; sourceTree = "<group>"; };
 		B9F79D081C99A76C00E06911 /* DocInfoPanel.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DocInfoPanel.xib; sourceTree = "<group>"; };
@@ -259,8 +256,6 @@
 				B9D6AEFF1C78D27E00381A32 /* MyPDFView.m */,
 				B9B14C581C9A9A42000A5401 /* HandleView.h */,
 				B9B14C591C9A9A43000A5401 /* HandleView.m */,
-				B9E3FFAE1CA9564300607A49 /* MyCALayer.h */,
-				B9E3FFAF1CA9564300607A49 /* MyCALayer.m */,
 				B9B8C38D1CA24EE4007008F4 /* HandScrollView.h */,
 				B9B8C38E1CA24EE4007008F4 /* HandScrollView.m */,
 				B9B8C3901CA24F0A007008F4 /* ZoomView.h */,
@@ -396,7 +391,6 @@
 				B9B8C38F1CA24EE4007008F4 /* HandScrollView.m in Sources */,
 				B9AD99B51C771044008C29A4 /* Document.m in Sources */,
 				B9B14C5A1C9A9A43000A5401 /* HandleView.m in Sources */,
-				B9E3FFB01CA9564400607A49 /* MyCALayer.m in Sources */,
 				B9F79D091C99A76C00E06911 /* DocInfoPanel.m in Sources */,
 				B9AD99B21C771044008C29A4 /* main.m in Sources */,
 				B9F79D0E1C99A78900E06911 /* DocTextPanel.m in Sources */,

@@ -14,7 +14,7 @@
 @implementation MyPDFView{
     BOOL isZoomCursorSet;
 }
-@synthesize _rect,handleView,handScrollView,zoomView;
+@synthesize _rect,handleView,handScrollView,zoomView,startPoint,targetPg;
 
 - (void)awakeFromNib{
     isZoomCursorSet = NO;
@@ -134,6 +134,16 @@
     [path fill];
     [[NSColor blackColor] set];
     [path stroke];
+}
+
+#pragma mark - mouse event
+
+- (void)mouseDown:(NSEvent *)theEvent{
+    NSPoint point = [self convertPoint:[theEvent locationInWindow] fromView:nil];
+    //処理対象ページを限定
+    targetPg = [self pageForPoint:point nearest:YES];
+    NSLog(@"%@",targetPg);
+
 }
 
 @end

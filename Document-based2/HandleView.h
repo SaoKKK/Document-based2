@@ -11,9 +11,6 @@
 #import "AppDelegate.h"
 #import "DocWinC.h"
 #import "MyPDFView.h"
-#import "MyCALayer.h"
-
-@class MyCALayer;
 
 @interface HandleView : NSView
 
