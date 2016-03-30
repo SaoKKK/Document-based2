@@ -27,5 +27,6 @@
 - (void)loadHandScrollView;
 - (void)loadZoomView;
 - (void)removeSubView;
+- (void)deselectArea;
 
 @end

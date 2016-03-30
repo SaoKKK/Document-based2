@@ -438,7 +438,7 @@
 }
 
 - (IBAction)test3:(id)sender {
-    _pdfView.selRect = NSMakeRect(100, 100, 300, 150);
+    [_pdfView deselectArea];
 }
 
 #pragma mark - outline data control
