@@ -21,8 +21,8 @@
 @property (strong)HandScrollView *handScrollView;
 @property (strong)ZoomView *zoomView;
 @property (assign)NSPoint startPoint;
-@property (readwrite)NSPoint endPoint;
-@property (readonly,nonatomic) PDFPage *targetPg;
+@property (assign)NSRect selRect;
+@property (readonly,nonatomic)PDFPage *targetPg;
 
 - (void)loadHandScrollView;
 - (void)loadZoomView;

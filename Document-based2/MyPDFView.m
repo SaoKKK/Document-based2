@@ -14,7 +14,7 @@
 @implementation MyPDFView{
     BOOL isZoomCursorSet;
 }
-@synthesize handScrollView,zoomView,startPoint,endPoint,targetPg;
+@synthesize handScrollView,zoomView,startPoint,selRect,targetPg;
 
 - (void)awakeFromNib{
     isZoomCursorSet = NO;
@@ -110,20 +110,16 @@
 - (void)drawPage:(PDFPage *)page{
     [super drawPage: page];
     
-    //NSLog(@"%f,%f,%f,%f",self.documentView.frame.origin.x,self.documentView.frame.origin.y,self.documentView.frame.size.width,self.documentView.frame.size.height);
-    //NSRect rect = [self.currentPage boundsForBox:kPDFDisplayBoxArtBox]; //アートボックス
-    NSRect selRect = NSMakeRect(startPoint.x,startPoint.y,endPoint.x-startPoint.x,endPoint.y-startPoint.y);
-    NSBezierPath	*path;
-    CGFloat lineDash[2];
-    lineDash[0]=6;
-    lineDash[1]=4;
-    path = [NSBezierPath bezierPathWithRect: selRect];
-    //[path setLineJoinStyle: NSRoundLineJoinStyle];
-    [path setLineDash:lineDash count:2 phase:0.0];
-    [path setLineWidth:0.1];
-    [[NSColor colorWithDeviceRed: 0.0 green: 1.0 blue: 0.0 alpha: 0.1] set];
+    //選択範囲を描画
+    NSBezierPath *path = [NSBezierPath bezierPathWithRect: selRect];
+    [[NSColor colorWithDeviceRed: 0.35 green: 0.55 blue: 0.75 alpha: 0.2] set];
     [path fill];
-    [[NSColor blackColor] set];
+    [path setLineWidth:0.5];
+    [[NSColor colorWithDeviceRed: 0.47 green: 0.55 blue: 0.78 alpha: 1.0] set];
+    [path stroke];
+    path = [NSBezierPath bezierPathWithRect:NSMakeRect(selRect.origin.x+0.75, selRect.origin.y+0.75, selRect.size.width-1.5, selRect.size.height-1.5)];
+    [path setLineWidth:1.0];
+    [[NSColor whiteColor] set];
     [path stroke];
 }
 
