@@ -14,7 +14,7 @@
 @implementation MyPDFView{
     BOOL isZoomCursorSet;
 }
-@synthesize _rect,handleView,handScrollView,zoomView,startPoint,targetPg;
+@synthesize handleView,handScrollView,zoomView,startPoint,endPoint,targetPg;
 
 - (void)awakeFromNib{
     isZoomCursorSet = NO;
@@ -23,6 +23,12 @@
         [handleView setFrame:self.bounds];
         [handScrollView setFrame:self.bounds];
         [zoomView setFrame:self.bounds];
+
+        [handleView createShapePath];
+    }];
+    [[NSNotificationCenter defaultCenter] addObserverForName:PDFViewScaleChangedNotification object:self queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification *notif){
+        //倍率変更時→選択エリアをリサイズする
+        [handleView createShapePath];
     }];
 }
 
@@ -119,14 +125,12 @@
     
     //NSLog(@"%f,%f,%f,%f",self.documentView.frame.origin.x,self.documentView.frame.origin.y,self.documentView.frame.size.width,self.documentView.frame.size.height);
     //NSRect rect = [self.currentPage boundsForBox:kPDFDisplayBoxArtBox]; //アートボックス
-    NSSize size = [self rowSizeForPage:self.currentPage]; //ページサイズ？
-    NSRect			bounds;
+    NSRect selRect = NSMakeRect(startPoint.x,startPoint.y,endPoint.x-startPoint.x,endPoint.y-startPoint.y);
     NSBezierPath	*path;
-    bounds = NSMakeRect(0, 0, size.width, size.height);
     CGFloat lineDash[2];
     lineDash[0]=6;
     lineDash[1]=4;
-    path = [NSBezierPath bezierPathWithRect: _rect];
+    path = [NSBezierPath bezierPathWithRect: selRect];
     //[path setLineJoinStyle: NSRoundLineJoinStyle];
     [path setLineDash:lineDash count:2 phase:0.0];
     [path setLineWidth:0.1];

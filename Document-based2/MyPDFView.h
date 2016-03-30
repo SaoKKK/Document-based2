@@ -20,11 +20,11 @@
 
 @interface MyPDFView : PDFView
 
-@property (assign)NSRect _rect;
 @property (strong)HandleView *handleView;
 @property (strong)HandScrollView *handScrollView;
 @property (strong)ZoomView *zoomView;
 @property (assign)NSPoint startPoint;
+@property (readwrite)NSPoint endPoint;
 @property (readonly,nonatomic) PDFPage *targetPg;
 
 - (void)loadHundleView;

@@ -438,9 +438,7 @@
 }
 
 - (IBAction)test3:(id)sender {
-    //NSSize pgSize = [_pdfView rowSizeForPage:_pdfView.currentPage];
-    _pdfView._rect = NSMakeRect(200, 100, 200, 100);
-    [_pdfView displayIfNeeded];
+    [_pdfView.handleView createShapePath];
 }
 
 #pragma mark - outline data control

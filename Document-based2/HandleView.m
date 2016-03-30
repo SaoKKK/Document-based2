@@ -26,11 +26,11 @@ enum UNDEROBJ_TYPE{
 };
 
 @implementation HandleView{
-    NSPoint startPoint;
+    NSPoint dragPoint;
     CAShapeLayer *shapeLayer;
-    PDFPage *page;
     NSRect pageRect;
 }
+@synthesize page;
 
 - (void)drawRect:(NSRect)dirtyRect {
     [self setLayer:[CALayer new]];
@@ -44,9 +44,9 @@ enum UNDEROBJ_TYPE{
     pageRect = [PVIEW convertRect:[page boundsForBox:kPDFDisplayBoxArtBox] fromPage:page];
     if ([PVIEW pageForPoint:point nearest:NO]) {
         //マウスダウンの座標がページ領域内であればその座標をstartPointに格納
-        startPoint = point;
+        (PVIEW).startPoint = [PVIEW convertPoint:point toPage:page];
     } else {
-        startPoint = [self areaPointFromOutPoint:point];
+        (PVIEW).startPoint = [PVIEW convertPoint:[self areaPointFromOutPoint:point] toPage:page];
     }
     //shape layerを作成
     shapeLayer = [CAShapeLayer layer];
@@ -65,34 +65,47 @@ enum UNDEROBJ_TYPE{
     [dashAnimation setRepeatCount:HUGE_VALF];
     [shapeLayer addAnimation:dashAnimation forKey:@"linePhase"];
     [self setNeedsDisplay:YES];
+    [PVIEW setNeedsDisplay:YES];
 }
 
 - (void)mouseDragged:(NSEvent *)theEvent{
     NSPoint point = [self convertPoint:[theEvent locationInWindow] fromView:nil];
-    NSPoint dragPoint;
     if (NSPointInRect(point, pageRect)) {
         //ドラッグ座標がページ領域内であればその座標をdragPointに格納
-        dragPoint = point;
+        (PVIEW).endPoint = [PVIEW convertPoint:point toPage:page];
     } else {
         //ドラッグ座標がページ領域外だった場合
-        dragPoint = [self areaPointFromOutPoint:point];
+        point = [self areaPointFromOutPoint:point];
+        (PVIEW).endPoint = [PVIEW convertPoint:[self areaPointFromOutPoint:point] toPage:page];
     }
     //shape layerのパスを作成
+    [self createShapePath];
+    [PVIEW setNeedsDisplay:YES];
+    
+}
+
+- (void)createShapePath{
+    //shape layerのパスを作成
+    CGPoint viewSPoint = [PVIEW convertPoint:(PVIEW).startPoint fromPage:page];
+    //viewSPoint = [self.superview convertPoint:viewSPoint toView:self];
+    NSRect oframe = [PVIEW convertRect:NSZeroRect fromView: self];
+    NSLog(@"%f,%f,%f,%f",oframe.origin.x,oframe.origin.y,oframe.size.width,oframe.size.height);
+    NSPoint viewEPoint = [PVIEW convertPoint:(PVIEW).endPoint fromPage:page];
     CGMutablePathRef path = CGPathCreateMutable();
-    CGPathMoveToPoint(path, NULL, startPoint.x, startPoint.y);
-    CGPathAddLineToPoint(path, NULL, startPoint.x, dragPoint.y);
-    CGPathAddLineToPoint(path, NULL, dragPoint.x, dragPoint.y);
-    CGPathAddLineToPoint(path, NULL, dragPoint.x, startPoint.y);
+    CGPathMoveToPoint(path, NULL, viewSPoint.x, viewSPoint.y);
+    CGPathAddLineToPoint(path, NULL, viewSPoint.x, viewEPoint.y);
+    CGPathAddLineToPoint(path, NULL, viewEPoint.x, viewEPoint.y);
+    CGPathAddLineToPoint(path, NULL, viewEPoint.x, viewSPoint.y);
     CGPathCloseSubpath(path);
     shapeLayer.path = path;
-    
+    [shapeLayer displayIfNeeded];
     CGPathRelease(path);
     [self setNeedsDisplay:YES];
 }
 
 - (void)mouseUp:(NSEvent *)theEvent{
     NSPoint point = [self convertPoint:[theEvent locationInWindow] fromView:nil];
-    if (point.x == startPoint.x && point.y == startPoint.y){
+    if (point.x == (PVIEW).startPoint.x && point.y == (PVIEW).startPoint.y){
         //シングルクリックの場合=選択範囲の領域外であれば選択を解除
         [shapeLayer removeFromSuperlayer];
         shapeLayer = nil;
@@ -105,7 +118,7 @@ enum UNDEROBJ_TYPE{
             endPoint = [self areaPointFromOutPoint:point];
         }
         //拡大エリアが作成された場合
-        NSRect expArea = NSMakeRect(MIN(startPoint.x,endPoint.x), MIN(startPoint.y,endPoint.y), fabs(startPoint.x-endPoint.x), fabs(startPoint.y-endPoint.y));
+        NSRect expArea = NSMakeRect(MIN((PVIEW).startPoint.x,endPoint.x), MIN((PVIEW).startPoint.y,endPoint.y), fabs((PVIEW).startPoint.x-endPoint.x), fabs((PVIEW).startPoint.y-endPoint.y));
         //拡大率を決定(縦横で倍率を出して小さい方を採用)
         float enlargementFactorFromWidth = (PVIEW).bounds.size.width/expArea.size.width;
         float enlargementFactorFromHeight = (PVIEW).bounds.size.height/expArea.size.height;
