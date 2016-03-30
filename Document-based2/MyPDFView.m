@@ -25,19 +25,42 @@ enum UNDEROBJ_TYPE{
 };
 
 @implementation MyPDFView{
+    NSTrackingArea *track;
     NSRect pageRect;
     PDFPage *oldPg;
-    BOOL isZoomCursorSet;
 }
 @synthesize handScrollView,zoomView,startPoint,selRect,targetPg;
 
 - (void)awakeFromNib{
-    isZoomCursorSet = NO;
     [[NSNotificationCenter defaultCenter] addObserverForName:NSWindowDidResizeNotification object:self.window queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification *notif){
         //ウインドウのリサイズ時→サブビューをリサイズする
         [handScrollView setFrame:self.bounds];
         [zoomView setFrame:self.bounds];
     }];
+}
+
+- (id)initWithFrame:(NSRect)frame {
+    self = [super initWithFrame:frame];
+    if (self) {
+        [self createTrackingArea];
+    }
+    return self;
+}
+
+- (void)updateTrackingAreas {
+    [self removeTrackingArea:track];
+    track = nil;
+    [self createTrackingArea];
+}
+
+//トラッキング・エリアを設定
+-(void)createTrackingArea{
+    NSTrackingAreaOptions trackOption = NSTrackingCursorUpdate;
+    trackOption |= NSTrackingMouseEnteredAndExited;
+    trackOption |= NSTrackingEnabledDuringMouseDrag;
+    trackOption |= NSTrackingActiveInActiveApp;
+    track = [[NSTrackingArea alloc] initWithRect:self.bounds options:trackOption owner:self userInfo:nil];
+    [self addTrackingArea:track];
 }
 
 #pragma mark - sub view control
@@ -52,14 +75,12 @@ enum UNDEROBJ_TYPE{
     [self removeSubView];
     zoomView = [[ZoomView alloc]initWithFrame:self.bounds];
     [self addSubview:zoomView];
-    isZoomCursorSet = YES;
 }
 
 - (void)removeSubView{
     [self deselectArea];
     [handScrollView removeFromSuperview];
     [zoomView removeFromSuperview];
-    isZoomCursorSet = NO;
 }
 
 #pragma mark - cursor control
@@ -67,20 +88,9 @@ enum UNDEROBJ_TYPE{
 //ページ領域によるカーソル変更
 - (void)setCursorForAreaOfInterest:(PDFAreaOfInterest)area{
     [self.window makeFirstResponder:self];
-    switch ([(WINC).segTool selectedSegment]){
-        case 0: //テキスト選択ツール選択時
-            [super setCursorForAreaOfInterest:area];
-            break;
-        case 1: //エリア選択ツール選択時
-            switch (area) {
-                case 0:
-                    [super setCursorForAreaOfInterest:area];
-                    break;
-                case 1:{
-                }
-                    break;
-            }
-            break;
+    if ([(WINC).segTool selectedSegment] == 0){
+        //テキスト選択ツール選択時は通常カーソル
+        [super setCursorForAreaOfInterest:area];
     }
 }
 
@@ -88,16 +98,8 @@ enum UNDEROBJ_TYPE{
 - (void)resetCursorRects{
     switch ([(WINC).segTool selectedSegment]){
         case 1:{
-            NSLog(@"sel");
-            NSPoint point = [self convertPoint:[NSEvent mouseLocation] fromView:nil];
-            if (targetPg == [self pageForPoint:point nearest:NO]) {
-                //マウスが選択範囲のあるページ内にあれば
-                NSLog(@"sel,yes");
-                [self addCursorRect:[self convertRect:selRect fromPage:targetPg] cursor:[NSCursor arrowCursor]];
-            } else {
-                NSLog(@"sel,no");
-                [self addCursorRect:self.bounds cursor:[NSCursor crosshairCursor]];
-            }
+            [self addCursorRect:self.bounds cursor:[NSCursor crosshairCursor]];
+            [self addCursorRect:[self convertRect:selRect fromPage:targetPg] cursor:[NSCursor arrowCursor]];
         }
             break;
         case 3:{ //ズームツール選択時
@@ -109,7 +111,7 @@ enum UNDEROBJ_TYPE{
 
 //ズームカーソルになっている時にoptionキーが押されたら縮小カーソルに変更
 - (void)flagsChanged:(NSEvent *)theEvent{
-    if (isZoomCursorSet){
+    if ((WINC).segTool.selectedSegment == 3){
         [[self updateZoomCursor] set];
     } else {
         [super flagsChanged:theEvent];
@@ -142,7 +144,7 @@ enum UNDEROBJ_TYPE{
     [super drawPage: page];
     
     //選択範囲を描画
-    if ((WINC).segTool.selectedSegment==1 && page == targetPg) {
+    if ((WINC).segTool.selectedSegment == 1 && page == targetPg) {
         if (selRect.size.width != 0 || selRect.size.height != 0) {
             //アンチエイリアスを切る
             NSGraphicsContext *gc = [NSGraphicsContext currentContext];
@@ -193,45 +195,67 @@ enum UNDEROBJ_TYPE{
 #pragma mark - mouse event
 
 - (void)mouseDown:(NSEvent *)theEvent{
-    [self deselectArea];
-    NSPoint point = [self convertPoint:[theEvent locationInWindow] fromView:nil];
-    //下にある最も近いページの領域をNSView座標系で取得
-    targetPg = [self pageForPoint:point nearest:YES];
-    pageRect = [self convertRect:[targetPg boundsForBox:kPDFDisplayBoxArtBox] fromPage:targetPg];
-    if ([self pageForPoint:point nearest:NO]) {
-        //マウスダウンの座標がページ領域内であればその座標をページ座標系に変換してstartPointに格納
-        startPoint = [self convertPoint:point toPage:targetPg];
+    if ((WINC).segTool.selectedSegment == 1) {
+        [self deselectArea];
+        NSPoint point = [self convertPoint:[theEvent locationInWindow] fromView:nil];
+        //下にある最も近いページの領域をNSView座標系で取得
+        targetPg = [self pageForPoint:point nearest:YES];
+        pageRect = [self convertRect:[targetPg boundsForBox:kPDFDisplayBoxArtBox] fromPage:targetPg];
+        if ([self pageForPoint:point nearest:NO]) {
+            //マウスダウンの座標がページ領域内であればその座標をページ座標系に変換してstartPointに格納
+            startPoint = [self convertPoint:point toPage:targetPg];
+        } else {
+            //マウスダウンの座標がページ領域外だった場合
+            startPoint = [self convertPoint:[self areaPointFromOutPoint:point] toPage:targetPg];
+        }
+        selRect = NSMakeRect(startPoint.x, startPoint.y, 0, 0);
     } else {
-        //マウスダウンの座標がページ領域外だった場合
-        startPoint = [self convertPoint:[self areaPointFromOutPoint:point] toPage:targetPg];
+        [super mouseDown:theEvent];
     }
-    selRect = NSMakeRect(startPoint.x, startPoint.y, 0, 0);
 }
 
 - (void)mouseDragged:(NSEvent *)theEvent{
-    NSPoint point = [self convertPoint:[theEvent locationInWindow] fromView:nil];
-    NSPoint endPoint;
-    if (NSPointInRect(point, pageRect)) {
-        //ドラッグ座標がページ領域内であればその座標をページ座標系に変換して使用
-        endPoint = [self convertPoint:point toPage:targetPg];
+    if ((WINC).segTool.selectedSegment == 1) {
+        NSPoint point = [self convertPoint:[theEvent locationInWindow] fromView:nil];
+        NSPoint endPoint;
+        if (NSPointInRect(point, pageRect)) {
+            //ドラッグ座標がページ領域内であればその座標をページ座標系に変換して使用
+            endPoint = [self convertPoint:point toPage:targetPg];
+        } else {
+            //ドラッグ座標がページ領域外だった場合
+            endPoint = [self convertPoint:[self areaPointFromOutPoint:point] toPage:targetPg];
+        }
+        if (endPoint.x < startPoint.x) {
+            selRect.origin.x = endPoint.x;
+            selRect.size.width = startPoint.x - endPoint.x;
+        } else {
+            selRect.size.width = endPoint.x - startPoint.x;
+        }
+        if (endPoint.y < startPoint.y) {
+            selRect.origin.y = endPoint.y;
+            selRect.size.height = startPoint.y - endPoint.y;
+        } else {
+            selRect.size.height = endPoint.y - startPoint.y;
+        }
+        [self setNeedsDisplay:YES];
     } else {
-        //ドラッグ座標がページ領域外だった場合
-        endPoint = [self convertPoint:[self areaPointFromOutPoint:point] toPage:targetPg];
+        [super mouseDragged:theEvent];
     }
-    selRect.size.width = endPoint.x - startPoint.x;
-    selRect.size.height = endPoint.y - startPoint.y;
-    [self setNeedsDisplay:YES];
 }
 
 - (void)mouseUp:(NSEvent *)theEvent{
-    //ページ選択履歴を残す
-    oldPg = targetPg;
-    NSPoint point = [self convertPoint:[theEvent locationInWindow] fromView:nil];
-    if (point.x == startPoint.x && point.y == startPoint.y){
-        //シングルクリックの場合
-
+    if ((WINC).segTool.selectedSegment == 1) {
+        //ページ選択履歴を残す
+        oldPg = targetPg;
+        NSPoint point = [self convertPoint:[theEvent locationInWindow] fromView:nil];
+        if (point.x == startPoint.x && point.y == startPoint.y){
+            //シングルクリックの場合
+            
+        } else {
+            
+        }
     } else {
-        
+        [super mouseUp:theEvent];
     }
 }
 
