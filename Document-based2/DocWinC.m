@@ -335,7 +335,7 @@
             [sender setImage:[NSImage imageNamed:@"selectText_off"] forSegment:0];
             [sender setImage:[NSImage imageNamed:@"selectArea_on"] forSegment:1];
             [sender setImage:[NSImage imageNamed:@"zoom_off"] forSegment:3];
-            [_pdfView loadHundleView];
+            [_pdfView removeSubView];
             break;
         case 2:
             [sender setImage:[NSImage imageNamed:@"selectText_off"] forSegment:0];
@@ -438,7 +438,6 @@
 }
 
 - (IBAction)test3:(id)sender {
-    [_pdfView.handleView createShapePath];
 }
 
 #pragma mark - outline data control

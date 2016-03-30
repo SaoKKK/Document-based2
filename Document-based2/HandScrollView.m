@@ -11,7 +11,7 @@
 #define WINC (DocWinC *)self.window.windowController
 
 @implementation HandScrollView{
-    NSPoint movePoint;
+    NSPoint startPoint;
     BOOL isDragging;
 }
 
@@ -29,18 +29,18 @@
 
 - (void)mouseDown:(NSEvent *)theEvent{
     [[NSCursor closedHandCursor] set];
-    movePoint = [self convertPoint:[theEvent locationInWindow] fromView:nil];
+    startPoint = [self convertPoint:[theEvent locationInWindow] fromView:nil];
 }
 
 - (void)mouseDragged:(NSEvent *)theEvent{
     isDragging = YES;
     NSPoint point = [self convertPoint:[theEvent locationInWindow] fromView:nil];
-    float dx = movePoint.x - point.x;
-    float dy = movePoint.y - point.y;
+    float dx = startPoint.x - point.x;
+    float dy = startPoint.y - point.y;
     NSView *documentView = (WINC)._pdfView.documentView;
     NSRect visibleRect = documentView.visibleRect;
     [documentView scrollPoint:NSMakePoint(visibleRect.origin.x+dx, visibleRect.origin.y+dy)];
-    movePoint = point;
+    startPoint = point;
 }
 
 - (void)mouseUp:(NSEvent *)theEvent{

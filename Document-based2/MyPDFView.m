@@ -14,31 +14,18 @@
 @implementation MyPDFView{
     BOOL isZoomCursorSet;
 }
-@synthesize handleView,handScrollView,zoomView,startPoint,endPoint,targetPg;
+@synthesize handScrollView,zoomView,startPoint,endPoint,targetPg;
 
 - (void)awakeFromNib{
     isZoomCursorSet = NO;
     [[NSNotificationCenter defaultCenter] addObserverForName:NSWindowDidResizeNotification object:self.window queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification *notif){
         //ウインドウのリサイズ時→サブビューをリサイズする
-        [handleView setFrame:self.bounds];
         [handScrollView setFrame:self.bounds];
         [zoomView setFrame:self.bounds];
-
-        [handleView createShapePath];
-    }];
-    [[NSNotificationCenter defaultCenter] addObserverForName:PDFViewScaleChangedNotification object:self queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification *notif){
-        //倍率変更時→選択エリアをリサイズする
-        [handleView createShapePath];
     }];
 }
 
 #pragma mark - sub view control
-
-- (void)loadHundleView{
-    [self removeSubView];
-    handleView = [[HandleView alloc]initWithFrame:self.bounds];
-    [self addSubview:handleView];
-}
 
 - (void)loadHandScrollView{
     [self removeSubView];
@@ -54,7 +41,6 @@
 }
 
 - (void)removeSubView{
-    [handleView removeFromSuperview];
     [handScrollView removeFromSuperview];
     [zoomView removeFromSuperview];
     isZoomCursorSet = NO;

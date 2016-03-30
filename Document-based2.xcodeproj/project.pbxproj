@@ -33,7 +33,6 @@
 		B9AD99B81C771044008C29A4 /* Document.xib in Resources */ = {isa = PBXBuildFile; fileRef = B9AD99B61C771044008C29A4 /* Document.xib */; };
 		B9AD99BA1C771044008C29A4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B9AD99B91C771044008C29A4 /* Assets.xcassets */; };
 		B9AD99BD1C771044008C29A4 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = B9AD99BB1C771044008C29A4 /* MainMenu.xib */; };
-		B9B14C5A1C9A9A43000A5401 /* HandleView.m in Sources */ = {isa = PBXBuildFile; fileRef = B9B14C591C9A9A43000A5401 /* HandleView.m */; };
 		B9B8C3791CA1FB4C007008F4 /* selectArea_off.png in Resources */ = {isa = PBXBuildFile; fileRef = B9B8C3751CA1FB4C007008F4 /* selectArea_off.png */; };
 		B9B8C37A1CA1FB4C007008F4 /* selectArea_on.png in Resources */ = {isa = PBXBuildFile; fileRef = B9B8C3761CA1FB4C007008F4 /* selectArea_on.png */; };
 		B9B8C37B1CA1FB4C007008F4 /* selectText_off.png in Resources */ = {isa = PBXBuildFile; fileRef = B9B8C3771CA1FB4C007008F4 /* selectText_off.png */; };
@@ -94,8 +93,6 @@
 		B9AD99B91C771044008C29A4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B9AD99BC1C771044008C29A4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		B9AD99BE1C771044008C29A4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		B9B14C581C9A9A42000A5401 /* HandleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HandleView.h; sourceTree = "<group>"; };
-		B9B14C591C9A9A43000A5401 /* HandleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HandleView.m; sourceTree = "<group>"; };
 		B9B8C3751CA1FB4C007008F4 /* selectArea_off.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = selectArea_off.png; path = Graphics/selectArea_off.png; sourceTree = "<group>"; };
 		B9B8C3761CA1FB4C007008F4 /* selectArea_on.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = selectArea_on.png; path = Graphics/selectArea_on.png; sourceTree = "<group>"; };
 		B9B8C3771CA1FB4C007008F4 /* selectText_off.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = selectText_off.png; path = Graphics/selectText_off.png; sourceTree = "<group>"; };
@@ -254,8 +251,6 @@
 				B9A301371C9FD6EB00407100 /* MYOLView.m */,
 				B9D6AEFE1C78D27E00381A32 /* MyPDFView.h */,
 				B9D6AEFF1C78D27E00381A32 /* MyPDFView.m */,
-				B9B14C581C9A9A42000A5401 /* HandleView.h */,
-				B9B14C591C9A9A43000A5401 /* HandleView.m */,
 				B9B8C38D1CA24EE4007008F4 /* HandScrollView.h */,
 				B9B8C38E1CA24EE4007008F4 /* HandScrollView.m */,
 				B9B8C3901CA24F0A007008F4 /* ZoomView.h */,
@@ -390,7 +385,6 @@
 				B9D6AF001C78D27E00381A32 /* MyPDFView.m in Sources */,
 				B9B8C38F1CA24EE4007008F4 /* HandScrollView.m in Sources */,
 				B9AD99B51C771044008C29A4 /* Document.m in Sources */,
-				B9B14C5A1C9A9A43000A5401 /* HandleView.m in Sources */,
 				B9F79D091C99A76C00E06911 /* DocInfoPanel.m in Sources */,
 				B9AD99B21C771044008C29A4 /* main.m in Sources */,
 				B9F79D0E1C99A78900E06911 /* DocTextPanel.m in Sources */,
