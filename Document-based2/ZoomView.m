@@ -8,7 +8,6 @@
 
 #import "ZoomView.h"
 
-#define APPD (AppDelegate *)[NSApp delegate]
 #define WINC (DocWinC *)self.window.windowController
 
 @implementation ZoomView{

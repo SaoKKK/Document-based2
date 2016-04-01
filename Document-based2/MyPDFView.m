@@ -25,17 +25,25 @@ enum UNDEROBJ_TYPE{
 };
 
 @implementation MyPDFView{
+    NSPoint startPoint;
     NSTrackingArea *track;
     NSRect pageRect;
-    PDFPage *oldPg;
 }
-@synthesize handScrollView,zoomView,startPoint,selRect,targetPg;
+@synthesize handScrollView,zoomView,selRect,targetPg;
+
+#pragma mark - initialize
 
 - (void)awakeFromNib{
     [[NSNotificationCenter defaultCenter] addObserverForName:NSWindowDidResizeNotification object:self.window queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification *notif){
         //ウインドウのリサイズ時→サブビューをリサイズする
         [handScrollView setFrame:self.bounds];
         [zoomView setFrame:self.bounds];
+    }];
+    //documentViewのvisibleRectに変更があったら再描画
+    NSClipView *cView = self.enclosingScrollView.contentView;
+    [cView setPostsBoundsChangedNotifications:YES];
+    [[NSNotificationCenter defaultCenter] addObserverForName:NSViewBoundsDidChangeNotification object:cView queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification *notif){
+        [self setNeedsDisplay:YES];
     }];
 }
 
@@ -46,6 +54,8 @@ enum UNDEROBJ_TYPE{
     }
     return self;
 }
+
+#pragma mark - set trackingArea
 
 - (void)updateTrackingAreas {
     [self removeTrackingArea:track];
@@ -78,7 +88,6 @@ enum UNDEROBJ_TYPE{
 }
 
 - (void)removeSubView{
-    [self deselectArea];
     [handScrollView removeFromSuperview];
     [zoomView removeFromSuperview];
 }
@@ -100,13 +109,27 @@ enum UNDEROBJ_TYPE{
         case 1:{
             [self addCursorRect:self.bounds cursor:[NSCursor crosshairCursor]];
             [self addCursorRect:[self convertRect:selRect fromPage:targetPg] cursor:[NSCursor arrowCursor]];
-        }
+            [self addCursorRect:[self makeHandleRect:NSMakePoint(NSMinX(selRect), NSMinY(selRect))] cursor:[[NSCursor alloc]initWithImage:[NSImage imageNamed:@"resizeb"] hotSpot:NSMakePoint(7, 7)]];
+            [self addCursorRect:[self makeHandleRect:NSMakePoint(NSMidX(selRect), NSMinY(selRect))] cursor:[NSCursor resizeUpDownCursor]];
+            [self addCursorRect:[self makeHandleRect:NSMakePoint(NSMaxX(selRect), NSMinY(selRect))] cursor:[[NSCursor alloc]initWithImage:[NSImage imageNamed:@"resizef"] hotSpot:NSMakePoint(7, 7)]];
+            [self addCursorRect:[self makeHandleRect:NSMakePoint(NSMinX(selRect), NSMidY(selRect))] cursor:[NSCursor resizeLeftRightCursor]];
+            [self addCursorRect:[self makeHandleRect:NSMakePoint(NSMaxX(selRect), NSMidY(selRect))] cursor:[NSCursor resizeLeftRightCursor]];
+            [self addCursorRect:[self makeHandleRect:NSMakePoint(NSMinX(selRect), NSMaxY(selRect))] cursor:[[NSCursor alloc]initWithImage:[NSImage imageNamed:@"resizef"] hotSpot:NSMakePoint(7, 7)]];
+            [self addCursorRect:[self makeHandleRect:NSMakePoint(NSMidX(selRect), NSMaxY(selRect))] cursor:[NSCursor resizeUpDownCursor]];
+            [self addCursorRect:[self makeHandleRect:NSMakePoint(NSMaxX(selRect), NSMaxY(selRect))] cursor:[[NSCursor alloc]initWithImage:[NSImage imageNamed:@"resizeb"] hotSpot:NSMakePoint(7, 7)]];
+            }
             break;
         case 3:{ //ズームツール選択時
             [self addCursorRect:self.bounds cursor:[self updateZoomCursor]];
         }
             break;
     }
+}
+
+- (NSRect)makeHandleRect:(NSPoint)point{
+    float sf = self.scaleFactor;
+    NSRect handleRect = NSMakeRect(point.x-(HandleWidth/sf)/2.0, point.y-(HandleWidth/sf)/2.0, HandleWidth/sf, HandleWidth/sf);
+    return [self convertRect:handleRect fromPage:targetPg];
 }
 
 //ズームカーソルになっている時にoptionキーが押されたら縮小カーソルに変更
@@ -144,7 +167,7 @@ enum UNDEROBJ_TYPE{
     [super drawPage: page];
     
     //選択範囲を描画
-    if ((WINC).segTool.selectedSegment == 1 && page == targetPg) {
+    if ((WINC).segTool.selectedSegment != 0 && page == targetPg) {
         if (selRect.size.width != 0 || selRect.size.height != 0) {
             //アンチエイリアスを切る
             NSGraphicsContext *gc = [NSGraphicsContext currentContext];
@@ -216,7 +239,11 @@ enum UNDEROBJ_TYPE{
 
 - (void)mouseDragged:(NSEvent *)theEvent{
     if ((WINC).segTool.selectedSegment == 1) {
+        [self.documentView autoscroll:theEvent];
         NSPoint point = [self convertPoint:[theEvent locationInWindow] fromView:nil];
+        if (! NSPointInRect(point, self.bounds)) {
+            pageRect = [self convertRect:[targetPg boundsForBox:kPDFDisplayBoxArtBox] fromPage:targetPg];
+        }
         NSPoint endPoint;
         if (NSPointInRect(point, pageRect)) {
             //ドラッグ座標がページ領域内であればその座標をページ座標系に変換して使用
@@ -245,8 +272,6 @@ enum UNDEROBJ_TYPE{
 
 - (void)mouseUp:(NSEvent *)theEvent{
     if ((WINC).segTool.selectedSegment == 1) {
-        //ページ選択履歴を残す
-        oldPg = targetPg;
         NSPoint point = [self convertPoint:[theEvent locationInWindow] fromView:nil];
         if (point.x == startPoint.x && point.y == startPoint.y){
             //シングルクリックの場合
@@ -254,6 +279,7 @@ enum UNDEROBJ_TYPE{
         } else {
             
         }
+        [self resetCursorRects];
     } else {
         [super mouseUp:theEvent];
     }

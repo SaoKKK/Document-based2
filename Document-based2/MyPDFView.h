@@ -20,7 +20,6 @@
 
 @property (strong)HandScrollView *handScrollView;
 @property (strong)ZoomView *zoomView;
-@property (assign)NSPoint startPoint;
 @property (assign)NSRect selRect;
 @property (readonly,nonatomic)PDFPage *targetPg;
 
