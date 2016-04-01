@@ -24,6 +24,7 @@
 @property (assign) BOOL isOLExists;
 @property (assign) BOOL isOLSelected;
 @property (assign) BOOL isOLSelectedSingle;
+@property (assign) BOOL isSelection;
 @property (assign) BOOL bRowClicked;
 @property (readwrite,nonatomic) NSPoint selPoint;
 

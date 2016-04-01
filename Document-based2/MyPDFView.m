@@ -42,7 +42,14 @@ enum UNDEROBJ_TYPE{
         [handScrollView setFrame:self.bounds];
         [zoomView setFrame:self.bounds];
     }];
-    //documentViewのvisibleRectに変更があったら再描画
+    [[NSNotificationCenter defaultCenter] addObserverForName:PDFViewSelectionChangedNotification object:self queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification *notif){
+        //選択が変更された時
+        if (self.currentSelection) {
+            (APPD).isSelection = YES;
+        } else {
+            (APPD).isSelection = NO;
+        }
+    }];
     NSClipView *cView = self.enclosingScrollView.contentView;
     [cView setPostsBoundsChangedNotifications:YES];
     [[NSNotificationCenter defaultCenter] addObserverForName:NSViewBoundsDidChangeNotification object:cView queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification *notif){
@@ -346,12 +353,13 @@ enum UNDEROBJ_TYPE{
 - (void)mouseUp:(NSEvent *)theEvent{
     if ((WINC).segTool.selectedSegment == 1) {
         NSPoint point = [self convertPoint:[theEvent locationInWindow] fromView:nil];
-        if (mouseLocation == OUT_AREA) {
-            NSPoint vStartP = [self convertPoint:startPoint fromPage:targetPg];
-            if (point.x ==  vStartP.x && point.y == vStartP.y){
-                //シングルクリックの場合は選択解除
-                [self deselectArea];
-            }
+        NSPoint vStartP = [self convertPoint:startPoint fromPage:targetPg];
+        if (mouseLocation == OUT_AREA && point.x ==  vStartP.x && point.y == vStartP.y) {
+            //シングルクリックの場合は選択解除
+            [self deselectArea];
+        } else {
+            //選択エリアが作成されている場合
+            (APPD).isSelection = YES;
         }
         [self resetCursorRects];
     } else {
@@ -413,6 +421,7 @@ enum UNDEROBJ_TYPE{
 - (void)deselectArea{
     selRect = NSZeroRect;
     [self setNeedsDisplay:YES];
+    (APPD).isSelection = NO;
 }
 
 @end

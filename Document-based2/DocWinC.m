@@ -107,6 +107,11 @@
     [[NSNotificationCenter defaultCenter] addObserverForName:NSWindowDidBecomeMainNotification object:self.window queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification *notif){
         (APPD).isDocWinMain = YES;
         (APPD).isOLExists = [self isOLExists];
+        if (_pdfView.currentSelection) {
+            (APPD).isSelection = YES;
+        } else {
+            (APPD).isSelection = NO;
+        }
         //ページ移動メニューの有効／無効の切り替え
         [self updateGoButtonEnabled];
         //倍率変更メニューの有効／無効の切り替え
@@ -508,7 +513,7 @@
         parentOL = [[_pdfView document]outlineRoot];
     } else {
         //選択行が親
-        parentOL = (PDFOutline *)[_olView itemAtRow:selectedRow];
+        parentOL = [_olView itemAtRow:selectedRow];
     }
     //親の小グループの末尾に追加
     NSInteger index = parentOL.numberOfChildren;
