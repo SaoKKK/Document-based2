@@ -257,7 +257,7 @@
                                                                 <rect key="frame" x="1" y="1" width="218" height="602"/>
                                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                 <subviews>
-                                                                    <outlineView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="firstColumnOnly" alternatingRowBackgroundColors="YES" autosaveColumns="NO" rowSizeStyle="automatic" viewBased="YES" indentationPerLevel="16" outlineTableColumn="Off-CF-tak" id="reD-FV-HUc" customClass="MYOLView">
+                                                                    <outlineView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="firstColumnOnly" alternatingRowBackgroundColors="YES" autosaveColumns="NO" rowSizeStyle="automatic" viewBased="YES" indentationPerLevel="16" outlineTableColumn="Off-CF-tak" id="reD-FV-HUc" customClass="MyOLView">
                                                                         <rect key="frame" x="0.0" y="0.0" width="218" height="0.0"/>
                                                                         <autoresizingMask key="autoresizingMask"/>
                                                                         <size key="intercellSpacing" width="3" height="2"/>
@@ -647,7 +647,7 @@
             </view>
             <point key="canvasLocation" x="-58" y="704.5"/>
         </window>
-        <customObject id="jTt-pK-nKN" userLabel="MyOLView" customClass="MYOLView"/>
+        <customObject id="jTt-pK-nKN" userLabel="MyOLView" customClass="MyOLView"/>
     </objects>
     <resources>
         <image name="NSIconViewTemplate" width="10" height="10"/>

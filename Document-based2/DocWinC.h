@@ -8,8 +8,10 @@
 
 #import <Cocoa/Cocoa.h>
 #import <Quartz/Quartz.h>
+#import "MyOLView.h"
 
 @class MyPDFView;
+@class MyOLView;
 
 @interface DocWinC : NSWindowController<NSWindowDelegate,NSSplitViewDelegate,NSTableViewDataSource,NSTableViewDelegate>{
     IBOutlet NSWindow *window;
@@ -33,7 +35,7 @@
     IBOutlet NSSegmentedControl *segTabTocSelect;
     IBOutlet NSSearchField *searchField;
     IBOutlet NSTableView *_tbView;
-    IBOutlet NSOutlineView *_olView;
+    IBOutlet MyOLView *_olView;
     IBOutlet NSSegmentedControl *segOLViewMode;
     NSURL *docURL; //ドキュメントのfileURL保持用
     CGFloat oldTocWidth; //目次エリアの変更前の幅保持用

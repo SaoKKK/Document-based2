@@ -437,7 +437,8 @@
 }
 
 - (IBAction)test:(id)sender {
-    [[NSCursor openHandCursor]set];
+    NSInteger selectedRow = _olView.selectedRow;
+    NSLog (@"%li",selectedRow);
 }
 
 - (IBAction)test2:(id)sender {
@@ -504,10 +505,10 @@
 - (void)addNewDataToSelection:(PDFOutline*)ol{
     //ルートアイテムがない場合は作成
     [self createOLRoot];
-    //アウトラインビューを編集モードに変更
-    [self viewToEditBMMode];
     PDFOutline *parentOL = [[PDFOutline alloc]init];
     NSInteger selectedRow = _olView.selectedRow;
+    //アウトラインビューを編集モードに変更
+    [self viewToEditBMMode];
     if (selectedRow == -1){
         //何も選択されていない = ルートが親
         parentOL = [[_pdfView document]outlineRoot];
