@@ -32,3 +32,7 @@
 //Menu item Show or Hide Text Panel
 "ShowTP" = "テキストパネルを表示";
 "HideTP" = "テキストパネルを隠す";
+
+"PageRangeMsg" = "ページ範囲指定エラー：";
+"PageRangeInfo" = "ページ範囲の指定が不正です。";
+"CharError" = "ページ範囲の指定に不適切な文字が使用されています。";

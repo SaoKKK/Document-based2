@@ -7,7 +7,11 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import <Quartz/Quartz.h>
+#import "DocWinC.h"
+#import "MyPDFView.h"
+#import "NSAlert+SynchronousSheet.h"
 
 @interface DocTextPanel : NSWindowController<NSWindowDelegate>
-
+- (void)clearTxt;
 @end

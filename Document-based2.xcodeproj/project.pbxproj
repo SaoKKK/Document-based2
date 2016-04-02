@@ -18,6 +18,7 @@
 		B9825A731C77838500F7AD4A /* DocWinC.m in Sources */ = {isa = PBXBuildFile; fileRef = B9825A721C77838500F7AD4A /* DocWinC.m */; };
 		B9916AA91C8419D700F82641 /* sidebar.png in Resources */ = {isa = PBXBuildFile; fileRef = B9916AA81C8419D700F82641 /* sidebar.png */; };
 		B997BFA01CAF824D0022C246 /* DocTextPanel.xib in Resources */ = {isa = PBXBuildFile; fileRef = B997BFA21CAF824D0022C246 /* DocTextPanel.xib */; };
+		B997BFA71CAFADE00022C246 /* NSAlert+SynchronousSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = B997BFA61CAFADE00022C246 /* NSAlert+SynchronousSheet.m */; };
 		B9A095B71C86B21F004C0DFB /* singlePage_off.png in Resources */ = {isa = PBXBuildFile; fileRef = B9A095B51C86B21F004C0DFB /* singlePage_off.png */; };
 		B9A095B81C86B21F004C0DFB /* singlePage_on.png in Resources */ = {isa = PBXBuildFile; fileRef = B9A095B61C86B21F004C0DFB /* singlePage_on.png */; };
 		B9A095BF1C86B640004C0DFB /* singleCon_off.png in Resources */ = {isa = PBXBuildFile; fileRef = B9A095B91C86B640004C0DFB /* singleCon_off.png */; };
@@ -76,6 +77,8 @@
 		B9916AA81C8419D700F82641 /* sidebar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = sidebar.png; path = Graphics/sidebar.png; sourceTree = "<group>"; };
 		B997BFA11CAF824D0022C246 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/DocTextPanel.xib; sourceTree = "<group>"; };
 		B997BFA41CAF825A0022C246 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/DocTextPanel.strings; sourceTree = "<group>"; };
+		B997BFA51CAFADE00022C246 /* NSAlert+SynchronousSheet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSAlert+SynchronousSheet.h"; sourceTree = "<group>"; };
+		B997BFA61CAFADE00022C246 /* NSAlert+SynchronousSheet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSAlert+SynchronousSheet.m"; sourceTree = "<group>"; };
 		B9A095B51C86B21F004C0DFB /* singlePage_off.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = singlePage_off.png; path = Graphics/singlePage_off.png; sourceTree = "<group>"; };
 		B9A095B61C86B21F004C0DFB /* singlePage_on.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = singlePage_on.png; path = Graphics/singlePage_on.png; sourceTree = "<group>"; };
 		B9A095B91C86B640004C0DFB /* singleCon_off.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = singleCon_off.png; path = Graphics/singleCon_off.png; sourceTree = "<group>"; };
@@ -172,6 +175,8 @@
 			children = (
 				B9AD99AD1C771044008C29A4 /* AppDelegate.h */,
 				B9AD99AE1C771044008C29A4 /* AppDelegate.m */,
+				B997BFA51CAFADE00022C246 /* NSAlert+SynchronousSheet.h */,
+				B997BFA61CAFADE00022C246 /* NSAlert+SynchronousSheet.m */,
 				B9AD99BB1C771044008C29A4 /* MainMenu.xib */,
 				B9AD99B91C771044008C29A4 /* Assets.xcassets */,
 				B9E21BE41C7A759F004DDB0F /* Document */,
@@ -396,6 +401,7 @@
 				B9AD99B51C771044008C29A4 /* Document.m in Sources */,
 				B9F79D091C99A76C00E06911 /* DocInfoPanel.m in Sources */,
 				B9AD99B21C771044008C29A4 /* main.m in Sources */,
+				B997BFA71CAFADE00022C246 /* NSAlert+SynchronousSheet.m in Sources */,
 				B9F79D0E1C99A78900E06911 /* DocTextPanel.m in Sources */,
 				B9B8C3921CA24F0A007008F4 /* ZoomView.m in Sources */,
 				B9AD99AF1C771044008C29A4 /* AppDelegate.m in Sources */,

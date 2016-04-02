@@ -32,3 +32,7 @@
 //Menu item Show or Hide Text Panel
 "ShowTP" = "Show Text Panel";
 "HideTP" = "Hide Text Panel";
+
+"PageRangeMsg" = "Page Range Error:";
+"PageRangeInfo" = "The value of the page range is not correct.";
+"CharError" = "The specified page range includes inappropriate characters.";

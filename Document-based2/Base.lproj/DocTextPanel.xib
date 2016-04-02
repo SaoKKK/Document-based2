@@ -65,8 +65,8 @@
                         </connections>
                     </button>
                     <popUpButton verticalHuggingPriority="750" id="ZrD-rY-dUr">
-                        <rect key="frame" x="9" y="41" width="141" height="22"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <rect key="frame" x="37" y="41" width="141" height="22"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <popUpButtonCell key="cell" type="push" title="Whole Document" bezelStyle="rounded" alignment="left" controlSize="small" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="WpF-eg-Lgj" id="C3X-Db-VKb">
                             <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                             <font key="font" metaFont="smallSystem"/>
@@ -82,26 +82,15 @@
                             <action selector="popTarget:" target="-2" id="JQi-5M-6qF"/>
                         </connections>
                     </popUpButton>
-                    <button verticalHuggingPriority="750" id="7bh-Zl-ROT">
-                        <rect key="frame" x="151" y="3" width="150" height="28"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
-                        <buttonCell key="cell" type="push" title="Export as Plane Text" bezelStyle="rounded" alignment="center" controlSize="small" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="S4m-rk-ZBt">
-                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                            <font key="font" metaFont="smallSystem"/>
-                        </buttonCell>
-                        <connections>
-                            <action selector="exportAsPlainTxt:" target="-2" id="Wcu-LT-Oq3"/>
-                        </connections>
-                    </button>
                     <button verticalHuggingPriority="750" id="V8n-GN-2VX">
-                        <rect key="frame" x="299" y="3" width="97" height="28"/>
+                        <rect key="frame" x="200" y="3" width="196" height="28"/>
                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
-                        <buttonCell key="cell" type="push" title="Export" bezelStyle="rounded" alignment="center" controlSize="small" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="wek-dI-UxQ">
+                        <buttonCell key="cell" type="push" title="Export as Rich Text" bezelStyle="rounded" alignment="center" controlSize="small" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="wek-dI-UxQ">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                             <font key="font" metaFont="smallSystem"/>
                         </buttonCell>
                         <connections>
-                            <action selector="export:" target="-2" id="sHp-pa-JTR"/>
+                            <action selector="exportAsRichTxt:" target="-2" id="HTZ-d9-2KI"/>
                         </connections>
                     </button>
                     <box verticalHuggingPriority="750" title="Box" boxType="separator" titlePosition="noTitle" id="Zbg-lq-E6V">
@@ -112,9 +101,9 @@
                         <font key="titleFont" metaFont="system"/>
                     </box>
                     <textField verticalHuggingPriority="750" id="zLX-Tn-vIL">
-                        <rect key="frame" x="156" y="43" width="140" height="19"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                        <textFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="kDZ-kd-YaI">
+                        <rect key="frame" x="184" y="43" width="112" height="19"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <textFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" enabled="NO" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" placeholderString="e.g. 1-2,5,10" drawsBackground="YES" id="kDZ-kd-YaI">
                             <font key="font" metaFont="smallSystem"/>
                             <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -123,6 +112,26 @@
                             </allowedInputSourceLocales>
                         </textFieldCell>
                     </textField>
+                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" id="CEc-um-S3i">
+                        <rect key="frame" x="7" y="46" width="37" height="14"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <textFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="from" id="ftn-Vh-92J">
+                            <font key="font" metaFont="smallSystem"/>
+                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
+                    <button verticalHuggingPriority="750" id="7bh-Zl-ROT">
+                        <rect key="frame" x="4" y="3" width="198" height="28"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
+                        <buttonCell key="cell" type="push" title="Export as Plane Text" bezelStyle="rounded" alignment="center" controlSize="small" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="S4m-rk-ZBt">
+                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                            <font key="font" metaFont="smallSystem"/>
+                        </buttonCell>
+                        <connections>
+                            <action selector="exportAsPlainTxt:" target="-2" id="Wcu-LT-Oq3"/>
+                        </connections>
+                    </button>
                 </subviews>
             </view>
             <connections>

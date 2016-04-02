@@ -65,6 +65,8 @@
     if (! txtPanel){
         txtPanel = [[DocTextPanel alloc]initWithWindowNibName:@"DocTextPanel"];
     }
+    
+    [txtPanel clearTxt];
     [txtPanel showOrHideWindow];
 }
 

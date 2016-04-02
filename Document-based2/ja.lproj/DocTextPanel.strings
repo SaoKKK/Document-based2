@@ -1,24 +1,25 @@
 
 /* Class = "NSMenuItem"; title = "Pages"; ObjectID = "Leu-oW-Gh3"; */
-"Leu-oW-Gh3.title" = "Pages";
+"Leu-oW-Gh3.title" = "指定ページ";
 
 /* Class = "NSButtonCell"; title = "Export as Plane Text"; ObjectID = "S4m-rk-ZBt"; */
-"S4m-rk-ZBt.title" = "Export as Plane Text";
+"S4m-rk-ZBt.title" = "プレーンテキストとして書き出し";
 
 /* Class = "NSMenuItem"; title = "Whole Document"; ObjectID = "WpF-eg-Lgj"; */
-"WpF-eg-Lgj.title" = "Whole Document";
+"WpF-eg-Lgj.title" = "ドキュメント全体";
 
 /* Class = "NSWindow"; title = "Text Panel"; ObjectID = "YXL-K3-E8g"; */
-"YXL-K3-E8g.title" = "Text Panel";
+"YXL-K3-E8g.title" = "テキストパネル";
 
 /* Class = "NSBox"; title = "Box"; ObjectID = "Zbg-lq-E6V"; */
 "Zbg-lq-E6V.title" = "Box";
 
 /* Class = "NSButtonCell"; title = "Get Text"; ObjectID = "gpb-Ch-1mf"; */
-"gpb-Ch-1mf.title" = "Get Text";
+"gpb-Ch-1mf.title" = "文字情報取得";
 
 /* Class = "NSMenuItem"; title = "Selection"; ObjectID = "jzr-VI-u3F"; */
-"jzr-VI-u3F.title" = "Selection";
+"jzr-VI-u3F.title" = "選択範囲";
 
 /* Class = "NSButtonCell"; title = "Export"; ObjectID = "wek-dI-UxQ"; */
-"wek-dI-UxQ.title" = "Export";
+"wek-dI-UxQ.title" = "リッチテキストとして書き出し";
+"ftn-Vh-92J.title" = "対象";
