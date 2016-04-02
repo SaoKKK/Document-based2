@@ -8,6 +8,6 @@
 
 #import <Cocoa/Cocoa.h>
 
-@interface DocTextPanel : NSWindowController
+@interface DocTextPanel : NSWindowController<NSWindowDelegate>
 
 @end

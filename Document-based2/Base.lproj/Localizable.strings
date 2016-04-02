@@ -29,3 +29,6 @@
 "NoSelectBM_msg" = "New Bookmark from Selection Error:";
 "NoSelectBM_info" = "No Objects Are Selected.\nChoose menu item \"New Bookmark from Selection\" after choosing the location where the bookmark is set.";
 
+//Menu item Show or Hide Text Panel
+"ShowTP" = "Show Text Panel";
+"HideTP" = "Hide Text Panel";

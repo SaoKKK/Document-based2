@@ -12,12 +12,32 @@
 
 @end
 
-@implementation DocTextPanel
+@implementation DocTextPanel{
+    IBOutlet NSTextView *_txtView;
+    IBOutlet NSTextField *txtPgRange;
+    IBOutlet NSPopUpButton *popTarget;
+}
 
 - (void)windowDidLoad {
     [super windowDidLoad];
+}
+
+- (void)windowWillClose:(NSNotification *)notification{
+    [_txtView setString:@""];
+}
+- (IBAction)popTarget:(id)sender {
+}
+
+- (IBAction)getTxt:(id)sender {
     
-    // Implement this method to handle any initialization after your window controller's window has been loaded from its nib file.
+}
+
+- (IBAction)export:(id)sender {
+    
+}
+
+- (IBAction)exportAsPlainTxt:(id)sender {
+    
 }
 
 @end

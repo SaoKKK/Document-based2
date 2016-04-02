@@ -10,7 +10,10 @@
 #import "DocInfoPanel.h"
 #import "DocTextPanel.h"
 
+@class DocTextPanel;
+
 @interface AppDelegate : NSObject <NSApplicationDelegate>
+@property (strong) DocTextPanel *txtPanel;
 @property (weak) IBOutlet NSMenuItem *mnGoToPrevPg;
 @property (weak) IBOutlet NSMenuItem *mnGoToNextPg;
 @property (weak) IBOutlet NSMenuItem *mnGoToFirstPg;

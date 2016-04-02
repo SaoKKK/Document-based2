@@ -43,6 +43,7 @@
 @end
 
 @implementation AppDelegate
+@synthesize txtPanel;
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
     //メニューグループを作成
@@ -60,6 +61,13 @@
 
 #pragma mark - menu action
 
+- (IBAction)showOrHideTextPanel:(id)sender{
+    if (! txtPanel){
+        txtPanel = [[DocTextPanel alloc]initWithWindowNibName:@"DocTextPanel"];
+    }
+    [txtPanel showOrHideWindow];
+}
+
 - (void)mnCurrentDocument:(id)sender{
     NSDocumentController *docCtr = [NSDocumentController sharedDocumentController];
     //アクティブウインドウのドキュメントへの参照
@@ -73,6 +81,15 @@
 }
 
 #pragma mark - menu control
+
+//メニュータイトルの変更
+- (BOOL)validateMenuItem:(NSMenuItem *)menuItem{
+    SEL action = menuItem.action;
+    if (action==@selector(showOrHideTextPanel:)) {
+        [menuItem setTitle:([txtPanel isWindowShown] ? NSLocalizedString(@"HideTP", @""):NSLocalizedString(@"ShowTP", @""))];
+    }
+    return YES;
+}
 
 //ディスプレイモード変更メニューのステータス変更
 - (void)setMnPageDisplayState:(NSInteger)tag{
