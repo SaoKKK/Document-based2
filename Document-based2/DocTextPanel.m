@@ -41,8 +41,7 @@
 }
 
 - (IBAction)getTxt:(id)sender {
-    NSDocumentController *docC = [NSDocumentController sharedDocumentController];
-    DocWinC *winC = [[docC currentDocument].windowControllers objectAtIndex:0];
+    DocWinC *winC = [self currentWinC];
     PDFDocument *doc = winC._pdfView.document;
     if ([popTarget indexOfSelectedItem] == 1) {
             //ページ範囲をインデックス・セットに変換
@@ -150,11 +149,36 @@
 }
 
 - (IBAction)exportAsRichTxt:(id)sender {
-    
+    NSString *savePath = [self createSavePath:@"rtf"];
+    NSAttributedString *aStr = _txtView.textStorage;
+    NSData *data = [aStr dataFromRange:(NSRange){0, [aStr length]} documentAttributes:@{NSDocumentTypeDocumentAttribute: NSRTFTextDocumentType} error:NULL];
+    [data writeToFile:savePath atomically:YES];
+
 }
 
 - (IBAction)exportAsPlainTxt:(id)sender {
-    
+    NSString *savePath = [self createSavePath:@"txt"];
+    NSString *expStr = [[_txtView.textStorage attributedSubstringFromRange:NSMakeRange(0, _txtView.textStorage.length)] string];
+    [expStr writeToFile:savePath atomically:YES encoding:NSUTF8StringEncoding error:nil];
+}
+
+- (NSString*)createSavePath:(NSString*)ext{
+    NSFileManager *fileMgr = [NSFileManager defaultManager];
+    DocWinC *winC = [self currentWinC];
+    NSString *saveFolder = [[winC.document fileURL].path stringByDeletingLastPathComponent];
+    NSString *fName = [[winC.document fileURL].path.lastPathComponent stringByDeletingPathExtension];
+    NSString *savePath = [NSString stringWithFormat:@"%@/%@_text.%@",saveFolder,fName,ext];
+    int i = 1;
+    while ([fileMgr fileExistsAtPath:savePath]) {
+        savePath = [NSString stringWithFormat:@"%@/%@_text %i.%@",saveFolder,fName,i,ext];
+        i++;
+    }
+    return savePath;
+}
+
+- (DocWinC*)currentWinC{
+    NSDocumentController *docC = [NSDocumentController sharedDocumentController];
+    return [[docC currentDocument].windowControllers objectAtIndex:0];
 }
 
 @end
