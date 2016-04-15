@@ -1,0 +1,12 @@
+
+/* Class = "NSTextFieldCell"; title = "Label"; ObjectID = "Wfv-WS-mCY"; */
+"Wfv-WS-mCY.title" = "Label";
+
+/* Class = "NSSegmentedCell"; fBN-Os-Zj3.ibShadowedLabels[0] = "aaa"; ObjectID = "fBN-Os-Zj3"; */
+"fBN-Os-Zj3.ibShadowedLabels[0]" = "aaa";
+
+/* Class = "NSSegmentedCell"; fBN-Os-Zj3.ibShadowedLabels[1] = "bbb"; ObjectID = "fBN-Os-Zj3"; */
+"fBN-Os-Zj3.ibShadowedLabels[1]" = "bbb";
+
+/* Class = "NSWindow"; title = "Window"; ObjectID = "isJ-hV-X9P"; */
+"isJ-hV-X9P.title" = "Window";

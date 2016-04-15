@@ -31,6 +31,7 @@
 		B9A095C81C86BA25004C0DFB /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B9A095C71C86BA25004C0DFB /* Foundation.framework */; };
 		B9A095CA1C86C5E3004C0DFB /* AppKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B9A095C91C86C5E3004C0DFB /* AppKit.framework */; };
 		B9A301381C9FD6EB00407100 /* MyOLView.m in Sources */ = {isa = PBXBuildFile; fileRef = B9A301371C9FD6EB00407100 /* MyOLView.m */; };
+		B9A7DB8A1CB63BA4008BE1B5 /* DocInfoPanel.xib in Resources */ = {isa = PBXBuildFile; fileRef = B9A7DB8C1CB63BA4008BE1B5 /* DocInfoPanel.xib */; };
 		B9AD99AF1C771044008C29A4 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B9AD99AE1C771044008C29A4 /* AppDelegate.m */; };
 		B9AD99B21C771044008C29A4 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = B9AD99B11C771044008C29A4 /* main.m */; };
 		B9AD99B51C771044008C29A4 /* Document.m in Sources */ = {isa = PBXBuildFile; fileRef = B9AD99B41C771044008C29A4 /* Document.m */; };
@@ -58,7 +59,6 @@
 		B9D6AF001C78D27E00381A32 /* MyPDFView.m in Sources */ = {isa = PBXBuildFile; fileRef = B9D6AEFF1C78D27E00381A32 /* MyPDFView.m */; };
 		B9DBE8B51C8963C10058B92D /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = B9DBE8B31C8963C00058B92D /* Localizable.strings */; };
 		B9F79D091C99A76C00E06911 /* DocInfoPanel.m in Sources */ = {isa = PBXBuildFile; fileRef = B9F79D071C99A76C00E06911 /* DocInfoPanel.m */; };
-		B9F79D0A1C99A76C00E06911 /* DocInfoPanel.xib in Resources */ = {isa = PBXBuildFile; fileRef = B9F79D081C99A76C00E06911 /* DocInfoPanel.xib */; };
 		B9F79D0E1C99A78900E06911 /* DocTextPanel.m in Sources */ = {isa = PBXBuildFile; fileRef = B9F79D0C1C99A78900E06911 /* DocTextPanel.m */; };
 		B9F961D81C8AB00B0034A940 /* OLController.m in Sources */ = {isa = PBXBuildFile; fileRef = B9F961D71C8AB00B0034A940 /* OLController.m */; };
 /* End PBXBuildFile section */
@@ -92,6 +92,7 @@
 		B9A095C91C86C5E3004C0DFB /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
 		B9A301361C9FD6EB00407100 /* MyOLView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyOLView.h; sourceTree = "<group>"; };
 		B9A301371C9FD6EB00407100 /* MyOLView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyOLView.m; sourceTree = "<group>"; };
+		B9A7DB8B1CB63BA4008BE1B5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/DocInfoPanel.xib; sourceTree = "<group>"; };
 		B9AD99AA1C771044008C29A4 /* Document-based2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Document-based2.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B9AD99AD1C771044008C29A4 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		B9AD99AE1C771044008C29A4 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -130,7 +131,6 @@
 		B9E21BE61C7AF86E004DDB0F /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Document.strings; sourceTree = "<group>"; };
 		B9F79D061C99A76C00E06911 /* DocInfoPanel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DocInfoPanel.h; sourceTree = "<group>"; };
 		B9F79D071C99A76C00E06911 /* DocInfoPanel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DocInfoPanel.m; sourceTree = "<group>"; };
-		B9F79D081C99A76C00E06911 /* DocInfoPanel.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DocInfoPanel.xib; sourceTree = "<group>"; };
 		B9F79D0B1C99A78900E06911 /* DocTextPanel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DocTextPanel.h; sourceTree = "<group>"; };
 		B9F79D0C1C99A78900E06911 /* DocTextPanel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DocTextPanel.m; sourceTree = "<group>"; };
 		B9F961D61C8AB00B0034A940 /* OLController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OLController.h; sourceTree = "<group>"; };
@@ -284,7 +284,7 @@
 		B9F79D051C99A70C00E06911 /* DocInfoPanel */ = {
 			isa = PBXGroup;
 			children = (
-				B9F79D081C99A76C00E06911 /* DocInfoPanel.xib */,
+				B9A7DB8C1CB63BA4008BE1B5 /* DocInfoPanel.xib */,
 				B9F79D061C99A76C00E06911 /* DocInfoPanel.h */,
 				B9F79D071C99A76C00E06911 /* DocInfoPanel.m */,
 			);
@@ -367,7 +367,7 @@
 				B9BBD7231C82CEBE006CF6DC /* goForward.png in Resources */,
 				B936FBD11CA2A1EB00B86A0B /* cZoomIn.png in Resources */,
 				B97DAD861CAD6F62005210C6 /* resizef.png in Resources */,
-				B9F79D0A1C99A76C00E06911 /* DocInfoPanel.xib in Resources */,
+				B9A7DB8A1CB63BA4008BE1B5 /* DocInfoPanel.xib in Resources */,
 				B936FBD01CA2A1EB00B86A0B /* cZoom.png in Resources */,
 				B9B8C37C1CA1FB4C007008F4 /* selectText_on.png in Resources */,
 				B9DBE8B51C8963C10058B92D /* Localizable.strings in Resources */,
@@ -421,6 +421,14 @@
 				B997BFA41CAF825A0022C246 /* ja */,
 			);
 			name = DocTextPanel.xib;
+			sourceTree = "<group>";
+		};
+		B9A7DB8C1CB63BA4008BE1B5 /* DocInfoPanel.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				B9A7DB8B1CB63BA4008BE1B5 /* Base */,
+			);
+			name = DocInfoPanel.xib;
 			sourceTree = "<group>";
 		};
 		B9AD99B61C771044008C29A4 /* Document.xib */ = {

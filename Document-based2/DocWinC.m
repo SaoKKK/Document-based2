@@ -437,8 +437,8 @@
 }
 
 - (IBAction)test:(id)sender {
-    NSInteger selectedRow = _olView.selectedRow;
-    NSLog (@"%li",selectedRow);
+    [segOLViewMode setWidth:70 forSegment:0];
+    [segOLViewMode setWidth:70 forSegment:1];
 }
 
 - (IBAction)test2:(id)sender {
@@ -793,6 +793,14 @@
     
     [leftView setFrame:leftFrame];
     [rightView setFrame:rightFrame];
+}
+
+- (CGFloat)splitView:(NSSplitView *)splitView constrainSplitPosition:(CGFloat)proposedPosition ofSubviewAt:(NSInteger)dividerIndex{
+    NSView *leftView = [[splitView subviews]objectAtIndex:0];
+    NSRect leftFrame = [leftView frame];
+    [segOLViewMode setWidth:leftFrame.size.width/2 forSegment:0];
+    [segOLViewMode setWidth:leftFrame.size.width/2 forSegment:1];
+    return proposedPosition;
 }
 
 #pragma mark - convert value between view and PDFView
