@@ -9,6 +9,7 @@
 #import <Cocoa/Cocoa.h>
 #import "DocInfoPanel.h"
 #import "DocTextPanel.h"
+#import "DocWinC.h"
 
 @class DocTextPanel;
 
@@ -23,6 +24,7 @@
 @property (weak) IBOutlet NSMenuItem *mnZoomIn;
 @property (weak) IBOutlet NSMenuItem *mnZoomOut;
 @property (weak) IBOutlet NSMenuItem *mnFullScreen;
+@property (assign) BOOL isImgInPboard;
 @property (assign) BOOL isDocWinMain;
 @property (assign) BOOL isOLExists;
 @property (assign) BOOL isOLSelected;

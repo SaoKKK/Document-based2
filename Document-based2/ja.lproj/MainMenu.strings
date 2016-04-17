@@ -65,7 +65,8 @@
 
 /* Class = "NSMenuItem"; title = "Save As…"; ObjectID = "Bw7-FT-i3A"; */
 "Bw7-FT-i3A.title" = "Save As…";
-
+// menu item "New Document from Clipboard"
+"rVd-px-L1i.title" = "クリップボードから新規作成";
 /* Class = "NSMenuItem"; title = "Close"; ObjectID = "DVo-aG-piG"; */
 "DVo-aG-piG.title" = "Close";
 

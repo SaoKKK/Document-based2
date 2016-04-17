@@ -38,16 +38,18 @@
     IBOutlet NSMenuItem *mnTwoPages;
     IBOutlet NSMenuItem *mnTwoPageCont;
     NSArray *mnPageDisplay; //表示モード変更メニューグループ
+    NSTimer *timer; //ペーストボード監視用タイマー
 }
 
 @end
 
 @implementation AppDelegate
-@synthesize txtPanel;
+@synthesize txtPanel,isImgInPboard;
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
     //メニューグループを作成
     mnPageDisplay = [NSArray arrayWithObjects:mnSinglePage,mnSingleCont,mnTwoPages,mnTwoPageCont,nil];
+    timer = [NSTimer scheduledTimerWithTimeInterval:2 target:self selector:@selector(observePboard) userInfo:nil repeats:YES];
 }
 
 - (void)applicationWillTerminate:(NSNotification *)aNotification {
@@ -59,7 +61,34 @@
     return NO;
 }
 
+- (void)observePboard{
+    NSPasteboard *pboard = [NSPasteboard generalPasteboard];
+    NSArray *classes = [NSArray arrayWithObject:[NSImage class]];
+    if ([pboard canReadObjectForClasses:classes options:nil]) {
+        isImgInPboard = YES;
+    } else {
+        isImgInPboard = NO;
+    }
+}
+
 #pragma mark - menu action
+
+- (IBAction)newDocFromPboard:(id)sender{
+    //クリップボードから画像オブジェクトを取得
+    NSPasteboard *pboard = [NSPasteboard generalPasteboard];
+    NSArray *classes = [NSArray arrayWithObject:[NSImage class]];
+    NSImage *img = [[pboard readObjectsForClasses:classes options:nil] objectAtIndex:0];
+    //画像からPDFを作成
+    PDFPage *page = [[PDFPage alloc]initWithImage:img];
+    [page setValue:@"1" forKey:@"label"];
+    PDFDocument *doc = [[PDFDocument alloc]init];
+    [doc insertPage:page atIndex:0];
+    //新規ドキュメント作成
+    NSDocumentController *docC = [NSDocumentController sharedDocumentController];
+    [docC openUntitledDocumentAndDisplay:YES error:nil];
+    DocWinC *newWC= [docC.currentDocument.windowControllers objectAtIndex:0];
+    [newWC makeNewDocWithPDF:doc];
+}
 
 - (IBAction)showOrHideTextPanel:(id)sender{
     if (! txtPanel){

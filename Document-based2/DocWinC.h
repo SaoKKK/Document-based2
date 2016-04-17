@@ -48,6 +48,7 @@
 @property (strong) IBOutlet NSSegmentedControl *segTool;
 @property (strong) IBOutlet MyPDFView *_pdfView;
 
+- (void)makeNewDocWithPDF:(PDFDocument*)pdf;
 - (IBAction)outlineViewRowClicked:(id)sender;
 - (NSData *)pdfViewDocumentData;
 - (void)revertDocumentToSaved;

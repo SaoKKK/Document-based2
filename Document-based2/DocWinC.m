@@ -22,17 +22,21 @@
 
 @synthesize segTool,_pdfView;
 
-#pragma mark - Window Controller Method
+#pragma mark - initialize window
 
 - (void)windowDidLoad {
     [super windowDidLoad];
-    //インスタンス変数を初期化
-    selectedViewMode = 0;
-    bFullscreen = NO;
     //ファイルから読み込まれたPDFドキュメントをビューに表示
     docURL = [[self document] fileURL];
     PDFDocument *doc = [[PDFDocument alloc]initWithURL:docURL];
     [_pdfView setDocument:doc];
+    [self initWindow];
+}
+
+- (void)initWindow{
+    //インスタンス変数を初期化
+    selectedViewMode = 0;
+    bFullscreen = NO;
     //ノーティフィケーションを設定
     [self setUpNotification];
     //デリゲートを設定
@@ -78,6 +82,15 @@
 - (void)revertDocumentToSaved{
     PDFDocument *doc = [[PDFDocument alloc]initWithURL:docURL];
     [_pdfView setDocument:doc];
+}
+
+#pragma mark - make new document
+
+- (void)makeNewDocWithPDF:(PDFDocument*)pdf{
+    [_pdfView setAutoScales:YES];
+    [_pdfView setDocument:pdf];
+    [self initWindow];
+    [self.document updateChangeCount:NSChangeDone];
 }
 
 #pragma mark - Setup notification
@@ -243,6 +256,17 @@
     } else {
         [[APPD mnFullScreen]setTitle:NSLocalizedString(@"MnTitleEnterFullScreen", @"")];
     }
+}
+
+#pragma mark - Show Allert
+
+- (NSInteger)runAllertModal:(NSString*)msg withInfo:(NSString*)info{
+    NSAlert *alert = [[NSAlert alloc]init];
+    alert.messageText = msg;
+    [alert setInformativeText:info];
+    [alert addButtonWithTitle:@"OK"];
+    [alert setAlertStyle:NSCriticalAlertStyle];
+    return [alert runModal];
 }
 
 #pragma mark - Actions

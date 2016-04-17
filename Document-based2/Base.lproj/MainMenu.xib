@@ -80,6 +80,12 @@
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <menu key="submenu" title="File" id="bib-Uj-vzu">
                         <items>
+                            <menuItem title="New Document from Clipboard" keyEquivalent="n" id="rVd-px-L1i">
+                                <connections>
+                                    <action selector="newDocFromPboard:" target="-1" id="XL9-Zi-wk7"/>
+                                    <binding destination="Voe-Tx-rLC" name="enabled" keyPath="self.isImgInPboard" id="nVf-pn-XAD"/>
+                                </connections>
+                            </menuItem>
                             <menuItem title="Open…" keyEquivalent="o" id="IAo-SY-fd9">
                                 <connections>
                                     <action selector="openDocument:" target="-1" id="bVn-NM-KNZ"/>
