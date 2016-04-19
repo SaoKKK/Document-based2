@@ -9,9 +9,11 @@
 #import <Cocoa/Cocoa.h>
 #import <Quartz/Quartz.h>
 #import "MyOLView.h"
+#import "DocInfoPanel.h"
 
 @class MyPDFView;
 @class MyOLView;
+@class DocInfoPanel;
 
 @interface DocWinC : NSWindowController<NSWindowDelegate,NSSplitViewDelegate,NSTableViewDataSource,NSTableViewDelegate>{
     IBOutlet NSWindow *window;
@@ -47,6 +49,7 @@
 }
 @property (strong) IBOutlet NSSegmentedControl *segTool;
 @property (strong) IBOutlet MyPDFView *_pdfView;
+@property (strong) DocInfoPanel *infoPanel;
 
 - (void)makeNewDocWithPDF:(PDFDocument*)pdf;
 - (IBAction)outlineViewRowClicked:(id)sender;

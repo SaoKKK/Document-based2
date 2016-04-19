@@ -131,7 +131,12 @@
                                 <modifierMask key="keyEquivalentModifierMask"/>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="aJh-i4-bef"/>
-                            <menuItem title="Show Document Info" keyEquivalent="i" id="F6H-ZL-3LG"/>
+                            <menuItem title="Show Document Info" keyEquivalent="i" id="F6H-ZL-3LG">
+                                <connections>
+                                    <action selector="mnShowInfo:" target="-1" id="JA5-dT-IqS"/>
+                                    <binding destination="Voe-Tx-rLC" name="enabled" keyPath="self.isDocWinMain" id="LeT-ry-Tfl"/>
+                                </connections>
+                            </menuItem>
                             <menuItem isSeparatorItem="YES" id="lTG-bF-hCr"/>
                             <menuItem title="Page Setup…" keyEquivalent="P" id="qIS-W8-SiK">
                                 <modifierMask key="keyEquivalentModifierMask" shift="YES" command="YES"/>
@@ -401,6 +406,13 @@ CA
                                 </connections>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="kiX-Ta-Tzb"/>
+                            <menuItem title="Display as Book" enabled="NO" keyEquivalent="5" id="wJD-7s-OCh">
+                                <connections>
+                                    <action selector="mnDisplayAsBook:" target="-1" id="CG2-9N-xxo"/>
+                                    <binding destination="Voe-Tx-rLC" name="enabled" keyPath="self.isTwoPages" id="k8i-0y-DPC"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem isSeparatorItem="YES" id="Zdj-Li-B8i"/>
                             <menuItem title="Zoom to Fit" enabled="NO" keyEquivalent="9" id="DP4-OT-pV1">
                                 <connections>
                                     <action selector="zoomImageToFit:" target="-1" id="gY6-Xo-DPZ"/>

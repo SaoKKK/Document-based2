@@ -105,7 +105,7 @@
 //menu item "Get Text Data"
 "I4O-Fj-zfb.title" = "テキスト情報の取得";
 //menu item "Show Document Info"
-"F6H-ZL-3LG.title" = "文書情報を見る";
+"F6H-ZL-3LG.title" = "文書情報を表示";
 
 // menu Edit
 "W48-6f-4Dl.title" = "編集";
@@ -130,6 +130,8 @@
 "nUn-NX-nUC.title" = "見開表示";
 // menu item Two Pages Continuous
 "2SK-wh-zRc.title" = "見開連続表示";
+// menu item Display as Book
+"wJD-7s-OCh.title" = "先頭ページを表紙として扱う";
 // memu item Actual Size
 "psd-Ef-9Ar.title" = "実際のサイズ";
 // menu item Zoom to Fit

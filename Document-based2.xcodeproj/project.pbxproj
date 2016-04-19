@@ -58,6 +58,8 @@
 		B9D6AEFA1C78CFD900381A32 /* Quartz.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B9D6AEF91C78CFD900381A32 /* Quartz.framework */; };
 		B9D6AF001C78D27E00381A32 /* MyPDFView.m in Sources */ = {isa = PBXBuildFile; fileRef = B9D6AEFF1C78D27E00381A32 /* MyPDFView.m */; };
 		B9DBE8B51C8963C10058B92D /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = B9DBE8B31C8963C00058B92D /* Localizable.strings */; };
+		B9E398271CC5C1080018DC88 /* lock.png in Resources */ = {isa = PBXBuildFile; fileRef = B9E398251CC5C1080018DC88 /* lock.png */; };
+		B9E398281CC5C1080018DC88 /* unlock.png in Resources */ = {isa = PBXBuildFile; fileRef = B9E398261CC5C1080018DC88 /* unlock.png */; };
 		B9F79D091C99A76C00E06911 /* DocInfoPanel.m in Sources */ = {isa = PBXBuildFile; fileRef = B9F79D071C99A76C00E06911 /* DocInfoPanel.m */; };
 		B9F79D0E1C99A78900E06911 /* DocTextPanel.m in Sources */ = {isa = PBXBuildFile; fileRef = B9F79D0C1C99A78900E06911 /* DocTextPanel.m */; };
 		B9F961D81C8AB00B0034A940 /* OLController.m in Sources */ = {isa = PBXBuildFile; fileRef = B9F961D71C8AB00B0034A940 /* OLController.m */; };
@@ -129,6 +131,8 @@
 		B9DBE8B61C8963C90058B92D /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
 		B9E21BE51C7AF86E004DDB0F /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/MainMenu.strings; sourceTree = "<group>"; };
 		B9E21BE61C7AF86E004DDB0F /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Document.strings; sourceTree = "<group>"; };
+		B9E398251CC5C1080018DC88 /* lock.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = lock.png; path = Graphics/lock.png; sourceTree = "<group>"; };
+		B9E398261CC5C1080018DC88 /* unlock.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = unlock.png; path = Graphics/unlock.png; sourceTree = "<group>"; };
 		B9F79D061C99A76C00E06911 /* DocInfoPanel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DocInfoPanel.h; sourceTree = "<group>"; };
 		B9F79D071C99A76C00E06911 /* DocInfoPanel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DocInfoPanel.m; sourceTree = "<group>"; };
 		B9F79D0B1C99A78900E06911 /* DocTextPanel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DocTextPanel.h; sourceTree = "<group>"; };
@@ -209,6 +213,8 @@
 		B9BBD71A1C82CE2D006CF6DC /* Graphics */ = {
 			isa = PBXGroup;
 			children = (
+				B9E398251CC5C1080018DC88 /* lock.png */,
+				B9E398261CC5C1080018DC88 /* unlock.png */,
 				B97DAD831CAD6F62005210C6 /* resizeb.png */,
 				B97DAD841CAD6F62005210C6 /* resizef.png */,
 				B936FBCD1CA2A1EB00B86A0B /* cZoom.png */,
@@ -361,6 +367,7 @@
 				B9BBD7261C82CEBE006CF6DC /* goPrev.png in Resources */,
 				B9BBD7221C82CEBE006CF6DC /* goBack.png in Resources */,
 				B936FBD21CA2A1EB00B86A0B /* cZoomOut.png in Resources */,
+				B9E398281CC5C1080018DC88 /* unlock.png in Resources */,
 				B9A095B71C86B21F004C0DFB /* singlePage_off.png in Resources */,
 				B9A095B81C86B21F004C0DFB /* singlePage_on.png in Resources */,
 				B9BBD7251C82CEBE006CF6DC /* goNext.png in Resources */,
@@ -369,6 +376,7 @@
 				B9BBD7241C82CEBE006CF6DC /* goLast.png in Resources */,
 				B9B8C37A1CA1FB4C007008F4 /* selectArea_on.png in Resources */,
 				B9AD99BA1C771044008C29A4 /* Assets.xcassets in Resources */,
+				B9E398271CC5C1080018DC88 /* lock.png in Resources */,
 				B93FD59E1C86F85D00B68959 /* zoomIn.png in Resources */,
 				B9B8C3861CA22A2A007008F4 /* scroll.png in Resources */,
 				B9A095C31C86B640004C0DFB /* twoUp_off.png in Resources */,

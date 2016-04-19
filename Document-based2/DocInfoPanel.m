@@ -8,7 +8,10 @@
 
 #import "DocInfoPanel.h"
 
-@interface DocInfoPanel ()
+@interface DocInfoPanel (){
+    IBOutlet NSSecureTextField *txtPass1;
+    IBOutlet NSSecureTextField *txtPass2;
+}
 
 @end
 
@@ -16,8 +19,21 @@
 
 - (void)windowDidLoad {
     [super windowDidLoad];
-    
-    // Implement this method to handle any initialization after your window controller's window has been loaded from its nib file.
+}
+
+- (IBAction)pshUpdate:(id)sender {
+    DocWinC *docWinC = self.window.sheetParent.windowController;
+    /*
+    CFURLRef url = (__bridge CFURLRef)[docWinC.document fileURL];
+    CGPDFDocumentRef doc = CGPDFDocumentCreateWithURL(url);
+    */
+    NSDictionary *options = [NSDictionary dictionaryWithObjectsAndKeys: @"owner", kCGPDFContextOwnerPassword, @"user", kCGPDFContextUserPassword, nil];
+    [docWinC._pdfView.document writeToFile: @"/Users/kounosaori/Desktop/aaa.pdf" withOptions: options];
+
+}
+
+- (IBAction)pshCancel:(id)sender {
+    [self.window.sheetParent endSheet:self.window returnCode:NSModalResponseCancel];
 }
 
 @end

@@ -49,6 +49,7 @@
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
     //メニューグループを作成
     mnPageDisplay = [NSArray arrayWithObjects:mnSinglePage,mnSingleCont,mnTwoPages,mnTwoPageCont,nil];
+    //ペーストボード監視用タイマー開始
     timer = [NSTimer scheduledTimerWithTimeInterval:2 target:self selector:@selector(observePboard) userInfo:nil repeats:YES];
 }
 
@@ -61,6 +62,7 @@
     return NO;
 }
 
+//ペーストボードを監視
 - (void)observePboard{
     NSPasteboard *pboard = [NSPasteboard generalPasteboard];
     NSArray *classes = [NSArray arrayWithObject:[NSImage class]];

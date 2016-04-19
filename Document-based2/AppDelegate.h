@@ -7,7 +7,6 @@
 //
 
 #import <Cocoa/Cocoa.h>
-#import "DocInfoPanel.h"
 #import "DocTextPanel.h"
 #import "DocWinC.h"
 
@@ -30,6 +29,7 @@
 @property (assign) BOOL isOLSelected;
 @property (assign) BOOL isOLSelectedSingle;
 @property (assign) BOOL isSelection;
+@property (assign) BOOL isTwoPages;
 @property (assign) BOOL bRowClicked;
 @property (readwrite,nonatomic) NSPoint selPoint;
 
