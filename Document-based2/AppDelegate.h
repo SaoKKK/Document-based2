@@ -13,6 +13,7 @@
 @class DocTextPanel;
 
 @interface AppDelegate : NSObject <NSApplicationDelegate>
+
 @property (strong) DocTextPanel *txtPanel;
 @property (weak) IBOutlet NSMenuItem *mnGoToPrevPg;
 @property (weak) IBOutlet NSMenuItem *mnGoToNextPg;
@@ -23,6 +24,12 @@
 @property (weak) IBOutlet NSMenuItem *mnZoomIn;
 @property (weak) IBOutlet NSMenuItem *mnZoomOut;
 @property (weak) IBOutlet NSMenuItem *mnFullScreen;
+//pass win outlet
+@property (weak) IBOutlet NSWindow *passWin;
+@property (weak) IBOutlet NSTextField *pwMsgTxt;
+@property (weak) IBOutlet NSTextField *pwInfoTxt;
+@property (weak) IBOutlet NSSecureTextField *pwTxtPass;
+@property (readwrite) NSWindow *parentWin;
 @property (assign) BOOL isImgInPboard;
 @property (assign) BOOL isDocWinMain;
 @property (assign) BOOL isOLExists;
@@ -30,10 +37,11 @@
 @property (assign) BOOL isOLSelectedSingle;
 @property (assign) BOOL isSelection;
 @property (assign) BOOL isTwoPages;
+@property (assign) BOOL isLocked;
+@property (assign) BOOL isCopyLocked;
 @property (assign) BOOL bRowClicked;
 @property (readwrite,nonatomic) NSPoint selPoint;
 
 - (void)setMnPageDisplayState:(NSInteger)tag;
-
 @end
 

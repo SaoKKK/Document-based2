@@ -27,6 +27,10 @@
                 <outlet property="mnTwoPages" destination="nUn-NX-nUC" id="j6b-oq-cNl"/>
                 <outlet property="mnZoomIn" destination="p7o-Az-s8w" id="37g-18-wZO"/>
                 <outlet property="mnZoomOut" destination="Srb-vg-b48" id="5ae-Cv-bSE"/>
+                <outlet property="passWin" destination="Vza-Zy-rGP" id="iDw-YI-k0W"/>
+                <outlet property="pwInfoTxt" destination="yNi-5q-Xdf" id="Hbu-vh-Ims"/>
+                <outlet property="pwMsgTxt" destination="5P3-f0-MBf" id="2WM-w1-7n9"/>
+                <outlet property="pwTxtPass" destination="DyJ-Ta-mql" id="VRj-wm-5s6"/>
             </connections>
         </customObject>
         <customObject id="YLy-65-1bz" customClass="NSFontManager"/>
@@ -608,5 +612,93 @@ CA
                 </menuItem>
             </items>
         </menu>
+        <window title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" frameAutosaveName="" animationBehavior="default" id="Vza-Zy-rGP">
+            <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
+            <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
+            <rect key="contentRect" x="109" y="138" width="400" height="170"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1280" height="800"/>
+            <view key="contentView" id="ZVY-Jm-IQp">
+                <rect key="frame" x="0.0" y="0.0" width="400" height="170"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" id="6NR-LI-2ID">
+                        <rect key="frame" x="20" y="100" width="50" height="50"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="NSApplicationIcon" id="IEp-pd-siK"/>
+                    </imageView>
+                    <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" id="yNi-5q-Xdf">
+                        <rect key="frame" x="84" y="80" width="298" height="28"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                        <textFieldCell key="cell" sendsActionOnEndEditing="YES" title="Enter the owner password to unlock copying from the document." id="lad-zL-Z5N">
+                            <font key="font" metaFont="smallSystem"/>
+                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
+                    <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" id="DY8-7I-Jbj">
+                        <rect key="frame" x="84" y="56" width="59" height="14"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <textFieldCell key="cell" controlSize="small" sendsActionOnEndEditing="YES" title="Password:" id="u8b-Li-55N">
+                            <font key="font" metaFont="smallSystem"/>
+                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
+                    <secureTextField verticalHuggingPriority="750" id="DyJ-Ta-mql">
+                        <rect key="frame" x="145" y="53" width="235" height="19"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <secureTextFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" drawsBackground="YES" usesSingleLineMode="YES" id="L8w-KE-uaS">
+                            <font key="font" metaFont="smallSystem"/>
+                            <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                            <allowedInputSourceLocales>
+                                <string>NSAllRomanInputSourcesLocaleIdentifier</string>
+                            </allowedInputSourceLocales>
+                        </secureTextFieldCell>
+                    </secureTextField>
+                    <button verticalHuggingPriority="750" id="1K4-XU-gHL">
+                        <rect key="frame" x="229" y="10" width="79" height="28"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
+                        <buttonCell key="cell" type="push" title="Cancel" bezelStyle="rounded" alignment="center" controlSize="small" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="HeN-ET-k9v">
+                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                            <font key="font" metaFont="smallSystem"/>
+                            <string key="keyEquivalent" base64-UTF8="YES">
+Gw
+</string>
+                        </buttonCell>
+                        <connections>
+                            <action selector="pwCancel:" target="Voe-Tx-rLC" id="pVS-Hu-VgE"/>
+                        </connections>
+                    </button>
+                    <button verticalHuggingPriority="750" id="Vo2-4j-USw">
+                        <rect key="frame" x="306" y="10" width="79" height="28"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
+                        <buttonCell key="cell" type="push" title="Unlock" bezelStyle="rounded" alignment="center" controlSize="small" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="OCo-6v-Efr">
+                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                            <font key="font" metaFont="smallSystem"/>
+                            <string key="keyEquivalent" base64-UTF8="YES">
+DQ
+</string>
+                        </buttonCell>
+                        <connections>
+                            <action selector="pwUnlock:" target="Voe-Tx-rLC" id="4N3-JT-p9e"/>
+                        </connections>
+                    </button>
+                    <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" id="5P3-f0-MBf">
+                        <rect key="frame" x="84" y="116" width="298" height="34"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                        <textFieldCell key="cell" sendsActionOnEndEditing="YES" title="You don't have permission to copy portions of this document." id="xVG-SS-8Em">
+                            <font key="font" metaFont="systemBold"/>
+                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
+                </subviews>
+            </view>
+            <point key="canvasLocation" x="819" y="1243"/>
+        </window>
     </objects>
+    <resources>
+        <image name="NSApplicationIcon" width="128" height="128"/>
+    </resources>
 </document>

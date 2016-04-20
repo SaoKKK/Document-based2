@@ -44,7 +44,7 @@
 @end
 
 @implementation AppDelegate
-@synthesize txtPanel,isImgInPboard;
+@synthesize txtPanel,isImgInPboard,parentWin,passWin,pwTxtPass;
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
     //メニューグループを作成
@@ -133,6 +133,20 @@
             [[mnPageDisplay objectAtIndex:i]setState:NO];
         }
     }
+}
+#pragma mark - pass win
+
+- (IBAction)pwUnlock:(id)sender {
+    NSDocumentController *docC = [NSDocumentController sharedDocumentController];
+    DocWinC *winC = [docC.currentDocument.windowControllers objectAtIndex:0];
+    [winC._pdfView.document unlockWithPassword:pwTxtPass.stringValue];
+    if (winC._pdfView.document.allowsCopying) {
+        [parentWin endSheet:passWin returnCode:NSModalResponseOK];
+    }
+}
+
+- (IBAction)pwCancel:(id)sender {
+    [parentWin endSheet:passWin returnCode:NSModalResponseCancel];
 }
 
 @end

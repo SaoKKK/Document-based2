@@ -424,3 +424,11 @@
 
 /* Class = "NSMenuItem"; title = "Show Substitutions"; ObjectID = "z6F-FW-3nz"; */
 "z6F-FW-3nz.title" = "Show Substitutions";
+
+//Pass win
+"xVG-SS-8Em.title" = "この書類をコピーするための権限がありません。";
+"lad-zL-Z5N.title" = "コピー操作のロックを解除するには、オーナーパスワードを入力してください。";
+"OCo-6v-Efr.title" = "ロック解除";
+"HeN-ET-k9v.title" = "キャンセル";
+
+

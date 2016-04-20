@@ -17,8 +17,6 @@
 
 @interface DocWinC : NSWindowController<NSWindowDelegate,NSSplitViewDelegate,NSTableViewDataSource,NSTableViewDelegate>{
     IBOutlet NSWindow *window;
-    IBOutlet NSWindow *progressWin;
-    IBOutlet NSProgressIndicator *savingProgBar;
     IBOutlet PDFThumbnailView *thumbView;
     IBOutlet NSButton *btnGoToFirstPg;
     IBOutlet NSButton *btnGoToPrevPg;
@@ -39,7 +37,9 @@
     IBOutlet NSTableView *_tbView;
     IBOutlet MyOLView *_olView;
     IBOutlet NSSegmentedControl *segOLViewMode;
-    NSURL *docURL; //ドキュメントのfileURL保持用
+    IBOutlet NSWindow *progressWin;
+    IBOutlet NSProgressIndicator *savingProgBar;
+    IBOutlet NSWindow *infoWin;
     CGFloat oldTocWidth; //目次エリアの変更前の幅保持用
     BOOL bFullscreen; //スクリーンモード保持用
     NSMutableArray *searchResult; //検索結果保持用
@@ -47,9 +47,11 @@
     PDFDestination *selectedDest; //選択中の領域のPDFDestinationを保持
     NSUInteger selectedViewMode; //指定ビューモード保持用
 }
+@property (readonly) NSURL *docURL; //ドキュメントのfileURL保持用
 @property (strong) IBOutlet NSSegmentedControl *segTool;
 @property (strong) IBOutlet MyPDFView *_pdfView;
 @property (strong) DocInfoPanel *infoPanel;
+@property (readwrite,nonatomic) NSMutableDictionary *docInfo;
 
 - (void)makeNewDocWithPDF:(PDFDocument*)pdf;
 - (IBAction)outlineViewRowClicked:(id)sender;

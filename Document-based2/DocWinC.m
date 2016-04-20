@@ -20,7 +20,7 @@
 
 @implementation DocWinC
 
-@synthesize segTool,_pdfView;
+@synthesize docURL,segTool,_pdfView,docInfo;
 
 #pragma mark - initialize window
 
@@ -62,6 +62,9 @@
     }
     //検索結果保持用配列を初期化
     searchResult = [NSMutableArray array];
+    //ドキュメント情報を取得
+    docInfo = [NSMutableDictionary dictionary];
+    
 }
 
 //アウトライン情報があるかどうかを返す
@@ -393,6 +396,7 @@
     self.infoPanel = [[DocInfoPanel alloc]initWithWindowNibName:@"DocInfoPanel"];
     [self.window beginSheet:self.infoPanel.window completionHandler:^(NSModalResponse returnCode){
         self.infoPanel = nil;
+        (APPD).isLocked = NO;
     }];
 }
 

@@ -8,7 +8,8 @@
 
 #import <Cocoa/Cocoa.h>
 #import "DocWinC.h"
+#import "AppDelegate.h"
+#import "NSAlert+SynchronousSheet.h"
 
 @interface DocInfoPanel : NSWindowController
-
 @end
