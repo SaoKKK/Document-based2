@@ -1,12 +1,90 @@
 
-/* Class = "NSTextFieldCell"; title = "Label"; ObjectID = "Wfv-WS-mCY"; */
-"Wfv-WS-mCY.title" = "Label";
+/* Class = "NSTextFieldCell"; title = "Require Password for Open Document"; ObjectID = "1Gf-FD-nFg"; */
+"1Gf-FD-nFg.title" = "ドキュメントを開く時にパスワードを要求する";
 
-/* Class = "NSSegmentedCell"; fBN-Os-Zj3.ibShadowedLabels[0] = "aaa"; ObjectID = "fBN-Os-Zj3"; */
-"fBN-Os-Zj3.ibShadowedLabels[0]" = "aaa";
+/* Class = "NSTextFieldCell"; title = "Encrypt Document:"; ObjectID = "4k3-lX-bRX"; */
+"4k3-lX-bRX.title" = "ドキュメントの暗号化:";
 
-/* Class = "NSSegmentedCell"; fBN-Os-Zj3.ibShadowedLabels[1] = "bbb"; ObjectID = "fBN-Os-Zj3"; */
-"fBN-Os-Zj3.ibShadowedLabels[1]" = "bbb";
+/* Class = "NSTextFieldCell"; title = "Security:"; ObjectID = "6Ux-2f-hnT"; */
+"6Ux-2f-hnT.title" = "セキュリティ:";
 
-/* Class = "NSWindow"; title = "Window"; ObjectID = "isJ-hV-X9P"; */
-"isJ-hV-X9P.title" = "Window";
+/* Class = "NSTextFieldCell"; title = "Restrict Copy/Print Processing"; ObjectID = "96R-wG-r7c"; */
+"96R-wG-r7c.title" = "コピー／プリントの制限";
+
+/* Class = "NSTextFieldCell"; title = "Producer:"; ObjectID = "9aF-9I-icr"; */
+"9aF-9I-icr.title" = "PDFデータの作成:";
+
+/* Class = "NSTextFieldCell"; title = "File Name:"; ObjectID = "Ae2-EH-UpN"; */
+"Ae2-EH-UpN.title" = "ファイル名:";
+
+/* Class = "NSTextFieldCell"; title = "Page:"; ObjectID = "EQT-Zm-45J"; */
+"EQT-Zm-45J.title" = "ページ:";
+
+/* Class = "NSTextFieldCell"; title = "Creation Date:"; ObjectID = "FKx-xt-V6T"; */
+"FKx-xt-V6T.title" = "作成日:";
+
+/* Class = "NSTextFieldCell"; title = "Modification Date:"; ObjectID = "FPp-pE-6gh"; */
+"FPp-pE-6gh.title" = "更新日:";
+
+/* Class = "NSTextFieldCell"; title = "Keyword:"; ObjectID = "Fxq-uY-R76"; */
+"Fxq-uY-R76.title" = "キーワード:";
+
+/* Class = "NSTextFieldCell"; title = "File Path:"; ObjectID = "NPg-aG-TaV"; */
+"NPg-aG-TaV.title" = "ファイル・パス:";
+
+/* Class = "NSButtonCell"; title = "Forbid Printing Document"; ObjectID = "OtF-m6-0aL"; */
+"OtF-m6-0aL.title" = "ドキュメントのプリントを禁止する";
+
+/* Class = "NSTextFieldCell"; title = "User Password:"; ObjectID = "QPG-Pi-K5H"; */
+"QPG-Pi-K5H.title" = "ユーザ・パスワード:";
+
+/* Class = "NSButtonCell"; title = "Forbid Copying Contents"; ObjectID = "QzI-ik-om5"; */
+"QzI-ik-om5.title" = "内容のコピーを禁止する";
+
+/* Class = "NSTextFieldCell"; title = "Click the lock to update"; ObjectID = "VVJ-Vp-Orm"; */
+"VVJ-Vp-Orm.title" = "変更するには鍵をクリックしてください";
+
+/* Class = "NSTextFieldCell"; title = "Version:"; ObjectID = "W31-GF-SYD"; */
+"W31-GF-SYD.title" = "バージョン:";
+
+/* Class = "NSTextFieldCell"; title = "General Information:"; ObjectID = "Wi8-DJ-8eS"; */
+"Wi8-DJ-8eS.title" = "一般情報:";
+
+/* Class = "NSTextFieldCell"; title = "Copy:"; ObjectID = "X8a-nV-uWb"; */
+"X8a-nV-uWb.title" = "コピー:";
+
+/* Class = "NSTextFieldCell"; title = "Owner Password:"; ObjectID = "YKx-U7-vw1"; */
+"YKx-U7-vw1.title" = "オーナー・パスワード:";
+
+/* Class = "NSTextFieldCell"; title = "Creator:"; ObjectID = "d3P-Jc-tV9"; */
+"d3P-Jc-tV9.title" = "コンテンツの作成:";
+
+/* Class = "NSTextFieldCell"; title = "(Confirmation)"; ObjectID = "dCM-BO-ZPV"; */
+"dCM-BO-ZPV.title" = "(確認用)";
+
+/* Class = "NSTextFieldCell"; title = "Print:"; ObjectID = "eB7-55-EWU"; */
+"eB7-55-EWU.title" = "プリント:";
+
+/* Class = "NSTextFieldCell"; title = "Detailed Information:"; ObjectID = "gyB-Hi-ZQD"; */
+"gyB-Hi-ZQD.title" = "詳細情報:";
+
+/* Class = "NSTextFieldCell"; title = "Author:"; ObjectID = "h4V-SD-Em7"; */
+"h4V-SD-Em7.title" = "著者:";
+
+/* Class = "NSTextFieldCell"; title = "Subject:"; ObjectID = "imF-q3-dvj"; */
+"imF-q3-dvj.title" = "件名:";
+
+/* Class = "NSTextFieldCell"; title = "Document Description:"; ObjectID = "jGL-fP-eUA"; */
+"jGL-fP-eUA.title" = "ドキュメントの概説:";
+
+/* Class = "NSTextFieldCell"; title = "Title:"; ObjectID = "plR-WO-Fnm"; */
+"plR-WO-Fnm.title" = "タイトル:";
+
+/* Class = "NSTextFieldCell"; title = "(Confirmation)"; ObjectID = "qN2-AN-PtX"; */
+"qN2-AN-PtX.title" = "(確認用)";
+
+/* Class = "NSButtonCell"; title = "Update"; ObjectID = "udz-go-PWM"; */
+"udz-go-PWM.title" = "更新";
+
+/* Class = "NSButtonCell"; title = "Close"; ObjectID = "zS7-rb-3FU"; */
+"zS7-rb-3FU.title" = "閉じる";

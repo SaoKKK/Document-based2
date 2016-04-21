@@ -39,6 +39,7 @@
 @property (assign) BOOL isTwoPages;
 @property (assign) BOOL isLocked;
 @property (assign) BOOL isCopyLocked;
+@property (assign) BOOL isPrintLocked;
 @property (assign) BOOL bRowClicked;
 @property (readwrite,nonatomic) NSPoint selPoint;
 

@@ -133,6 +133,7 @@
 		B9E21BE61C7AF86E004DDB0F /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Document.strings; sourceTree = "<group>"; };
 		B9E398251CC5C1080018DC88 /* lock.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = lock.png; path = Graphics/lock.png; sourceTree = "<group>"; };
 		B9E398261CC5C1080018DC88 /* unlock.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = unlock.png; path = Graphics/unlock.png; sourceTree = "<group>"; };
+		B9E51F1A1CC8667A004F002E /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/DocInfoPanel.strings; sourceTree = "<group>"; };
 		B9F79D061C99A76C00E06911 /* DocInfoPanel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DocInfoPanel.h; sourceTree = "<group>"; };
 		B9F79D071C99A76C00E06911 /* DocInfoPanel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DocInfoPanel.m; sourceTree = "<group>"; };
 		B9F79D0B1C99A78900E06911 /* DocTextPanel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DocTextPanel.h; sourceTree = "<group>"; };
@@ -443,6 +444,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				B9A7DB8B1CB63BA4008BE1B5 /* Base */,
+				B9E51F1A1CC8667A004F002E /* ja */,
 			);
 			name = DocInfoPanel.xib;
 			sourceTree = "<group>";

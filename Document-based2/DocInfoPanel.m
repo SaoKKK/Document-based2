@@ -46,47 +46,39 @@
     if (winC) {
         PDFDocument *doc = winC._pdfView.document;
         NSDictionary *attr = [doc documentAttributes];
-        [txtFName setStringValue:winC.docURL.path.lastPathComponent];
-        [txtFPath setStringValue:winC.docURL.path];
+        txtFName.stringValue = [self stringOrEmpty:winC.docURL.path.lastPathComponent];
+        txtFPath.stringValue = [self stringOrEmpty:winC.docURL.path];
         NSDateFormatter *format = [[NSDateFormatter alloc]init];
         format.dateStyle = NSDateFormatterLongStyle;
         format.timeStyle = NSDateFormatterMediumStyle;
-        [txtCDate setStringValue:[format stringFromDate:[attr objectForKey:PDFDocumentCreationDateAttribute]]];
-        [txtMDate setStringValue:[format stringFromDate:[attr objectForKey:PDFDocumentModificationDateAttribute]]];
-        [txtVer setStringValue:[NSString stringWithFormat:@"%d.%d", [doc majorVersion], [doc minorVersion]]];
-        [txtPage setStringValue:[NSString stringWithFormat:@"%li",[doc pageCount]]];
+        txtCDate.stringValue = [self stringOrEmpty:[format stringFromDate:[attr objectForKey:PDFDocumentCreationDateAttribute]]];
+        txtMDate.stringValue = [self stringOrEmpty:[format stringFromDate:[attr objectForKey:PDFDocumentModificationDateAttribute]]];
+        txtVer.stringValue = [NSString stringWithFormat:@"%d.%d", [doc majorVersion], [doc minorVersion]];
+        txtPage.stringValue = [NSString stringWithFormat:@"%li",[doc pageCount]];
         if (doc.isEncrypted){
-            [txtSecurity setStringValue:NSLocalizedString(@"Encrypted", @"")];
+            txtSecurity.stringValue = NSLocalizedString(@"Encrypted", @"");
         } else {
-            [txtSecurity setStringValue:NSLocalizedString(@"None", @"")];
+            txtSecurity.stringValue = NSLocalizedString(@"None", @"");
         }
         if (doc.allowsCopying) {
-            [txtCopy setStringValue:NSLocalizedString(@"Allow", @"")];
+            txtCopy.stringValue = NSLocalizedString(@"Allow", @"");
             (APPD).isCopyLocked = NO;
         } else {
-            [txtCopy setStringValue:NSLocalizedString(@"Forbid", @"")];
+            txtCopy.stringValue = NSLocalizedString(@"Forbid", @"");
             (APPD).isCopyLocked = YES;
         }
         if (doc.allowsPrinting) {
-            [txtPrint setStringValue:NSLocalizedString(@"Allow", @"")];
+            txtPrint.stringValue = NSLocalizedString(@"Allow", @"");
+            (APPD).isPrintLocked = NO;
         } else {
-            [txtPrint setStringValue:NSLocalizedString(@"Forbid", @"")];
+            txtPrint.stringValue = NSLocalizedString(@"Forbid", @"");
+            (APPD).isPrintLocked = YES;
         }
-        if ([attr objectForKey:PDFDocumentCreatorAttribute]) {
-            [txtCreator setStringValue:[attr objectForKey:PDFDocumentCreatorAttribute]];
-        }
-        if ([attr objectForKey:PDFDocumentProducerAttribute]) {
-            [txtProducer setStringValue:[attr objectForKey:PDFDocumentProducerAttribute]];
-        }
-        if ([attr objectForKey:PDFDocumentTitleAttribute]) {
-            [txtTitle setStringValue:[attr objectForKey:PDFDocumentTitleAttribute]];
-        }
-        if ([attr objectForKey:PDFDocumentAuthorAttribute]) {
-            [txtAuthor setStringValue:[attr objectForKey:PDFDocumentAuthorAttribute]];
-        }
-        if ([attr objectForKey:PDFDocumentSubjectAttribute]) {
-            [txtSubject setStringValue:[attr objectForKey:PDFDocumentSubjectAttribute]];
-        }
+        txtCreator.stringValue = [self stringOrEmpty:[attr objectForKey:PDFDocumentCreatorAttribute]];
+        txtProducer.stringValue = [self stringOrEmpty:[attr objectForKey:PDFDocumentProducerAttribute]];
+        txtTitle.stringValue = [self stringOrEmpty:[attr objectForKey:PDFDocumentTitleAttribute] ];
+        txtAuthor.stringValue = [self stringOrEmpty:[attr objectForKey:PDFDocumentAuthorAttribute]];
+        txtSubject.stringValue = [self stringOrEmpty:[attr objectForKey:PDFDocumentSubjectAttribute]];
         if ([attr objectForKey:PDFDocumentKeywordsAttribute]) {
             NSArray *keywords = [attr objectForKey:PDFDocumentKeywordsAttribute];
             NSString *keyStr = @"";
@@ -99,34 +91,40 @@
                     }
                 }
             }
-            [txtKeyword setStringValue:keyStr];
+            txtKeyword.stringValue = keyStr;
         }
     }
 }
 
+//nil値を空文字に変換
+- (NSString*)stringOrEmpty:(NSString*)str{
+    return str ? str : @"";
+}
+
 - (IBAction)pshLock:(id)sender {
     if ([sender state]){
-        if ((APPD).isCopyLocked) {
+        if ((APPD).isCopyLocked || (APPD).isPrintLocked) {
             (APPD).parentWin = self.window;
-            [(APPD).pwMsgTxt setStringValue:NSLocalizedString(@"UnlockEditMsg", @"")];
-            [(APPD).pwInfoTxt setStringValue:NSLocalizedString(@"UnlockEditInfo", @"")];
+            (APPD).pwMsgTxt.stringValue = NSLocalizedString(@"UnlockEditMsg", @"");
+            (APPD).pwInfoTxt.stringValue = NSLocalizedString(@"UnlockEditInfo", @"");
             [self.window beginSheet:(APPD).passWin completionHandler:^(NSInteger returnCode){
                 if (returnCode == NSModalResponseCancel) {
                     [sender setState:NO];
                 } else {
-                    [txtCopy setStringValue:NSLocalizedString(@"Allow", @"")];
-                    [txtPrint setStringValue:NSLocalizedString(@"Allow", @"")];
-                    [txtLock setStringValue:NSLocalizedString(@"Lock", @"")];
+                    txtCopy.stringValue = NSLocalizedString(@"Allow", @"");
+                    txtPrint.stringValue = NSLocalizedString(@"Allow", @"");
+                    txtLock.stringValue = NSLocalizedString(@"Lock", @"");
                     (APPD).isCopyLocked = NO;
+                    (APPD).isPrintLocked = NO;
                     (APPD).isLocked = YES;
                 }
             }];
         } else {
-            [txtLock setStringValue:NSLocalizedString(@"Lock", @"")];
+            txtLock.stringValue = NSLocalizedString(@"Lock", @"");
             (APPD).isLocked = YES;
         }
     } else {
-        [txtLock setStringValue:NSLocalizedString(@"Unlock", @"")];
+        txtLock.stringValue = NSLocalizedString(@"Unlock", @"");
         (APPD).isLocked = NO;
     }
 }
@@ -187,6 +185,7 @@
         option = [NSDictionary dictionaryWithObjectsAndKeys:(__bridge id _Nonnull)(aCopy),kCGPDFContextAllowsCopying,(__bridge id _Nonnull)(aPrint),kCGPDFContextAllowsPrinting, nil];
         [options addEntriesFromDictionary:option];
     }
+    NSLog(@"%@",options);
     [doc writeToURL: winC.docURL withOptions: options];
     [self.window.sheetParent endSheet:self.window returnCode:NSModalResponseOK];
 }
