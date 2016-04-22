@@ -27,7 +27,7 @@
                 <outlet property="mnTwoPages" destination="nUn-NX-nUC" id="j6b-oq-cNl"/>
                 <outlet property="mnZoomIn" destination="p7o-Az-s8w" id="37g-18-wZO"/>
                 <outlet property="mnZoomOut" destination="Srb-vg-b48" id="5ae-Cv-bSE"/>
-                <outlet property="passWin" destination="Vza-Zy-rGP" id="iDw-YI-k0W"/>
+                <outlet property="passWin" destination="Vza-Zy-rGP" id="Em7-0M-acc"/>
                 <outlet property="pwInfoTxt" destination="yNi-5q-Xdf" id="Hbu-vh-Ims"/>
                 <outlet property="pwMsgTxt" destination="5P3-f0-MBf" id="2WM-w1-7n9"/>
                 <outlet property="pwTxtPass" destination="DyJ-Ta-mql" id="VRj-wm-5s6"/>
@@ -150,7 +150,7 @@
                             </menuItem>
                             <menuItem title="Print…" keyEquivalent="p" id="aTl-1u-JFS">
                                 <connections>
-                                    <action selector="print:" target="-1" id="85O-mR-H7y"/>
+                                    <action selector="printDocument:" target="-1" id="JI9-gg-veG"/>
                                 </connections>
                             </menuItem>
                         </items>

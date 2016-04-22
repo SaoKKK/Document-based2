@@ -7,8 +7,8 @@
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="DocInfoPanel">
             <connections>
-                <outlet property="rdForbidCopy" destination="pEq-jE-cJ5" id="ns9-WC-j9F"/>
-                <outlet property="rdForbidPrint" destination="k4k-ON-6du" id="jnR-MA-lJX"/>
+                <outlet property="chkForbidCopy" destination="pEq-jE-cJ5" id="WmW-Gm-FQB"/>
+                <outlet property="chkForbidPrint" destination="k4k-ON-6du" id="j02-St-HIw"/>
                 <outlet property="txtAuthor" destination="V5O-ou-giW" id="BTS-sS-b6l"/>
                 <outlet property="txtCDate" destination="YfX-AQ-xFd" id="CkW-T2-tS2"/>
                 <outlet property="txtCopy" destination="hzy-Rb-ngS" id="5op-cQ-3bg"/>

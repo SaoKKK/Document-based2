@@ -8,6 +8,8 @@
 
 #import "AppDelegate.h"
 
+#define WINC (DocWinC *)[[NSDocumentController sharedDocumentController].currentDocument.windowControllers objectAtIndex:0]
+
 #pragma mark - WindowController
 
 @interface NSWindowController(ConvenienceWC)
@@ -39,6 +41,8 @@
     IBOutlet NSMenuItem *mnTwoPageCont;
     NSArray *mnPageDisplay; //表示モード変更メニューグループ
     NSTimer *timer; //ペーストボード監視用タイマー
+    NSMutableArray *indexes; //アウトラインのページインデクスバックアップ用
+    int cntIndex;
 }
 
 @end
@@ -137,11 +141,46 @@
 #pragma mark - pass win
 
 - (IBAction)pwUnlock:(id)sender {
-    NSDocumentController *docC = [NSDocumentController sharedDocumentController];
-    DocWinC *winC = [docC.currentDocument.windowControllers objectAtIndex:0];
-    [winC._pdfView.document unlockWithPassword:pwTxtPass.stringValue];
-    if (winC._pdfView.document.allowsCopying) {
+    //現在のアウトラインのページインデクスをバックアップ
+    indexes = [NSMutableArray array];
+    cntIndex = 0;
+    PDFOutline *root = (WINC)._pdfView.document.outlineRoot;
+    [self getIndex:root];
+    //ドキュメントをアンロック
+    [(WINC)._pdfView.document unlockWithPassword:pwTxtPass.stringValue];
+    //アンロック後のアウトラインにバックアップしておいたページインデクスをセット
+    [self setIndex:root];
+    if ((WINC)._pdfView.document.allowsCopying && (WINC)._pdfView.document.allowsPrinting) {
+        self.isCopyLocked = NO;
+        self.isPrintLocked = NO;
+        self.isLocked = NO;
         [parentWin endSheet:passWin returnCode:NSModalResponseOK];
+    }
+}
+
+- (void)getIndex:(PDFOutline*)parent{
+    for (int i = 0; i < parent.numberOfChildren; i++) {
+        PDFOutline *ol = [parent childAtIndex:i];
+        PDFPage *page = ol.destination.page;
+        NSInteger pgIndex = [(WINC)._pdfView.document indexForPage:page];
+        [indexes addObject:[NSNumber numberWithInteger:pgIndex]];
+        if (ol.numberOfChildren > 0) {
+            [self getIndex:ol];
+        }
+    }
+}
+
+- (void)setIndex:(PDFOutline*)parent{
+    PDFDocument *doc = (WINC)._pdfView.document;
+    for (int i = 0; i < parent.numberOfChildren; i++) {
+        PDFOutline *ol = [parent childAtIndex:i];
+        PDFPage *page = [doc pageAtIndex:[[indexes objectAtIndex:cntIndex] integerValue]];
+        PDFDestination *dest = ol.destination;
+        [dest setValue:page forKey:@"page"];
+        cntIndex ++;
+        if (ol.numberOfChildren > 0) {
+            [self setIndex:ol];
+        }
     }
 }
 

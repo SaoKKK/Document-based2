@@ -45,6 +45,14 @@
 "Unlock" = "Click the lock to update.";
 "Lock" = "Click the lock to prevent updating.";
 
+//info panel allert
+"passSameMsg" = "User password and owner password must be different.";
+"oNoneMsg" = "To lock copying or printing requires owner password.";
+"oNoneInfo" = "Input owner password and its confirmation.";
+"uPassMsg" = "The inputed value of the user password is different from the inputed value for confirmation.";
+"oPassMsg" = "The inputed value of the owner password is different from the inputed value for confirmation.";
+"passInfo" = "Re-try updating after re-input the passwords to the text field for registration and the text field for confirmation.";
+
 //pass win
 "UnlockCopyMsg" = "You don't have permission to copy portions of this document.";
 "UnlockCopyInfo" = "Enter the owner password to unlock copying from the document.";
@@ -52,10 +60,3 @@
 "UnlockPrintInfo" = "Enter the owner password to unlock printing the document.";
 "UnlockEditMsg" = "You don't have permission to edit the information of this document.";
 "UnlockEditInfo" = "Enter the owner password to unlock editing the document information.";
-"oNoneMsg" = "To lock copying or printing requires owner password.";
-"oNoneInfo" = "Input owner password and its confirmation.";
-"uPassMsg" = "The inputed value of the user password is different from the inputed value for confirmation.";
-"oPassMsg" = "The inputed value of the owner password is different from the inputed value for confirmation.";
-"passInfo" = "Re-try updating after re-input the passwords to the text field for registration and the text field for confirmation.";
-"uNoneMsg" = "To encrypt the document requires both user password and owner password.";
-"uNoneInfo" = "If processing continues, the application assigns the same value as another to the password of the blank, is it all right?";

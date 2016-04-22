@@ -30,8 +30,8 @@
     IBOutlet NSSecureTextField *txtUPass2;
     IBOutlet NSSecureTextField *txtOPass1;
     IBOutlet NSSecureTextField *txtOPass2;
-    IBOutlet NSButton *rdForbidCopy;
-    IBOutlet NSButton *rdForbidPrint;
+    IBOutlet NSButton *chkForbidCopy;
+    IBOutlet NSButton *chkForbidPrint;
     IBOutlet NSTextField *txtLock;
 }
 
@@ -135,7 +135,7 @@
     //入力値のチェック
     NSString *uPass = txtUPass1.stringValue;
     NSString *oPass = txtOPass1.stringValue;
-    if (rdForbidCopy.state || rdForbidPrint.state) {
+    if (chkForbidCopy.state || chkForbidPrint.state) {
         if ([oPass isEqualToString:@""]) {
             [self showPassAllert:NSLocalizedString(@"oNoneMsg",@"") info:NSLocalizedString(@"oNoneInfo",@"")];
             return;
@@ -147,6 +147,10 @@
     }
     if ([uPass isNotEqualTo:txtUPass2.stringValue]) {
         [self showPassAllert:NSLocalizedString(@"uPassMsg",@"") info:NSLocalizedString(@"passInfo",@"")];
+        return;
+    }
+    if ([oPass isNotEqualTo:@""] && [oPass isEqualToString:uPass]) {
+        [self showPassAllert:NSLocalizedString(@"passSameMsg",@"") info:NSLocalizedString(@"passInfo",@"")];
         return;
     }
     //書類の概説を更新
@@ -172,12 +176,12 @@
         option = [NSDictionary dictionaryWithObjectsAndKeys:oPass,kCGPDFContextOwnerPassword, nil];
         [options addEntriesFromDictionary:option];
         CFBooleanRef aCopy,aPrint;
-        if (rdForbidCopy.state) {
+        if (chkForbidCopy.state) {
             aCopy = kCFBooleanFalse;
         } else {
             aCopy = kCFBooleanTrue;
         }
-        if (rdForbidPrint.state) {
+        if (chkForbidPrint.state) {
             aPrint = kCFBooleanFalse;
         } else {
             aPrint = kCFBooleanTrue;
@@ -185,7 +189,6 @@
         option = [NSDictionary dictionaryWithObjectsAndKeys:(__bridge id _Nonnull)(aCopy),kCGPDFContextAllowsCopying,(__bridge id _Nonnull)(aPrint),kCGPDFContextAllowsPrinting, nil];
         [options addEntriesFromDictionary:option];
     }
-    NSLog(@"%@",options);
     [doc writeToURL: winC.docURL withOptions: options];
     [self.window.sheetParent endSheet:self.window returnCode:NSModalResponseOK];
 }

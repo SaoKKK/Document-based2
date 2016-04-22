@@ -76,6 +76,12 @@
     }
 }
 
+//暗号化情報を更新
+- (void)updateLockInfo{
+    (APPD).isCopyLocked = ![_pdfView.document allowsCopying];
+    (APPD).isPrintLocked = ![_pdfView.document allowsPrinting];
+}
+
 #pragma mark - document save/open support
 
 - (NSData *)pdfViewDocumentData{
@@ -123,6 +129,7 @@
     [[NSNotificationCenter defaultCenter] addObserverForName:NSWindowDidBecomeMainNotification object:self.window queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification *notif){
         (APPD).isDocWinMain = YES;
         (APPD).isOLExists = [self isOLExists];
+        [self updateLockInfo];
         if (_pdfView.currentSelection) {
             (APPD).isSelection = YES;
         } else {
@@ -173,6 +180,10 @@
     [[NSNotificationCenter defaultCenter]addObserverForName:NSWindowDidExitFullScreenNotification object:self.window queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification *notif){
         bFullscreen = NO;
         [self mnFullScreenSetTitle];
+    }];
+    //ドキュメントがアンロックされた
+    [[NSNotificationCenter defaultCenter]addObserverForName:PDFDocumentDidUnlockNotification object:_pdfView.document queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification *notif){
+        [self updateLockInfo];
     }];
 }
 
@@ -392,12 +403,29 @@
 
 #pragma mark - menu action
 
+//ファイルメニュー
 - (IBAction)mnShowInfo:(id)sender{
     self.infoPanel = [[DocInfoPanel alloc]initWithWindowNibName:@"DocInfoPanel"];
     [self.window beginSheet:self.infoPanel.window completionHandler:^(NSModalResponse returnCode){
         self.infoPanel = nil;
         (APPD).isLocked = NO;
     }];
+}
+
+- (IBAction)printDocument:(id)sender{
+    if ((APPD).isPrintLocked){
+        (APPD).parentWin = self.window;
+        (APPD).pwTxtPass.stringValue = @"";
+        (APPD).pwMsgTxt.stringValue = NSLocalizedString(@"UnlockPrintMsg", @"");
+        (APPD).pwInfoTxt.stringValue = NSLocalizedString(@"UnlockPrintInfo", @"");
+        [self.window beginSheet:(APPD).passWin completionHandler:^(NSInteger returnCode){
+            if (returnCode == NSModalResponseOK) {
+                [_pdfView printWithInfo:[self.document printInfo]  autoRotate:YES];
+            }
+        }];
+    } else {
+        [_pdfView printWithInfo:[self.document printInfo]  autoRotate:YES];
+    }
 }
 
 //表示メニュー
@@ -486,10 +514,32 @@
 }
 
 - (IBAction)test:(id)sender {
+    PDFDocument *doc = _pdfView.document;
+    NSDictionary *options = [NSDictionary dictionaryWithObjectsAndKeys:
+                             @"user",kCGPDFContextUserPassword,
+                             @"owner",kCGPDFContextOwnerPassword,
+                             kCFBooleanFalse,kCGPDFContextAllowsCopying,
+                             kCFBooleanFalse,kCGPDFContextAllowsPrinting,
+                             nil];
+    [doc writeToFile:@"/Users/kounosaori/Desktop/encryptedPDF.pdf" withOptions:options];
 }
 
 - (IBAction)test2:(id)sender {
-    [[NSCursor closedHandCursor]set];
+    //現在のアウトラインのページインデクスをバックアップ
+    PDFOutline *root = _pdfView.document.outlineRoot;
+    [self getIndex:root];
+}
+
+- (void)getIndex:(PDFOutline*)parent{
+    for (int i = 0; i < parent.numberOfChildren; i++) {
+        PDFOutline *ol = [parent childAtIndex:i];
+        PDFPage *page = ol.destination.page;
+        NSUInteger pgIndex = [_pdfView.document indexForPage:page];
+        NSLog(@"%li",pgIndex);
+        if (ol.numberOfChildren > 0) {
+            [self getIndex:ol];
+        }
+    }
 }
 
 - (IBAction)test3:(id)sender {

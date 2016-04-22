@@ -172,6 +172,46 @@ enum UNDEROBJ_TYPE{
     return cursor;
 }
 
+#pragma mark - menu action
+
+- (IBAction)selectAll:(id)sender{
+    if ((WINC).segTool.selectedSegment == 1){
+        targetPg = self.currentPage;
+        selRect = [self.currentPage boundsForBox:kPDFDisplayBoxArtBox];
+        [self setNeedsDisplay:YES];
+        (APPD).isSelection = YES;
+    } else {
+        [super selectAll:nil];
+    }
+}
+
+- (void)copy:(id)sender{
+    if ((APPD).isCopyLocked){
+        (APPD).parentWin = self.window;
+        (APPD).pwTxtPass.stringValue = @"";
+        (APPD).pwMsgTxt.stringValue = NSLocalizedString(@"UnlockCopyMsg", @"");
+        (APPD).pwInfoTxt.stringValue = NSLocalizedString(@"UnlockCopyInfo", @"");
+        [self.window beginSheet:(APPD).passWin completionHandler:^(NSInteger returnCode){
+            if (returnCode == NSModalResponseOK) {
+                [self performCopy];
+            }
+        }];
+    } else {
+        [self performCopy];
+    }
+}
+
+- (void)performCopy{
+    if ((WINC).segTool.selectedSegment == 1) {
+        PDFSelection *sel = [targetPg selectionForRect:selRect];
+        [self setCurrentSelection:sel];
+        [super copy:nil];
+        [self clearSelection];
+    } else {
+        [super copy:nil];
+    }
+}
+
 #pragma mark - draw page
 
 - (void)drawPage:(PDFPage *)page{
@@ -232,7 +272,13 @@ enum UNDEROBJ_TYPE{
     if ((WINC).segTool.selectedSegment == 1) {
         NSPoint point = [self convertPoint:[theEvent locationInWindow] fromView:nil];
         //カーソル座標に最も近いページの領域をNSView座標系で取得
+        PDFPage *oldPg = targetPg;
         targetPg = [self pageForPoint:point nearest:YES];
+        //違うページにマウスダウンされた場合はselRectをクリア
+        if (targetPg != oldPg) {
+            selRect = NSZeroRect;
+            [self setNeedsDisplay:YES];
+        }
         pgRect = [targetPg boundsForBox:kPDFDisplayBoxArtBox];
         vPgRect = [self convertRect:pgRect fromPage:targetPg];
         if ([self pageForPoint:point nearest:NO]) {
