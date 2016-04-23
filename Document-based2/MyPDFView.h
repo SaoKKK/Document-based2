@@ -27,6 +27,6 @@
 - (void)loadZoomView;
 - (void)removeSubView;
 - (void)deselectArea;
-- (IBAction)printDocument:(id)sender;
+- (void)printDocument:(id)sender;
 
 @end

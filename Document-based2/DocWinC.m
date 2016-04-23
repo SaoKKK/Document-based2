@@ -402,7 +402,7 @@
     }];
 }
 
-- (IBAction)printDocument:(id)sender{
+- (void)printDocument:(id)sender{
     [_pdfView printDocument:nil];
 }
 

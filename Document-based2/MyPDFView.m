@@ -174,7 +174,7 @@ enum UNDEROBJ_TYPE{
 
 #pragma mark - menu action
 
-- (IBAction)printDocument:(id)sender{
+- (void)printDocument:(id)sender{
     if (!self.document.allowsPrinting){
         (APPD).parentWin = self.window;
         (APPD).pwTxtPass.stringValue = @"";
