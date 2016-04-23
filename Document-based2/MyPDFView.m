@@ -174,6 +174,22 @@ enum UNDEROBJ_TYPE{
 
 #pragma mark - menu action
 
+- (IBAction)printDocument:(id)sender{
+    if (!self.document.allowsPrinting){
+        (APPD).parentWin = self.window;
+        (APPD).pwTxtPass.stringValue = @"";
+        (APPD).pwMsgTxt.stringValue = NSLocalizedString(@"UnlockPrintMsg", @"");
+        (APPD).pwInfoTxt.stringValue = NSLocalizedString(@"UnlockPrintInfo", @"");
+        [self.window beginSheet:(APPD).passWin completionHandler:^(NSInteger returnCode){
+            if (returnCode == NSModalResponseOK) {
+                [self printWithInfo:[(WINC).document printInfo]  autoRotate:YES];
+            }
+        }];
+    } else {
+        [self printWithInfo:[(WINC).document printInfo]  autoRotate:YES];
+    }
+}
+
 - (IBAction)selectAll:(id)sender{
     if ((WINC).segTool.selectedSegment == 1){
         targetPg = self.currentPage;
@@ -186,7 +202,7 @@ enum UNDEROBJ_TYPE{
 }
 
 - (void)copy:(id)sender{
-    if ((APPD).isCopyLocked){
+    if (!self.document.allowsCopying){
         (APPD).parentWin = self.window;
         (APPD).pwTxtPass.stringValue = @"";
         (APPD).pwMsgTxt.stringValue = NSLocalizedString(@"UnlockCopyMsg", @"");

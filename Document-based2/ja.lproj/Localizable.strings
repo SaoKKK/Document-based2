@@ -19,8 +19,13 @@
 
 //Document Changed Alert Dialog Button Title
 "Save" = "保存";
+"Continue" = "続行";
 "Cancel" = "キャンセル";
 "Don't Save" = "保存しない";
+
+//Document encrypted allert dialog
+"EncryptedMsg" = "この文書はパスワードによって暗号化されています。";
+"EncryptedInfo" = "処理を続行した場合、暗号化は解除されます。暗号化を解除しない場合は、キャンセルボタンをクリックし、「ファイル」メニューから「文書情報を表示」を選択後、暗号化を実行してください。ドキュメントは暗号化されて保存されます。";
 
 //New Bookmark Undefined Label
 "UntitledLabal" = "名称未設定";
@@ -33,9 +38,12 @@
 "ShowTP" = "テキストパネルを表示";
 "HideTP" = "テキストパネルを隠す";
 
-"PageRangeMsg" = "ページ範囲指定エラー：";
-"PageRangeInfo" = "ページ範囲の指定が不正です。";
+//AllertWithOKBtn
+"PRangeMsg" = "ページ範囲指定エラー：";
+"PRangeInfo" = "ページ範囲の指定が不正です。";
 "CharError" = "ページ範囲の指定に不適切な文字が使用されています。";
+"LockedMsg" = "テキストの取得にはこのドキュメントをコピーする権限が必要です。";
+"LockedInfo" = "コピー操作のロックを解除するには、ドキュメントの暗号化を解除してください。";
 
 //Info Panel
 "Encrypted" = "暗号化";

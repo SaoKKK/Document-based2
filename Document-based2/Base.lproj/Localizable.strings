@@ -19,8 +19,13 @@
 
 //Document Changed Alert Dialog Button Title
 "Save" = "Save";
+"Continue" = "Continue";
 "Cancel" = "Cancel";
 "Don't Save" = "Don't Save";
+
+//Document encrypted allert dialog
+"EncryptedMsg" = "This document is encrypted with password.";
+"EncryptedInfo" = "If you continue processing, the document will be decrypted. If you don't want it, click the cancel button and select the menu item \"File\" → \"Show Document Info\" and perform encrypting. Then encrypted file will be saved.";
 
 //New Bookmark Undefined Label
 "UntitledLabal" = "Untitled";
@@ -33,9 +38,12 @@
 "ShowTP" = "Show Text Panel";
 "HideTP" = "Hide Text Panel";
 
-"PageRangeMsg" = "Page Range Error:";
-"PageRangeInfo" = "The value of the page range is not correct.";
+//AllertWithOKBtn
+"PRangeMsg" = "Page Range Error:";
+"PRangeInfo" = "The value of the page range is not correct.";
 "CharError" = "The specified page range includes inappropriate characters.";
+"LockedMsg" = "To get text requires the permission to copy this document.";
+"LockedInfo" = "To unlock copying from the document, decrypt this document.";
 
 //Info Panel
 "Encrypted" = "Encrypted";

@@ -43,6 +43,11 @@
 - (IBAction)getTxt:(id)sender {
     DocWinC *winC = [self currentWinC];
     PDFDocument *doc = winC._pdfView.document;
+    //ドキュメントに対するコピー権限がない場合は処理を拒否
+    if (!doc.allowsCopying) {
+        [self allertWithOKBtn:NSLocalizedString(@"LockedMsg",@"") info:NSLocalizedString(@"LockedInfo",@"")];
+        return;
+    }
     if ([popTarget indexOfSelectedItem] == 1) {
             //ページ範囲をインデックス・セットに変換
             NSString *indexStr = txtPgRange.stringValue;
@@ -50,14 +55,14 @@
             NSUInteger totalPage = doc.pageCount;
             //入力の有無をチェック
             if ([indexStr isEqualToString:@""]) {
-                [self showPageRangeAllert:NSLocalizedString(@"PageEmpty",@"")];
+                [self allertWithOKBtn:NSLocalizedString(@"PRangeMsg",@"") info:NSLocalizedString(@"PageEmpty",@"")];
                 return;
             }
             //入力値に不正な文字列が含まれないかチェック
             NSCharacterSet *pgRangeChrSet = [NSCharacterSet characterSetWithCharactersInString:@"0123456789,-"];
             NSCharacterSet *inputChrSet = [NSCharacterSet characterSetWithCharactersInString:indexStr];
             if (! [pgRangeChrSet isSupersetOfSet:inputChrSet]) {
-                [self showPageRangeAllert:NSLocalizedString(@"CharError",@"")];
+                [self allertWithOKBtn:NSLocalizedString(@"PRangeMsg",@"") info:NSLocalizedString(@"CharError",@"")];
                 return;
             }
             //入力値をカンマで分割
@@ -67,20 +72,20 @@
                 NSArray *pages = [range componentsSeparatedByString:@"-"];
                 if (pages.count > 2) {
                     //"-"が2つ以上含まれる場合
-                    [self showPageRangeAllert:NSLocalizedString(@"PageRangeInfo",@"")];
+                    [self allertWithOKBtn:NSLocalizedString(@"PRangeMsg",@"") info:NSLocalizedString(@"PRangeInfo",@"")];
                     return;
                 } else if (pages.count == 1) {
                     //"-"が含まれない場合
                     if ([range integerValue] <= totalPage && [range integerValue] > 0) {
                         [pageRange addIndex:[range integerValue]];
                     } else {
-                        [self showPageRangeAllert:NSLocalizedString(@"PageRangeInfo",@"")];
+                        [self allertWithOKBtn:NSLocalizedString(@"PRangeMsg",@"") info:NSLocalizedString(@"PRangeInfo",@"")];
                         return;
                     }
                 } else if ([[pages objectAtIndex:0]isEqualToString:@""]) {
                     //"-"が先頭にある場合
                     if ([[pages objectAtIndex:1]integerValue] > totalPage || [[pages objectAtIndex:0]integerValue] < 1) {
-                        [self showPageRangeAllert:NSLocalizedString(@"PageRangeInfo",@"")];
+                        [self allertWithOKBtn:NSLocalizedString(@"PRangeMsg",@"") info:NSLocalizedString(@"PRangeInfo",@"")];
                         return;
                     } else {
                         [pageRange addIndexesInRange:NSMakeRange(1,[[pages objectAtIndex:1]integerValue])];
@@ -88,7 +93,7 @@
                 } else if ([[pages objectAtIndex:1]isEqualToString:@""]) {
                     //"-"が末尾にある場合
                     if ([[pages objectAtIndex:0]integerValue] > totalPage || [[pages objectAtIndex:0]integerValue] < 1) {
-                        [self showPageRangeAllert:NSLocalizedString(@"PageRangeInfo",@"")];
+                        [self allertWithOKBtn:NSLocalizedString(@"PRangeMsg",@"") info:NSLocalizedString(@"PRangeInfo",@"")];
                         return;
                     } else {
                         [pageRange addIndexes:[self indexFrom1stIndex:[[pages objectAtIndex:0]integerValue] toLastIndex:totalPage]];
@@ -96,7 +101,7 @@
                 } else {
                     //通常の範囲指定
                     if ([[pages objectAtIndex:0]integerValue] < 1 || [[pages objectAtIndex:0]integerValue] > totalPage || [[pages objectAtIndex:0]integerValue] > [[pages objectAtIndex:1]integerValue]) {
-                        [self showPageRangeAllert:NSLocalizedString(@"PageRangeInfo",@"")];
+                        [self allertWithOKBtn:NSLocalizedString(@"PRangeMsg",@"") info:NSLocalizedString(@"PRangeInfo",@"")];
                         return;
                     } else {
                         [pageRange addIndexes:[self indexFrom1stIndex:[[pages objectAtIndex:0]integerValue] toLastIndex:[[pages objectAtIndex:1]integerValue]]];
@@ -130,10 +135,10 @@
         }
 }
 
-- (NSInteger)showPageRangeAllert:(NSString*)infoTxt{
+- (NSInteger)allertWithOKBtn:(NSString*)msg info:(NSString*)info{
     NSAlert *alert = [[NSAlert alloc]init];
-    alert.messageText = NSLocalizedString(@"PageRangeMsg",@"");
-    [alert setInformativeText:infoTxt];
+    alert.messageText = msg;
+    [alert setInformativeText:info];
     [alert addButtonWithTitle:@"OK"];
     [alert setAlertStyle:NSCriticalAlertStyle];
     return [alert runModalSheetForWindow:self.window];

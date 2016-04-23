@@ -9,6 +9,7 @@
 #import "DocInfoPanel.h"
 
 #define APPD (AppDelegate *)[NSApp delegate]
+#define WINC (DocWinC *)self.window.sheetParent.windowController
 
 @interface DocInfoPanel (){
     IBOutlet NSTextField *txtFName;
@@ -62,17 +63,13 @@
         }
         if (doc.allowsCopying) {
             txtCopy.stringValue = NSLocalizedString(@"Allow", @"");
-            (APPD).isCopyLocked = NO;
         } else {
             txtCopy.stringValue = NSLocalizedString(@"Forbid", @"");
-            (APPD).isCopyLocked = YES;
         }
         if (doc.allowsPrinting) {
             txtPrint.stringValue = NSLocalizedString(@"Allow", @"");
-            (APPD).isPrintLocked = NO;
         } else {
             txtPrint.stringValue = NSLocalizedString(@"Forbid", @"");
-            (APPD).isPrintLocked = YES;
         }
         txtCreator.stringValue = [self stringOrEmpty:[attr objectForKey:PDFDocumentCreatorAttribute]];
         txtProducer.stringValue = [self stringOrEmpty:[attr objectForKey:PDFDocumentProducerAttribute]];
@@ -103,7 +100,7 @@
 
 - (IBAction)pshLock:(id)sender {
     if ([sender state]){
-        if ((APPD).isCopyLocked || (APPD).isPrintLocked) {
+        if (!(WINC)._pdfView.document.allowsCopying || !(WINC)._pdfView.document.allowsPrinting) {
             (APPD).parentWin = self.window;
             (APPD).pwMsgTxt.stringValue = NSLocalizedString(@"UnlockEditMsg", @"");
             (APPD).pwInfoTxt.stringValue = NSLocalizedString(@"UnlockEditInfo", @"");
@@ -114,8 +111,6 @@
                     txtCopy.stringValue = NSLocalizedString(@"Allow", @"");
                     txtPrint.stringValue = NSLocalizedString(@"Allow", @"");
                     txtLock.stringValue = NSLocalizedString(@"Lock", @"");
-                    (APPD).isCopyLocked = NO;
-                    (APPD).isPrintLocked = NO;
                     (APPD).isLocked = YES;
                 }
             }];
@@ -130,8 +125,7 @@
 }
 
 - (IBAction)pshUpdate:(id)sender {
-    DocWinC *winC = self.window.sheetParent.windowController;
-    PDFDocument *doc = winC._pdfView.document;
+    PDFDocument *doc = (WINC)._pdfView.document;
     //入力値のチェック
     NSString *uPass = txtUPass1.stringValue;
     NSString *oPass = txtOPass1.stringValue;
@@ -189,7 +183,8 @@
         option = [NSDictionary dictionaryWithObjectsAndKeys:(__bridge id _Nonnull)(aCopy),kCGPDFContextAllowsCopying,(__bridge id _Nonnull)(aPrint),kCGPDFContextAllowsPrinting, nil];
         [options addEntriesFromDictionary:option];
     }
-    [doc writeToURL: winC.docURL withOptions: options];
+    [doc writeToURL: (WINC).docURL withOptions: options];
+    (WINC).isEncrypted = YES;
     [self.window.sheetParent endSheet:self.window returnCode:NSModalResponseOK];
 }
 

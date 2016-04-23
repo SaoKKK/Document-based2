@@ -39,7 +39,6 @@
     IBOutlet NSSegmentedControl *segOLViewMode;
     IBOutlet NSWindow *progressWin;
     IBOutlet NSProgressIndicator *savingProgBar;
-    IBOutlet NSWindow *infoWin;
     CGFloat oldTocWidth; //目次エリアの変更前の幅保持用
     BOOL bFullscreen; //スクリーンモード保持用
     NSMutableArray *searchResult; //検索結果保持用
@@ -48,6 +47,7 @@
     NSUInteger selectedViewMode; //指定ビューモード保持用
 }
 @property (readonly) NSURL *docURL; //ドキュメントのfileURL保持用
+@property (assign) BOOL isEncrypted; //ドキュメントの暗号化の有無
 @property (strong) IBOutlet NSSegmentedControl *segTool;
 @property (strong) IBOutlet MyPDFView *_pdfView;
 @property (strong) DocInfoPanel *infoPanel;

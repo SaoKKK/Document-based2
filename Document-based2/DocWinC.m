@@ -30,6 +30,7 @@
     docURL = [[self document] fileURL];
     PDFDocument *doc = [[PDFDocument alloc]initWithURL:docURL];
     [_pdfView setDocument:doc];
+    self.isEncrypted = doc.isEncrypted;
     [self initWindow];
 }
 
@@ -74,12 +75,6 @@
     } else {
         return NO;
     }
-}
-
-//暗号化情報を更新
-- (void)updateLockInfo{
-    (APPD).isCopyLocked = ![_pdfView.document allowsCopying];
-    (APPD).isPrintLocked = ![_pdfView.document allowsPrinting];
 }
 
 #pragma mark - document save/open support
@@ -129,7 +124,6 @@
     [[NSNotificationCenter defaultCenter] addObserverForName:NSWindowDidBecomeMainNotification object:self.window queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification *notif){
         (APPD).isDocWinMain = YES;
         (APPD).isOLExists = [self isOLExists];
-        [self updateLockInfo];
         if (_pdfView.currentSelection) {
             (APPD).isSelection = YES;
         } else {
@@ -180,10 +174,6 @@
     [[NSNotificationCenter defaultCenter]addObserverForName:NSWindowDidExitFullScreenNotification object:self.window queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification *notif){
         bFullscreen = NO;
         [self mnFullScreenSetTitle];
-    }];
-    //ドキュメントがアンロックされた
-    [[NSNotificationCenter defaultCenter]addObserverForName:PDFDocumentDidUnlockNotification object:_pdfView.document queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification *notif){
-        [self updateLockInfo];
     }];
 }
 
@@ -413,19 +403,7 @@
 }
 
 - (IBAction)printDocument:(id)sender{
-    if ((APPD).isPrintLocked){
-        (APPD).parentWin = self.window;
-        (APPD).pwTxtPass.stringValue = @"";
-        (APPD).pwMsgTxt.stringValue = NSLocalizedString(@"UnlockPrintMsg", @"");
-        (APPD).pwInfoTxt.stringValue = NSLocalizedString(@"UnlockPrintInfo", @"");
-        [self.window beginSheet:(APPD).passWin completionHandler:^(NSInteger returnCode){
-            if (returnCode == NSModalResponseOK) {
-                [_pdfView printWithInfo:[self.document printInfo]  autoRotate:YES];
-            }
-        }];
-    } else {
-        [_pdfView printWithInfo:[self.document printInfo]  autoRotate:YES];
-    }
+    [_pdfView printDocument:nil];
 }
 
 //表示メニュー
@@ -525,9 +503,7 @@
 }
 
 - (IBAction)test2:(id)sender {
-    //現在のアウトラインのページインデクスをバックアップ
-    PDFOutline *root = _pdfView.document.outlineRoot;
-    [self getIndex:root];
+    NSLog(@"%hhi",[(PDFDocument*)[self document] isEncrypted]);
 }
 
 - (void)getIndex:(PDFOutline*)parent{

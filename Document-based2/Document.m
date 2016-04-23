@@ -10,21 +10,13 @@
 #import "DocWinC.h"
 
 #define APPD (AppDelegate *)[NSApp delegate]
+#define WINC (DocWinC *)[[self windowControllers]objectAtIndex:0]
 
 @interface Document ()
 
 @end
 
 @implementation Document
-
-
-- (instancetype)init {
-    self = [super init];
-    if (self) {
-    
-    }
-    return self;
-}
 
 //オートセーブ機能のON/OFF
 + (BOOL)autosavesInPlace {
@@ -41,34 +33,48 @@
     [self addWindowController:_docWinC];
 }
 
-//ドキュメントの保存
+#pragma mark - Save Document
+
 - (NSData *)dataOfType:(NSString *)typeName error:(NSError **)outError{
     //PDFビューのドキュメントをNSDataにパッケージして返す
-    DocWinC *winC = [[self windowControllers]objectAtIndex:0];
-    return [winC pdfViewDocumentData];
+    return [WINC pdfViewDocumentData];
 }
 
 - (void)saveDocument:(id)sender{
-    if ((APPD).isCopyLocked || (APPD).isPrintLocked) {
-        DocWinC *winC = [[self windowControllers]objectAtIndex:0];
-        (APPD).parentWin = winC.window;
+    if (!(WINC)._pdfView.document.allowsCopying || !(WINC)._pdfView.document.allowsPrinting) {
+        (APPD).parentWin = (WINC).window;
         (APPD).pwTxtPass.stringValue = @"";
         (APPD).pwMsgTxt.stringValue = NSLocalizedString(@"UnlockEditMsg", @"");
         (APPD).pwInfoTxt.stringValue = NSLocalizedString(@"UnlockEditInfo", @"");
         [(APPD).parentWin beginSheet:(APPD).passWin completionHandler:^(NSInteger returnCode){
             if (returnCode == NSModalResponseOK) {
-                [super saveDocument:nil];
+                [self performSave];
             }
         }];
     } else {
-        [super saveDocument:nil];
+        [self performSave];
     }
 }
 
+- (void)performSave{
+    if ((WINC).isEncrypted) {
+        NSAlert *alert = [[NSAlert alloc]init];
+        alert.messageText = NSLocalizedString(@"EncryptedMsg", @"");
+        [alert setInformativeText:NSLocalizedString(@"EncryptedInfo", @"")];
+        [alert addButtonWithTitle:NSLocalizedString(@"Continue", @"")];
+        [alert addButtonWithTitle:NSLocalizedString(@"Cancel", @"")];
+        [alert setAlertStyle:NSCriticalAlertStyle];
+        if ([alert runModalSheetForWindow:(WINC).window] == NSAlertSecondButtonReturn){
+            return;
+        }
+    }
+    [super saveDocument:nil];
+    (WINC).isEncrypted = NO;
+}
+
 - (IBAction)saveDocumentAs:(id)sender{
-    if ((APPD).isCopyLocked || (APPD).isPrintLocked) {
-        DocWinC *winC = [[self windowControllers]objectAtIndex:0];
-        (APPD).parentWin = winC.window;
+    if (!(WINC)._pdfView.document.allowsCopying || !(WINC)._pdfView.document.allowsPrinting) {
+        (APPD).parentWin = (WINC).window;
         (APPD).pwTxtPass.stringValue = @"";
         (APPD).pwMsgTxt.stringValue = NSLocalizedString(@"UnlockEditMsg", @"");
         (APPD).pwInfoTxt.stringValue = NSLocalizedString(@"UnlockEditInfo", @"");
@@ -82,12 +88,12 @@
     }
 }
 
-//データを読み込んでドキュメントを開く
+#pragma mark - Open Document
+
 - (BOOL)readFromData:(NSData *)data ofType:(NSString *)typeName error:(NSError **)outError {
     if ([self windowControllers].count != 0) {
         //復帰のための読み込みの場合
-        DocWinC *winC = [[self windowControllers]objectAtIndex:0];
-        [winC revertDocumentToSaved];
+        [WINC revertDocumentToSaved];
     }
     return YES;
 }

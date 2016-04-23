@@ -48,7 +48,7 @@
 @end
 
 @implementation AppDelegate
-@synthesize txtPanel,isImgInPboard,parentWin,passWin,pwTxtPass;
+@synthesize txtPanel,isImgInPboard,parentWin,passWin,pwTxtPass,isLocked;
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
     //メニューグループを作成
@@ -146,14 +146,13 @@
     cntIndex = 0;
     PDFOutline *root = (WINC)._pdfView.document.outlineRoot;
     [self getIndex:root];
+
     //ドキュメントをアンロック
     [(WINC)._pdfView.document unlockWithPassword:pwTxtPass.stringValue];
-    //アンロック後のアウトラインにバックアップしておいたページインデクスをセット
-    [self setIndex:root];
     if ((WINC)._pdfView.document.allowsCopying && (WINC)._pdfView.document.allowsPrinting) {
-        self.isCopyLocked = NO;
-        self.isPrintLocked = NO;
-        self.isLocked = NO;
+        //アンロック後のアウトラインにバックアップしておいたページインデクスをセット
+        [self setIndex:root];
+        isLocked = NO;
         [parentWin endSheet:passWin returnCode:NSModalResponseOK];
     }
 }
@@ -163,6 +162,9 @@
         PDFOutline *ol = [parent childAtIndex:i];
         PDFPage *page = ol.destination.page;
         NSInteger pgIndex = [(WINC)._pdfView.document indexForPage:page];
+        if (pgIndex == NSNotFound) {
+            pgIndex = 0;
+        }
         [indexes addObject:[NSNumber numberWithInteger:pgIndex]];
         if (ol.numberOfChildren > 0) {
             [self getIndex:ol];
